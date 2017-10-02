@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Busca de registro</title>
+        <title>Envio de notificação</title>
         <style>
             * {
                 box-sizing: border-box;
@@ -24,15 +24,21 @@
                 margin-bottom: 5px;
             }
             
-            input[type=text], input[type=email] {
-                width: 170px;
+            input[type=text], input[type=file], textarea {
+                width: 260px;
+            }
+            
+            #texto {
+                height: 100px;
+            
+                resize: none;
             }
             
             input[type=button] {
-                width: 75px;
+                width: 120px;
             }
             
-            #buscar {
+            #enviar {
                 float: right;
             }
         </style>
@@ -40,19 +46,19 @@
     <body>
         <div class="janela">
             <div style="text-align: center; margin-bottom: 10px">
-                Busca de registro
+                Envio de notificação
             </div>
             <div class="grupo">
-                <div><label for="identidade">CPF ou Matrícula:</label></div>
-                <div><input id="identidade" type="text"/></div>
+                <div><label for="destino">Destinatário:</label></div>
+                <div><input id="destino" type="text"/></div>
             </div>
             <div class="grupo">
-                <div><label for="email">E-mail:</label></div>
-                <div><input id="email" type="email"/></div>
+                <div><label for="texto">Texto:</label></div>
+                <div><textarea id="texto"></textarea></div>
             </div>
             <div style="margin-top: 15px">
                 <input id="retornar" type="button" value="Retornar"/>
-                <input id="buscar" type="button" value="Buscar"/>
+                <input id="enviar" type="button" value="Enviar"/>
             </div>
         </div>
     </body>
