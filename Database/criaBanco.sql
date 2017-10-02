@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS usuario;
 CREATE TABLE usuario(	
 	id BIGSERIAL NOT NULL,	
 	senha VARCHAR(50) NOT NULL,
-	tipo CHAR NOT NULL,
+	tipo CHAR(1) NOT NULL,
 	PRIMARY KEY(id)
 );
 
@@ -22,7 +22,7 @@ CREATE TABLE responsavel(
 	email VARCHAR(80),
 	telefone VARCHAR(14),
 	nome VARCHAR(100),	
-	sexo CHARACTER,
+	sexo CHAR(1),
 	pais VARCHAR(50),
 	cidade VARCHAR(60),
 	cep VARCHAR(10),
@@ -41,7 +41,7 @@ CREATE TABLE aluno(
 	email VARCHAR(80),
 	telefone VARCHAR(14),
 	nome VARCHAR(100),	
-	sexo CHARACTER,
+	sexo CHAR(1),
 	pais VARCHAR(50),
 	cidade VARCHAR(60),
 	cep VARCHAR(10),
@@ -59,7 +59,7 @@ CREATE TABLE professor(
 	email VARCHAR(80),
 	telefone VARCHAR(14),
 	nome VARCHAR(100),	
-	sexo CHARACTER,
+	sexo CHAR(1),
 	pais VARCHAR(50),
 	cidade VARCHAR(60),
 	cep VARCHAR(10),
