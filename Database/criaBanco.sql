@@ -18,7 +18,7 @@ CREATE TABLE usuario(
 
 CREATE TABLE responsavel(
 	cpf VARCHAR(14),
-	id BIGSERIAL REFERENCES usuario(id) NOT NULL,	
+	id BIGINT REFERENCES usuario(id) NOT NULL,	
 	email VARCHAR(80),
 	telefone VARCHAR(14),
 	nome VARCHAR(100),	
@@ -36,7 +36,7 @@ CREATE TABLE responsavel(
 CREATE TABLE aluno(	
 	matricula VARCHAR(10),
 	turma VARCHAR(5),
-	id BIGSERIAL REFERENCES usuario(id) NOT NULL,
+	id BIGINT REFERENCES usuario(id) NOT NULL,
 	cpf VARCHAR(14),
 	email VARCHAR(80),
 	telefone VARCHAR(14),
@@ -54,7 +54,7 @@ CREATE TABLE aluno(
 
 CREATE TABLE professor(	
 	codigo VARCHAR(10),
-	id BIGSERIAL REFERENCES usuario(id) NOT NULL,
+	id BIGINT REFERENCES usuario(id) NOT NULL,
 	cpf VARCHAR(14),
 	email VARCHAR(80),
 	telefone VARCHAR(14),
@@ -82,6 +82,7 @@ CREATE TABLE atividade(
 CREATE TABLE informacao(
 	cod_informacao BIGSERIAL,
 	cod_atividade VARCHAR(20) REFERENCES atividade (codigo),
+	cod_professor VARCHAR(10) REFERENCES professor (codigo),
 	titulo VARCHAR(100),
 	datahora TIMESTAMP,
 	texto VARCHAR(1000),
@@ -90,8 +91,8 @@ CREATE TABLE informacao(
 );
 
 CREATE TABLE mensagem(
-	remetente BIGSERIAL REFERENCES usuario (id),
-	destinatario BIGSERIAL REFERENCES usuario (id),
+	remetente BIGINT REFERENCES usuario (id),
+	destinatario BIGINT REFERENCES usuario (id),
 	datahora TIMESTAMP,
 	texto VARCHAR(1000),
 	PRIMARY KEY (remetente, destinatario, datahora)
