@@ -19,19 +19,19 @@ END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
 
-CREATE OR REPLACE FUNCTION cadastraResponsavel(senha VARCHAR(50), cpf VARCHAR(14), email VARCHAR(80), telefone VARCHAR(14), nome VARCHAR(100), sexo CHAR(1), 
+CREATE OR REPLACE FUNCTION cadastraResponsavel(senha VARCHAR(50), responsavelCpf VARCHAR(14), email VARCHAR(80), telefone VARCHAR(14), nome VARCHAR(100), sexo CHAR(1), 
 	pais VARCHAR(50), cidade VARCHAR(60), cep VARCHAR(10), bairro VARCHAR(50), rua VARCHAR(100), numero INTEGER, complemento VARCHAR(80), aluno VARCHAR(10))
 RETURNS void AS $$
 DECLARE last_id BIGINT;
-DECLARE temp VARCHAR(14);
+DECLARE aux VARCHAR(14);
 BEGIN	
-	SELECT r.cpf INTO temp from responsavel r where r.cpf = cpf;
+	SELECT cpf INTO aux from responsavel where cpf = responsavelCpf;
 	IF NOT FOUND THEN
 		INSERT INTO usuario(senha, tipo) VALUES (senha, 'R') RETURNING id INTO last_id;
 		INSERT INTO responsavel(id, cpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento) 
-			VALUES (last_id, cpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento);
+			VALUES (last_id, responsavelCpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento);
 	END IF;
-	INSERT INTO responsavel_aluno(responsavel_cpf, aluno_matricula) VALUES (cpf, aluno);
+	INSERT INTO responsavel_aluno(responsavel_cpf, aluno_matricula) VALUES (responsavelCpf, aluno);
 END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
