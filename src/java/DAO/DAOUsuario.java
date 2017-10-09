@@ -14,7 +14,7 @@ public class DAOUsuario {
             Class.forName("org.postgresql.Driver").newInstance();
             
             conn = DriverManager.getConnection("jdbc:postgresql:" +
-                        "//localhost/ExtraCurricular?user=postgres&password=123");                        
+                        "//localhost/ExtraCurricular?user=postgres&password=y7s6s9");                        
         } catch (Exception e){
         }                
     }
@@ -70,6 +70,33 @@ public class DAOUsuario {
             stmt.setInt(12, responsavel.getEndereco().getNumero());
             stmt.setString(13, responsavel.getEndereco().getComplemento());
             stmt.setString(14, aluno.getMatricula());
+            // Executa o comando
+            return (stmt.execute());
+        } catch (SQLException ex) {              
+            System.out.println(ex);
+        }
+        return false;
+    }
+    
+    public Boolean cadastraProfessor(Professor professor) {
+        try {
+            // Cria o comando
+            CallableStatement stmt = conn.prepareCall("{ call cadastraProfessor(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }");
+            // Recupera os dados
+            stmt.setString(1, professor.getDadosUsuario().getSenha());    
+            stmt.setString(2, professor.getCodigo());
+            stmt.setString(3, professor.getDadosPessoais().getCpf());
+            stmt.setString(4, professor.getDadosPessoais().getEmail());
+            stmt.setString(5, professor.getDadosPessoais().getTelefone());
+            stmt.setString(6, professor.getDadosPessoais().getNome());            
+            stmt.setString(7, professor.getDadosPessoais().getSexo());
+            stmt.setString(8, professor.getEndereco().getPais());
+            stmt.setString(9, professor.getEndereco().getCidade());
+            stmt.setString(10, professor.getEndereco().getCep());
+            stmt.setString(11, professor.getEndereco().getBairro());
+            stmt.setString(12, professor.getEndereco().getRua());
+            stmt.setInt(13, professor.getEndereco().getNumero());
+            stmt.setString(14, professor.getEndereco().getComplemento());
             // Executa o comando
             return (stmt.execute());
         } catch (SQLException ex) {              
