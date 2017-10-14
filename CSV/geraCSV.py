@@ -12,8 +12,7 @@ def geraCPF():
     while (c in cpf_list):
         c = random.randint(10000000000,99999999999)
     cpf_list.append(c)
-    c = str(c)
-    return (c[:3] + '.' + c[3:6] + '.' + c[6:9] + '-' + c[9:])
+    return str(c)    
 
 def geraRM():
     global rm_list
