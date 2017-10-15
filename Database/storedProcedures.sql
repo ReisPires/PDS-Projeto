@@ -119,10 +119,9 @@ END $$ LANGUAGE 'plpgsql';
 /* ========================================================== */
 
 CREATE OR REPLACE FUNCTION atualizaSenha(uid BIGINT, senhaAntiga VARCHAR(50), senhaNova VARCHAR(50))
-RETURNS table(num BIGINT) AS $$
+RETURNS void AS $$
 BEGIN
-	RETURN QUERY WITH rows AS (UPDATE usuario SET senha = senhaNova WHERE id = uid AND senha = senhaAntiga RETURNING id INT) 
-		SELECT COUNT(*) FROM rows;
+	UPDATE usuario SET id = uid, senha = senhaNova WHERE id = uid AND senha = senhaAntiga;	
 END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
