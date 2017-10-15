@@ -39,7 +39,7 @@ CREATE OR REPLACE FUNCTION cadastraAluno(senha VARCHAR(50), matricula VARCHAR(10
 RETURNS void AS $$
 DECLARE last_id BIGINT;
 BEGIN	
-	INSERT INTO usuario(senha, tipo) VALUES (senha, 'A') RETURNING id INTO last_id;
+	INSERT INTO usuario(login1, login2, senha, tipo) VALUES (matricula, email, senha, 'A') RETURNING id INTO last_id;
 	INSERT INTO aluno(matricula, turma, id, cpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento) 
 		VALUES (matricula, turma, last_id, cpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento);
 END $$ LANGUAGE 'plpgsql';
@@ -54,7 +54,7 @@ DECLARE aux VARCHAR(14);
 BEGIN	
 	SELECT cpf INTO aux from responsavel where cpf = responsavelCpf;
 	IF NOT FOUND THEN
-		INSERT INTO usuario(senha, tipo) VALUES (senha, 'R') RETURNING id INTO last_id;
+		INSERT INTO usuario(login1, login2, senha, tipo) VALUES (responsavelCpf, email, senha, 'R') RETURNING id INTO last_id;
 		INSERT INTO responsavel(id, cpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento) 
 			VALUES (last_id, responsavelCpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento);
 	END IF;
@@ -68,9 +68,20 @@ CREATE OR REPLACE FUNCTION cadastraProfessor(senha VARCHAR(50), codigo VARCHAR(1
 RETURNS void AS $$
 DECLARE last_id BIGINT;
 BEGIN	
-	INSERT INTO usuario(senha, tipo) VALUES (senha, 'P') RETURNING id INTO last_id;
+	INSERT INTO usuario(login1, login2, senha, tipo) VALUES (codigo, email, senha, 'P') RETURNING id INTO last_id;
 	INSERT INTO professor(codigo, id, cpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento) 
 		VALUES (codigo, last_id, cpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento);
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION cadastraAdministrador(nome VARCHAR(10), senha VARCHAR(50))
+RETURNS void AS $$
+DECLARE last_id BIGINT;
+BEGIN	
+	INSERT INTO usuario(login1, login2, senha, tipo) VALUES (nome, NULL, senha, 'E') RETURNING id INTO last_id;
+	INSERT INTO administrador(nome, id) 
+		VALUES (nome, last_id);
 END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
@@ -86,8 +97,85 @@ END $$ LANGUAGE 'plpgsql';
 CREATE OR REPLACE FUNCTION enviaMensagem(remetente BIGINT, destinatario BIGINT, texto VARCHAR(1000))
 RETURNS void AS $$
 BEGIN
-	INSERT INTO mensagem(remetente, destinatario, texto, lida) VALUES (remetente, destinatario, now(), texto, FALSE);
+	INSERT INTO mensagem(remetente, destinatario, datahora, texto, lida) VALUES (remetente, destinatario, now(), texto, FALSE);
 END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
 
+CREATE OR REPLACE FUNCTION realizaLogin(uLogin VARCHAR(80), uSenha VARCHAR(50))
+RETURNS TABLE(id BIGINT, tipo CHAR(1)) AS $$
+BEGIN
+	RETURN QUERY SELECT u.id, u.tipo FROM usuario u WHERE (u.login1 = uLogin OR u.login2 = uLogin) AND u.senha = uSenha AND u.senha != u.login1;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION realizaPrimeiroAcesso(uLogin1 VARCHAR(11), uLogin2 VARCHAR(80))
+RETURNS TABLE(id BIGINT, tipo CHAR(1)) AS $$
+BEGIN
+	RETURN QUERY SELECT u.id, u.tipo FROM usuario u WHERE u.login1 = uLogin1 AND u.login2 = uLogin2 AND u.senha = u.login1;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION atualizaSenha(uid BIGINT, senhaAntiga VARCHAR(50), senhaNova VARCHAR(50))
+RETURNS table(num BIGINT) AS $$
+BEGIN
+	RETURN QUERY WITH rows AS (UPDATE usuario SET senha = senhaNova WHERE id = uid AND senha = senhaAntiga RETURNING 1) 
+		SELECT COUNT(*) FROM rows;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION listaAtividadesAluno(uid BIGINT)
+RETURNS table (codigo VARCHAR(20), nome VARCHAR(100)) AS $$
+BEGIN
+	RETURN QUERY SELECT t.codigo, t.nome FROM atividade t 
+	JOIN aluno_atividade l ON l.atividade_codigo = t.codigo 
+	JOIN aluno a ON a.matricula = l.aluno_matricula
+	WHERE a.id = uid;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION listaAtividadesProfessor(uid BIGINT)
+RETURNS table (codigo VARCHAR(20), nome VARCHAR(100)) AS $$
+BEGIN
+	RETURN QUERY SELECT t.codigo, t.nome FROM atividade t 
+	JOIN professor_atividade a ON a.atividade_codigo = t.codigo 
+	JOIN professor p ON p.codigo = a.professor_codigo
+	WHERE p.id = uid;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION listaAtividadesResponsavel(uid BIGINT)
+RETURNS table (codigo VARCHAR(20), nome VARCHAR(100)) AS $$
+BEGIN
+	RETURN QUERY SELECT t.codigo, t.nome FROM atividade t 
+	JOIN aluno_atividade l ON l.atividade_codigo = t.codigo 
+	JOIN responsavel_aluno e ON e.aluno_matricula = l.aluno_matricula
+	JOIN responsavel r ON e.responsavel_cpf = r.cpf
+	WHERE r.id = uid;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION exibeInformacoesAtividade(atvCodigo VARCHAR(20))
+RETURNS table (professor VARCHAR (100), titulo VARCHAR(100), datahora TIMESTAMP, texto VARCHAR(1000), midia VARCHAR(1000)) AS $$
+BEGIN
+	RETURN QUERY SELECT p.nome, i.titulo, i.datahora, i.texto, i.midia 
+	FROM informacao i JOIN professor p ON i.cod_professor = p.codigo
+	WHERE i.cod_atividade = atvCodigo
+	ORDER BY datahora DESC;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION exibeMensagens(uid BIGINT)
+RETURNS table (remetente BIGINT, destinatario BIGINT, datahora TIMESTAMP, texto VARCHAR(1000), lida BOOLEAN) AS $$
+BEGIN
+	SELECT * FROM mensagem WHERE destinatario = uid ORDER BY datahora DESC;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
