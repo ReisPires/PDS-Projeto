@@ -50,7 +50,7 @@ public class Login extends HttpServlet {
             return;
         }
         
-        request.getSession().setAttribute("usuario", usuario);
+        request.getSession().setAttribute("usuario", u.getId());
         request.getRequestDispatcher("atividades.jsp").forward(request, response);
     }
 
