@@ -74,11 +74,7 @@ public class DAOLogin {
             stmt.setString(2, senhaAntiga);
             stmt.setString(3, senhaNova);
             // Executa o comando
-            stmt.execute();
-            ResultSet rs = (ResultSet) stmt.getResultSet();
-            if (rs.next() && rs.getInt(1) > 1)                 
-                return true;                      
-            return false;            
+            return (stmt.execute());            
         } catch (SQLException ex) {  
             System.out.println(ex);
         }    
