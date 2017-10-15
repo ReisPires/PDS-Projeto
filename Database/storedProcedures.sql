@@ -97,7 +97,7 @@ END $$ LANGUAGE 'plpgsql';
 CREATE OR REPLACE FUNCTION enviaMensagem(remetente BIGINT, destinatario BIGINT, texto VARCHAR(1000))
 RETURNS void AS $$
 BEGIN
-	INSERT INTO mensagem(remetente, destinatario, texto, lida) VALUES (remetente, destinatario, now(), texto, FALSE);
+	INSERT INTO mensagem(remetente, destinatario, datahora, texto, lida) VALUES (remetente, destinatario, now(), texto, FALSE);
 END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
@@ -124,3 +124,58 @@ BEGIN
 	RETURN QUERY WITH rows AS (UPDATE usuario SET senha = senhaNova WHERE id = uid AND senha = senhaAntiga RETURNING 1) 
 		SELECT COUNT(*) FROM rows;
 END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION listaAtividadesAluno(uid BIGINT)
+RETURNS table (codigo VARCHAR(20), nome VARCHAR(100)) AS $$
+BEGIN
+	RETURN QUERY SELECT t.codigo, t.nome FROM atividade t 
+	JOIN aluno_atividade l ON l.atividade_codigo = t.codigo 
+	JOIN aluno a ON a.matricula = l.aluno_matricula
+	WHERE a.id = uid;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION listaAtividadesProfessor(uid BIGINT)
+RETURNS table (codigo VARCHAR(20), nome VARCHAR(100)) AS $$
+BEGIN
+	RETURN QUERY SELECT t.codigo, t.nome FROM atividade t 
+	JOIN professor_atividade a ON a.atividade_codigo = t.codigo 
+	JOIN professor p ON p.codigo = a.professor_codigo
+	WHERE p.id = uid;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION listaAtividadesResponsavel(uid BIGINT)
+RETURNS table (codigo VARCHAR(20), nome VARCHAR(100)) AS $$
+BEGIN
+	RETURN QUERY SELECT t.codigo, t.nome FROM atividade t 
+	JOIN aluno_atividade l ON l.atividade_codigo = t.codigo 
+	JOIN responsavel_aluno e ON e.aluno_matricula = l.aluno_matricula
+	JOIN responsavel r ON e.responsavel_cpf = r.cpf
+	WHERE r.id = uid;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION exibeInformacoesAtividade(atvCodigo VARCHAR(20))
+RETURNS table (professor VARCHAR (100), titulo VARCHAR(100), datahora TIMESTAMP, texto VARCHAR(1000), midia VARCHAR(1000)) AS $$
+BEGIN
+	RETURN QUERY SELECT p.nome, i.titulo, i.datahora, i.texto, i.midia 
+	FROM informacao i JOIN professor p ON i.cod_professor = p.codigo
+	WHERE i.cod_atividade = atvCodigo
+	ORDER BY datahora DESC;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION exibeMensagens(uid BIGINT)
+RETURNS table (remetente BIGINT, destinatario BIGINT, datahora TIMESTAMP, texto VARCHAR(1000), lida BOOLEAN) AS $$
+BEGIN
+	SELECT * FROM mensagem WHERE destinatario = uid ORDER BY datahora DESC;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
