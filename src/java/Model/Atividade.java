@@ -1,76 +1,64 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
-/**
- *
- * @author William Alves
- */
-public class Atividade {;
+public class Atividade {
 
-    String codAtividade;
-    String nomeAtividade;
-    int anoAtividade;
-    String semestreAtividade;
-    String horarioAtividade;
+    private String codigo;
+    private String nome;
+    private int ano;
+    private String semestre;
+    private String horario;    
 
-    public Atividade(String codAtividade, String nomeAtividade, int anoAtividade, String semestreAtividade, String horarioAtividade) {
-        this.codAtividade = codAtividade;
-        this.nomeAtividade = nomeAtividade;
-        this.anoAtividade = anoAtividade;
-        this.semestreAtividade = semestreAtividade;
-        this.horarioAtividade = horarioAtividade;
+    public Atividade(String codigo, String nome, int ano, String semestre, String horario) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.ano = ano;
+        this.semestre = semestre;
+        this.horario = horario;        
     }
 
-    public Atividade(String codAtividade, String nomeAtividade) {
-        this.codAtividade = codAtividade;
-        this.nomeAtividade = nomeAtividade;
+    public Atividade(String codigo, String nome) {
+        this.codigo = codigo;
+        this.nome = nome;
     }
 
-    public String getCodAtividade() {
-        return codAtividade;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCodAtividade(String codAtividade) {
-        this.codAtividade = codAtividade;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
-    public String getNomeAtividade() {
-        return nomeAtividade;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeAtividade(String nomeAtividade) {
-        this.nomeAtividade = nomeAtividade;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public int getAnoAtividade() {
-        return anoAtividade;
+    public int getAno() {
+        return ano;
     }
 
-    public void setAnoAtividade(int anoAtividade) {
-        this.anoAtividade = anoAtividade;
+    public void setAno(int ano) {
+        this.ano = ano;
     }
 
-    public String getSemestreAtividade() {
-        return semestreAtividade;
+    public String getSemestre() {
+        return semestre;
     }
 
-    public void setSemestreAtividade(String semestreAtividade) {
-        this.semestreAtividade = semestreAtividade;
+    public void setSemestre(String semestre) {
+        this.semestre = semestre;
     }
 
-    public String getHorarioAtividade() {
-        return horarioAtividade;
+    public String getHorario() {
+        return horario;
     }
 
-    public void setHorarioAtividade(String horarioAtividade) {
-        this.horarioAtividade = horarioAtividade;
+    public void setHorario(String horario) {
+        this.horario = horario;
     }
-    
-    
-    
-    
+                
 }
