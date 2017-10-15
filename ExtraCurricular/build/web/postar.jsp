@@ -1,3 +1,9 @@
+<%
+// Verifica se o usuário não está logado
+if (request.getSession().getAttribute("usuario") == null)
+    request.getRequestDispatcher("index.jsp").forward(request, response);
+%>
+
 <!DOCTYPE html>
 <html>
     <head>

@@ -1,3 +1,9 @@
+<%
+// Verifica se o usuário não está logado
+if (request.getSession().getAttribute("usuario") == null)
+    request.getRequestDispatcher("index.jsp").forward(request, response);
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -5,6 +11,16 @@
         <title>Lista de Atividades</title>
         <link rel="stylesheet" type="text/css" href="styles/main.css">
         <style>
+            .janela {
+                margin: auto;
+                
+                border: 1px solid black;
+                
+                width: 500px;
+                
+                padding: 15px;
+            }
+            
             .lista-atividades {
                 margin-bottom: 15px;
                 
@@ -39,6 +55,11 @@
     </head>
     <body>
         <div class="janela">
+            <div style="text-align: center; margin-bottom: 15px">
+                <form action="sair" method="post">
+                    <input type="submit" value="Sair" style="width: 100%"/>
+                </form>
+            </div>
             <div class="lista-atividades">Lista de atividades</div>
             <table>
                 <tr><td>

@@ -5,11 +5,10 @@
  */
 package Control;
 
-import DAO.DAOLogin;
-import Model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Gustavo
  */
-public class Login extends HttpServlet {
+@WebServlet(name = "Sair", urlPatterns = {"/sair"})
+public class Sair extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,27 +31,8 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getSession().getAttribute("usuario") != null) {
-            request.getRequestDispatcher("atividades.jsp").forward(request, response);
-            
-            return;
-        }
-        
-        String usuario = (String)request.getParameter("usuario");
-        String senha = (String)request.getParameter("senha");
-        
-        DAOLogin daoLogin = new DAOLogin();
-        Usuario u = daoLogin.realizaLogin(new Usuario(usuario, senha));
-        
-        if (u == null) {
-            request.setAttribute("incorrect", new Boolean(true));
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-            
-            return;
-        }
-        
-        request.getSession().setAttribute("usuario", u.getId());
-        request.getRequestDispatcher("atividades.jsp").forward(request, response);
+        request.getSession().invalidate();
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

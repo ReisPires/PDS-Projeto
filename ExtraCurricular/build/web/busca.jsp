@@ -1,4 +1,8 @@
 <%
+// Verifica se o usuário já está logado
+if (request.getSession().getAttribute("usuario") != null)
+    request.getRequestDispatcher("atividades.jsp").forward(request, response);
+
 boolean incorrect = request.getAttribute("incorrect") != null;
 %>
 
@@ -63,5 +67,10 @@ boolean incorrect = request.getAttribute("incorrect") != null;
                 </div>
             </form>
         </div>
+        <script>
+            retornar.onclick = function () {
+                window.location.href = "index.jsp";
+            };
+        </script>
     </body>
 </html>

@@ -5,19 +5,20 @@
  */
 package Control;
 
-import DAO.DAOLogin;
-import Model.Usuario;
+import DAO.*;
+import Model.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Pedro Pires
+ * @author Gustavo
  */
+@WebServlet(name = "Buscar", urlPatterns = {"/buscar"})
 public class Buscar extends HttpServlet {
 
     /**
@@ -31,7 +32,6 @@ public class Buscar extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         String login1 = (String)request.getParameter("identidade");
         String login2 = (String)request.getParameter("email");
         String senha = (String)request.getParameter("senha");
