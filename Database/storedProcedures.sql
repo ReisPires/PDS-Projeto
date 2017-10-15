@@ -121,7 +121,7 @@ END $$ LANGUAGE 'plpgsql';
 CREATE OR REPLACE FUNCTION atualizaSenha(uid BIGINT, senhaAntiga VARCHAR(50), senhaNova VARCHAR(50))
 RETURNS table(num BIGINT) AS $$
 BEGIN
-	RETURN QUERY WITH rows AS (UPDATE usuario SET senha = senhaNova WHERE id = uid AND senha = senhaAntiga RETURNING 1) 
+	RETURN QUERY WITH rows AS (UPDATE usuario SET senha = senhaNova WHERE id = uid AND senha = senhaAntiga RETURNING id INT) 
 		SELECT COUNT(*) FROM rows;
 END $$ LANGUAGE 'plpgsql';
 
@@ -173,9 +173,9 @@ END $$ LANGUAGE 'plpgsql';
 /* ========================================================== */
 
 CREATE OR REPLACE FUNCTION exibeMensagens(uid BIGINT)
-RETURNS table (remetente BIGINT, destinatario BIGINT, datahora TIMESTAMP, texto VARCHAR(1000), lida BOOLEAN) AS $$
+RETURNS table (rem BIGINT, dest BIGINT, datahora TIMESTAMP, texto VARCHAR(1000), lida BOOLEAN) AS $$
 BEGIN
-	SELECT * FROM mensagem WHERE destinatario = uid ORDER BY datahora DESC;
+	RETURN QUERY SELECT * FROM mensagem WHERE destinatario = uid ORDER BY datahora DESC;
 END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */

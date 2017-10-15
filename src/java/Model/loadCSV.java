@@ -5,8 +5,7 @@
  */
 package Model;
 
-import DAO.DAOAtividade;
-import DAO.DAOUsuario;
+import DAO.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,17 +15,12 @@ import java.util.Scanner;
  * @author Pedro Pires
  */
 public class loadCSV {
-
-    public void alunosCSV() {
-        
-    }
-    
    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    /*DAOUsuario banco = new DAOUsuario();
+       /* DAOUsuario banco = new DAOUsuario();
         
         try {
             BufferedReader fileReader = new BufferedReader(new InputStreamReader(new FileInputStream("alunos.csv"), "UTF-8"));
@@ -63,9 +57,7 @@ public class loadCSV {
             }          
         } catch (Exception ex) {
             System.out.println(ex);
-        }
-        
-    */   DAOUsuario banco = new DAOUsuario();
+        }       
         
         try {
             BufferedReader fileReader = new BufferedReader(new InputStreamReader(new FileInputStream("professores.csv"), "UTF-8"));
@@ -78,7 +70,7 @@ public class loadCSV {
                 String codigo = csvReader.next();
                 String nome = csvReader.next();
                 String email = csvReader.next();
-                
+               
                 // Cadastra o professor
                 Professor professor = new Professor(codigo, new Usuario(codigo), new DadosPessoais(email, nome), new Endereco());
                 banco.cadastraProfessor(professor);                
@@ -87,7 +79,9 @@ public class loadCSV {
         } catch (Exception ex) {
             System.out.println(ex);
         }
-/*     DAOAtividade banco = new DAOAtividade();
+     
+       DAOAtividade bancoAtv = new DAOAtividade();
+       
        try {
             BufferedReader fileReader = new BufferedReader(new InputStreamReader(new FileInputStream("atividades.csv"), "UTF-8"));
             String line = fileReader.readLine();
@@ -99,27 +93,65 @@ public class loadCSV {
                 String nomeAtividade = csvReader.next();
                 String codProfessor = csvReader.next();
                 String codAluno = csvReader.next();
-                
+                                                
                 // Cadastra a atividade
-                Atividade atividade = new Atividade(codigo, nomeAtividade);
+                String[] professores = codProfessor.replace(" ", "").replace("\"", "").split("/");
+                String[] alunos = codAluno.replace(" ", "").replace("\"", "").split("/");
                 
-                if(codProfessor.charAt(0) == 'a'){
-                    String[] professores = codProfessor.replace(" ", "").replace("\"", "").split(",");
-                    for (String professore : professores) {
-                        ProfessorAtividade professorAtividade = new ProfessorAtividade(new Professor(professore, new Usuario(00, "aaa"), new DadosPessoais("00", "aaa"), new Endereco()), atividade);
-                        banco.cadastraAtividade(professorAtividade);
-                    }  
-                }
-                else{
-                  ProfessorAtividade professorAtividade = new ProfessorAtividade(new Professor(codProfessor, new Usuario(00, "aaa"), new DadosPessoais("00", "aaa"), new Endereco()), atividade);
-                    //AlunoAtividade = new ProfessorAtividade(codAluno, atividade);
-                    banco.cadastraAtividade(professorAtividade);   
-                }
-
-           }          
+                Atividade atividade = new Atividade(codigo, nomeAtividade);                
+                bancoAtv.cadastraAtividade(atividade);
+                
+                for (String prof : professores)                   
+                    bancoAtv.associaProfessor(new ProfessorAtividade(codigo, prof));                 
+                
+                for (String aluno : alunos)                   
+                    bancoAtv.matriculaAluno(new AlunoAtividade(aluno, codigo));
+                
+            }
         } catch (Exception ex) {
             System.out.println(ex);
-        }
-    */    
+        } */
+       
+       //DAOLogin log = new DAOLogin();
+       //log.realizaLogin(new Usuario("104099", "ABCDE"));               
+       /*if (log.atualizaSenha(6, "42748724190", "senhas"))
+            System.out.println("true");
+       else
+            System.out.println("false");*/
+       //log.realizaPrimeiroAcesso("90790064787", "pai.105328.18@gmail.com");
+       
+    //  DAOAtividade atv = new DAOAtividade();
+       /*ArrayList<Atividade> atvs = atv.listaAtividades(new Usuario(3078, "aaa", "P"));
+       for (int i = 0; i < atvs.size(); ++i) {
+           System.out.println(atvs.get(i).getCodigo());
+           System.out.println(atvs.get(i).getNome());
+       }*/
+      
+     /*  ArrayList<Informacao> infos = atv.exibeInformacoesAtividade(new Atividade("11", "abc"));
+       for (int i = 0; i < infos.size(); ++i) {
+           System.out.println(infos.get(i).getNomeProfessor());
+           System.out.println(infos.get(i).getTitulo());
+           System.out.println(infos.get(i).getHorario());
+           System.out.println(infos.get(i).getDia());
+           System.out.println(infos.get(i).getTexto());
+           System.out.println(infos.get(i).getMidia());
+           
+       }*/
+     
+     //atv.insereInformacao(new Informacao("2754", "22", "Truque", "Truque enviado pelo cara", null));
+     
+    // DAOMensagem m = new DAOMensagem();
+     
+     //m.enviaMensagem(new Mensagem(3, 4, "ABCDEFG"));
+     //m.enviaMensagem(new Mensagem(8, 4, "ABCDEFG"));
+     /*ArrayList<Mensagem> ms = m.exibeMensagens(new Usuario(4, "abc"));
+     for (int i = 0; i < ms.size(); ++i) {
+           System.out.println(ms.get(i).getRemetente());                      
+           System.out.println(ms.get(i).getDestinatario());                      
+           System.out.println(ms.get(i).getDia());                      
+           System.out.println(ms.get(i).getHorario());                      
+           System.out.println(ms.get(i).getTexto());                      
+           System.out.println(ms.get(i).getLida());
+       }*/
     } 
 }

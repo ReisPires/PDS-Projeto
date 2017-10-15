@@ -14,7 +14,7 @@ public class DAOUsuario {
             Class.forName("org.postgresql.Driver").newInstance();
             
             conn = DriverManager.getConnection("jdbc:postgresql:" +
-                        "//localhost/ExtraCurricular?user=postgres&password=y7s6s9");                        
+                        "//localhost/ExtraCurricular?user=postgres&password=123");                        
         } catch (Exception e){
         }                
     }
