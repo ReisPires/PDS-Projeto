@@ -5,6 +5,8 @@
  */
 package Control;
 
+import DAO.DAOLogin;
+import Model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -38,7 +40,10 @@ public class Login extends HttpServlet {
         String usuario = (String)request.getParameter("usuario");
         String senha = (String)request.getParameter("senha");
         
-        if (true) {
+        DAOLogin daoLogin = new DAOLogin();
+        Usuario u = daoLogin.realizaLogin(new Usuario(usuario, senha));
+        
+        if (u == null) {
             request.setAttribute("incorrect", new Boolean(true));
             request.getRequestDispatcher("login.jsp").forward(request, response);
             
