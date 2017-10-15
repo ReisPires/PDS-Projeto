@@ -12,6 +12,8 @@ DROP TABLE IF EXISTS usuario;
 
 CREATE TABLE usuario(	
 	id BIGSERIAL NOT NULL,	
+	login1 VARCHAR(11) NOT NULL,
+	login2 VARCHAR(80),
 	senha VARCHAR(50) NOT NULL,
 	tipo CHAR(1) NOT NULL,
 	PRIMARY KEY(id)
@@ -24,7 +26,7 @@ CREATE TABLE administrador(
 );
 
 CREATE TABLE responsavel(
-	cpf VARCHAR(14),
+	cpf VARCHAR(11),
 	id BIGINT REFERENCES usuario(id) NOT NULL,	
 	email VARCHAR(80),
 	telefone VARCHAR(14),
@@ -62,7 +64,7 @@ CREATE TABLE aluno(
 CREATE TABLE professor(	
 	codigo VARCHAR(10),
 	id BIGINT REFERENCES usuario(id) NOT NULL,
-	cpf VARCHAR(14),
+	cpf VARCHAR(11),
 	email VARCHAR(80),
 	telefone VARCHAR(14),
 	nome VARCHAR(100),	
@@ -107,7 +109,7 @@ CREATE TABLE mensagem(
 );
 
 CREATE TABLE responsavel_aluno(
-	responsavel_cpf VARCHAR(14) REFERENCES responsavel (cpf),
+	responsavel_cpf VARCHAR(11) REFERENCES responsavel (cpf),
 	aluno_matricula VARCHAR(10) REFERENCES aluno (matricula),
 	PRIMARY KEY (responsavel_cpf, aluno_matricula)
 );
