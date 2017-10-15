@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS aluno_atividade;
 DROP TABLE IF EXISTS professor_atividade;
 DROP TABLE IF EXISTS informacao;
 DROP TABLE IF EXISTS atividade;
+DROP TABLE IF EXISTS administrador;
 DROP TABLE IF EXISTS professor;
 DROP TABLE IF EXISTS aluno;
 DROP TABLE IF EXISTS responsavel;
@@ -14,6 +15,12 @@ CREATE TABLE usuario(
 	senha VARCHAR(50) NOT NULL,
 	tipo CHAR(1) NOT NULL,
 	PRIMARY KEY(id)
+);
+
+CREATE TABLE administrador(
+	nome VARCHAR(10),
+	id BIGINT REFERENCES usuario(id) NOT NULL,
+	PRIMARY KEY(nome)
 );
 
 CREATE TABLE responsavel(

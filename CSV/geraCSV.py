@@ -12,8 +12,7 @@ def geraCPF():
     while (c in cpf_list):
         c = random.randint(10000000000,99999999999)
     cpf_list.append(c)
-    c = str(c)
-    return (c[:3] + '.' + c[3:6] + '.' + c[6:9] + '-' + c[9:])
+    return str(c)    
 
 def geraRM():
     global rm_list
@@ -71,8 +70,8 @@ def geraProfsAtv():
         p2 = random.randint(0, len(cprof_list))
         if (n == 5):
             p3 = random.randint(0, len(cprof_list))
-            return str(cprof_list[p1]) + ', ' + str(cprof_list[p2]) + ', ' + str(cprof_list[p3])
-        return str(cprof_list[p1]) + ', ' + str(cprof_list[p2])
+            return str(cprof_list[p1]) + '/' + str(cprof_list[p2]) + '/' + str(cprof_list[p3])
+        return str(cprof_list[p1]) + '/' + str(cprof_list[p2])
     return str(cprof_list[p1])
 
 def geraAlunosAtv():
@@ -82,10 +81,10 @@ def geraAlunosAtv():
     saida = ''
     for i in range(0,n):
         rm = random.randint(0, len(rm_list))
-        while (rm in rm_list):
+        while (rm in alunos):
             rm = random.randint(0, len(rm_list))
         alunos.append(rm)
-        saida += str(rm) + ', '
+        saida += str(rm_list[rm]) + '/'
     return saida[:-2]
 
 with open('alunos.csv', 'w') as f:
@@ -100,7 +99,7 @@ with open('alunos.csv', 'w') as f:
             cw.writeheader()
             l = list()
             for row in nr:
-                l.append(row['name'][1:] + row['nickname'])
+                l.append(row['name'] + ' ' + row['nickname'])
                 
             random.shuffle(l)
             for i in range(0,1000):        
