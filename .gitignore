@@ -7,3 +7,7 @@ nbproject/private/private.xml
 nbproject/private/private.properties
 nbproject/genfiles.properties
 build.xml
+ExtraCurricular/build/web/WEB-INF/classes/.netbeans_automatic_build
+*.MF
+*.xml
+*.class
