@@ -1,3 +1,11 @@
+<%
+// Verifica se o usuário já está logado
+if (request.getSession().getAttribute("usuario") != null)
+    request.getRequestDispatcher("atividades.jsp").forward(request, response);
+
+boolean incorrect = request.getAttribute("incorrect") != null;
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,18 +43,34 @@
             <div style="text-align: center; margin-bottom: 10px">
                 Busca de registro
             </div>
-            <div class="grupo">
-                <div><label for="identidade">CPF ou Matrícula:</label></div>
-                <div><input id="identidade" type="text"/></div>
+            <% if (incorrect) { %>
+            <div style="text-align: center; color: red">
+                Usuário não encontrado
             </div>
-            <div class="grupo">
-                <div><label for="email">E-mail:</label></div>
-                <div><input id="email" type="email"/></div>
-            </div>
-            <div style="margin-top: 15px">
-                <input id="retornar" type="button" value="Retornar"/>
-                <input id="buscar" type="button" value="Buscar"/>
-            </div>
+            <% } %>
+            <form action="buscar" method="post">
+                <div class="grupo">
+                    <div><label for="identidade">CPF ou Matrícula:</label></div>
+                    <div><input id="identidade" name="identidade" type="text"/></div>
+                </div>
+                <div class="grupo">
+                    <div><label for="email">E-mail:</label></div>
+                    <div><input id="email" name="email" type="email"/></div>
+                </div>
+                <div class="grupo">
+                    <div><label for="senha">Nova senha:</label></div>
+                    <div><input id="senha" name="senha" type="password"/></div>
+                </div>
+                <div style="margin-top: 15px">
+                    <input id="retornar" type="button" value="Retornar"/>
+                    <input id="buscar" type="submit" value="Buscar"/>
+                </div>
+            </form>
         </div>
+        <script>
+            retornar.onclick = function () {
+                window.location.href = "index.jsp";
+            };
+        </script>
     </body>
 </html>

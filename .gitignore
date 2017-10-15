@@ -8,6 +8,15 @@ nbproject/private/private.properties
 nbproject/genfiles.properties
 build.xml
 ExtraCurricular/build/web/WEB-INF/classes/.netbeans_automatic_build
-*.MF
-*.xml
+*.MF*.class
 *.class
+*.MF
+ExtraCurricular/nbproject/project.xml
+ExtraCurricular/nbproject/private/private.xml
+ExtraCurricular/nbproject/build-impl.xml
+ExtraCurricular/build/web/META-INF/context.xml
+ExtraCurricular/nbproject/ant-deploy.xml
+*.smap
+ExtraCurricular/nbproject/build-impl.xml~
+*.properties
+ExtraCurricular/src/java/DAO/DAOLogin.java

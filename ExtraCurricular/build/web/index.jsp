@@ -10,7 +10,7 @@ boolean incorrect = request.getAttribute("incorrect") != null;
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Busca de registro</title>
+        <title>Login</title>
         <link rel="stylesheet" type="text/css" href="styles/main.css">
         <style>
             .janela {
@@ -21,19 +21,23 @@ boolean incorrect = request.getAttribute("incorrect") != null;
                 padding: 15px;
             }
             
+            form {
+                margin: 0px;
+            }
+            
             .grupo {
                 margin-bottom: 5px;
             }
             
-            input[type=text], input[type=email] {
+            input[type=text], input[type=password] {
                 width: 170px;
             }
             
-            input[type=button] {
+            input[type=submit], input[type=button] {
                 width: 75px;
             }
             
-            #buscar {
+            #cadastrar {
                 float: right;
             }
         </style>
@@ -41,35 +45,31 @@ boolean incorrect = request.getAttribute("incorrect") != null;
     <body>
         <div class="janela">
             <div style="text-align: center; margin-bottom: 10px">
-                Busca de registro
+                Sistema
             </div>
             <% if (incorrect) { %>
             <div style="text-align: center; color: red">
-                Usuário não encontrado
+                Usuário ou senha incorretos
             </div>
             <% } %>
-            <form action="buscar" method="post">
+            <form action="entrar" method="post">
                 <div class="grupo">
-                    <div><label for="identidade">CPF ou Matrícula:</label></div>
-                    <div><input id="identidade" name="identidade" type="text"/></div>
+                    <div><label for="usuario">Usuário:</label></div>
+                    <div><input id="usuario" name="usuario" type="text"/></div>
                 </div>
                 <div class="grupo">
-                    <div><label for="email">E-mail:</label></div>
-                    <div><input id="email" name="email" type="email"/></div>
-                </div>
-                <div class="grupo">
-                    <div><label for="senha">Nova senha:</label></div>
+                    <div><label for="senha">Senha:</label></div>
                     <div><input id="senha" name="senha" type="password"/></div>
                 </div>
                 <div style="margin-top: 15px">
-                    <input id="retornar" type="button" value="Retornar"/>
-                    <input id="buscar" type="submit" value="Buscar"/>
+                    <input id="entrar" type="submit" value="Entrar"/>
+                    <input id="cadastrar" type="button" value="Cadastrar"/>
                 </div>
             </form>
         </div>
         <script>
-            retornar.onclick = function () {
-                window.location.href = "index.jsp";
+            cadastrar.onclick = function () {
+                window.location.href = "busca.jsp";
             };
         </script>
     </body>

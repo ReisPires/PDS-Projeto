@@ -5,11 +5,11 @@
  */
 package Control;
 
-import DAO.DAOLogin;
-import Model.Usuario;
+import DAO.*;
+import Model.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Gustavo
  */
-public class Login extends HttpServlet {
+@WebServlet(name = "Buscar", urlPatterns = {"/buscar"})
+public class Buscar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,25 +32,19 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getSession().getAttribute("usuario") != null) {
-            request.getRequestDispatcher("atividades.jsp").forward(request, response);
-            
-            return;
-        }
-        
-        String usuario = (String)request.getParameter("usuario");
+        String login1 = (String)request.getParameter("identidade");
+        String login2 = (String)request.getParameter("email");
         String senha = (String)request.getParameter("senha");
         
         DAOLogin daoLogin = new DAOLogin();
-        Usuario u = daoLogin.realizaLogin(new Usuario(usuario, senha));
+        Usuario u = daoLogin.realizaPrimeiroAcesso(login1, login2);
         
-        if (u == null) {
+        if (u == null || !daoLogin.atualizaSenha(u.getId(), u.getLogin(), senha)) {
             request.setAttribute("incorrect", new Boolean(true));
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-            
+            request.getRequestDispatcher("busca.jsp").forward(request, response);            
             return;
-        }
-        
+        }                
+                        
         request.getSession().setAttribute("usuario", u.getId());
         request.getRequestDispatcher("atividades.jsp").forward(request, response);
     }

@@ -5,9 +5,11 @@
  */
 package Control;
 
+import DAO.*;
+import Model.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Gustavo
  */
-public class Index extends HttpServlet {
+@WebServlet(name = "Entrar", urlPatterns = {"/entrar"})
+public class Entrar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,14 +32,34 @@ public class Index extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String usuario = (String)request.getSession().getAttribute("usuario");
-        if (usuario != null) {
+        // Verifica se o usuário já está logado
+        if (request.getSession().getAttribute("usuario") != null) {
             request.getRequestDispatcher("atividades.jsp").forward(request, response);
             
             return;
         }
         
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        // Caso não estiver logado, tentar logar
+        String usuario = (String)request.getParameter("usuario");
+        String senha = (String)request.getParameter("senha");
+        
+        DAOLogin daoLogin = new DAOLogin();
+        Usuario u = daoLogin.realizaLogin(new Usuario(usuario, senha));
+        
+        // Verifica se o usuário conseguiu logar
+        if (u != null) {
+            request.getSession().setAttribute("usuario", u.getId());
+            if ("E".equals(u.getTipo())) {
+                request.getRequestDispatcher("csv.jsp").forward(request, response);
+            } else {                
+                request.getRequestDispatcher("atividades.jsp").forward(request, response);
+            }
+            return;
+        }
+        
+        // O usuário não conseguiu logar
+        request.setAttribute("incorrect", new Boolean(true));
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
