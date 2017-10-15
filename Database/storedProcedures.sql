@@ -86,7 +86,7 @@ END $$ LANGUAGE 'plpgsql';
 CREATE OR REPLACE FUNCTION enviaMensagem(remetente BIGINT, destinatario BIGINT, texto VARCHAR(1000))
 RETURNS void AS $$
 BEGIN
-	INSERT INTO mensagem(remetente, destinatario, texto) VALUES (remetente, destinatario, now(), texto);
+	INSERT INTO mensagem(remetente, destinatario, texto, lida) VALUES (remetente, destinatario, now(), texto, FALSE);
 END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */

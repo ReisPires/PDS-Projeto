@@ -102,6 +102,7 @@ CREATE TABLE mensagem(
 	destinatario BIGINT REFERENCES usuario (id),
 	datahora TIMESTAMP,
 	texto VARCHAR(1000),
+	lida BOOLEAN,
 	PRIMARY KEY (remetente, destinatario, datahora)
 );
 
