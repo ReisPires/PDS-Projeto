@@ -1,13 +1,40 @@
-CREATE OR REPLACE FUNCTION cadastraAtividade(codigo VARCHAR(20), nome VARCHAR(100), ano INTEGER, semestre VARCHAR(5), horario VARCHAR(200), professor VARCHAR(10))
+CREATE OR REPLACE FUNCTION cadastraAtividade(cod VARCHAR(20), nome VARCHAR(100), ano INTEGER, semestre VARCHAR(5), horario VARCHAR(200))
 RETURNS void AS $$
+DECLARE aux VARCHAR(10);
 BEGIN
-	INSERT INTO atividade (codigo, nome, ano, semestre, horario) VALUES (codigo, nome, ano, semestre, horario);
-	INSERT INTO professor_atividade (professor_codigo, atividade_codigo) VALUES (professor, codigo);
+	SELECT codigo INTO aux FROM atividade WHERE codigo = cod;
+	IF NOT FOUND THEN
+		INSERT INTO atividade (codigo, nome, ano, semestre, horario) VALUES (cod, nome, ano, semestre, horario);
+	END IF;
 END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
 
-CREATE OR REPLACE FUNCTION cadastraAluno(senha VARCHAR(50), matricula VARCHAR(10), turma VARCHAR(5), cpf VARCHAR(14), email VARCHAR(80), telefone VARCHAR(14), 
+CREATE OR REPLACE FUNCTION associaProfessor(codAtividade VARCHAR(20), codProfessor VARCHAR(10))
+RETURNS void AS $$
+DECLARE aux VARCHAR(10);
+BEGIN
+	SELECT codigo INTO aux FROM professor WHERE codigo = codProfessor;
+	IF FOUND THEN
+		INSERT INTO professor_atividade (atividade_codigo, professor_codigo) VALUES (codAtividade, codProfessor);
+	END IF;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION matriculaAluno(codAtividade VARCHAR(20), matAluno VARCHAR(10))
+RETURNS void AS $$
+DECLARE aux VARCHAR(10);
+BEGIN
+	SELECT matricula INTO aux FROM aluno WHERE matricula = matAluno;
+	IF FOUND THEN
+		INSERT INTO aluno_atividade (atividade_codigo, aluno_matricula) VALUES (codAtividade, matAluno);
+	END IF;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION cadastraAluno(senha VARCHAR(50), matricula VARCHAR(10), turma VARCHAR(5), cpf VARCHAR(11), email VARCHAR(80), telefone VARCHAR(14), 
 	nome VARCHAR(100), sexo CHAR(1), pais VARCHAR(50), cidade VARCHAR(60), cep VARCHAR(10), bairro VARCHAR(50), rua VARCHAR(100), numero INTEGER, complemento VARCHAR(80))
 RETURNS void AS $$
 DECLARE last_id BIGINT;
@@ -19,7 +46,7 @@ END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
 
-CREATE OR REPLACE FUNCTION cadastraResponsavel(senha VARCHAR(50), responsavelCpf VARCHAR(14), email VARCHAR(80), telefone VARCHAR(14), nome VARCHAR(100), sexo CHAR(1), 
+CREATE OR REPLACE FUNCTION cadastraResponsavel(senha VARCHAR(50), responsavelCpf VARCHAR(11), email VARCHAR(80), telefone VARCHAR(14), nome VARCHAR(100), sexo CHAR(1), 
 	pais VARCHAR(50), cidade VARCHAR(60), cep VARCHAR(10), bairro VARCHAR(50), rua VARCHAR(100), numero INTEGER, complemento VARCHAR(80), aluno VARCHAR(10))
 RETURNS void AS $$
 DECLARE last_id BIGINT;
@@ -36,7 +63,7 @@ END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
 
-CREATE OR REPLACE FUNCTION cadastraProfessor(senha VARCHAR(50), codigo VARCHAR(10), cpf VARCHAR(14), email VARCHAR(80), telefone VARCHAR(14), nome VARCHAR(100), 
+CREATE OR REPLACE FUNCTION cadastraProfessor(senha VARCHAR(50), codigo VARCHAR(10), cpf VARCHAR(11), email VARCHAR(80), telefone VARCHAR(14), nome VARCHAR(100), 
 	sexo CHAR(1), pais VARCHAR(50), cidade VARCHAR(60), cep VARCHAR(10), bairro VARCHAR(50), rua VARCHAR(100), numero INTEGER, complemento VARCHAR(80))
 RETURNS void AS $$
 DECLARE last_id BIGINT;
@@ -61,3 +88,6 @@ RETURNS void AS $$
 BEGIN
 	INSERT INTO mensagem(remetente, destinatario, texto) VALUES (remetente, destinatario, now(), texto);
 END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
