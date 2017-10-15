@@ -49,8 +49,11 @@ public class Entrar extends HttpServlet {
         // Verifica se o usuário conseguiu logar
         if (u != null) {
             request.getSession().setAttribute("usuario", u.getId());
-            request.getRequestDispatcher("atividades.jsp").forward(request, response);
-            
+            if ("E".equals(u.getTipo())) {
+                request.getRequestDispatcher("csv.jsp").forward(request, response);
+            } else {                
+                request.getRequestDispatcher("atividades.jsp").forward(request, response);
+            }
             return;
         }
         

@@ -16,3 +16,7 @@ ExtraCurricular/nbproject/private/private.xml
 ExtraCurricular/nbproject/build-impl.xml
 ExtraCurricular/build/web/META-INF/context.xml
 ExtraCurricular/nbproject/ant-deploy.xml
+*.smap
+ExtraCurricular/nbproject/build-impl.xml~
+*.properties
+ExtraCurricular/src/java/DAO/DAOLogin.java
