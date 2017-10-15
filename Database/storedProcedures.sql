@@ -39,7 +39,7 @@ CREATE OR REPLACE FUNCTION cadastraAluno(senha VARCHAR(50), matricula VARCHAR(10
 RETURNS void AS $$
 DECLARE last_id BIGINT;
 BEGIN	
-	INSERT INTO usuario(senha, tipo) VALUES (senha, 'A') RETURNING id INTO last_id;
+	INSERT INTO usuario(login1, login2, senha, tipo) VALUES (matricula, email, senha, 'A') RETURNING id INTO last_id;
 	INSERT INTO aluno(matricula, turma, id, cpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento) 
 		VALUES (matricula, turma, last_id, cpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento);
 END $$ LANGUAGE 'plpgsql';
@@ -54,7 +54,7 @@ DECLARE aux VARCHAR(14);
 BEGIN	
 	SELECT cpf INTO aux from responsavel where cpf = responsavelCpf;
 	IF NOT FOUND THEN
-		INSERT INTO usuario(senha, tipo) VALUES (senha, 'R') RETURNING id INTO last_id;
+		INSERT INTO usuario(login1, login2, senha, tipo) VALUES (responsavelCpf, email, senha, 'R') RETURNING id INTO last_id;
 		INSERT INTO responsavel(id, cpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento) 
 			VALUES (last_id, responsavelCpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento);
 	END IF;
@@ -68,9 +68,20 @@ CREATE OR REPLACE FUNCTION cadastraProfessor(senha VARCHAR(50), codigo VARCHAR(1
 RETURNS void AS $$
 DECLARE last_id BIGINT;
 BEGIN	
-	INSERT INTO usuario(senha, tipo) VALUES (senha, 'P') RETURNING id INTO last_id;
+	INSERT INTO usuario(login1, login2, senha, tipo) VALUES (codigo, email, senha, 'P') RETURNING id INTO last_id;
 	INSERT INTO professor(codigo, id, cpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento) 
 		VALUES (codigo, last_id, cpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento);
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION cadastraAdministrador(nome VARCHAR(10), senha VARCHAR(50))
+RETURNS void AS $$
+DECLARE last_id BIGINT;
+BEGIN	
+	INSERT INTO usuario(login1, login2, senha, tipo) VALUES (nome, NULL, senha, 'E') RETURNING id INTO last_id;
+	INSERT INTO administrador(nome, id) 
+		VALUES (nome, last_id);
 END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
@@ -91,3 +102,25 @@ END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
 
+CREATE OR REPLACE FUNCTION realizaLogin(uLogin VARCHAR(80), uSenha VARCHAR(50))
+RETURNS TABLE(id BIGINT, tipo CHAR(1)) AS $$
+BEGIN
+	RETURN QUERY SELECT u.id, u.tipo FROM usuario u WHERE (u.login1 = uLogin OR u.login2 = uLogin) AND u.senha = uSenha AND u.senha != u.login1;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION realizaPrimeiroAcesso(uLogin1 VARCHAR(11), uLogin2 VARCHAR(80))
+RETURNS TABLE(id BIGINT, tipo CHAR(1)) AS $$
+BEGIN
+	RETURN QUERY SELECT u.id, u.tipo FROM usuario u WHERE u.login1 = uLogin1 AND u.login2 = uLogin2 AND u.senha = u.login1;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION atualizaSenha(uid BIGINT, senhaAntiga VARCHAR(50), senhaNova VARCHAR(50))
+RETURNS table(num BIGINT) AS $$
+BEGIN
+	RETURN QUERY WITH rows AS (UPDATE usuario SET senha = senhaNova WHERE id = uid AND senha = senhaAntiga RETURNING 1) 
+		SELECT COUNT(*) FROM rows;
+END $$ LANGUAGE 'plpgsql';
