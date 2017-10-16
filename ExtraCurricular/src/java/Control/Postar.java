@@ -52,7 +52,7 @@ public class Postar extends HttpServlet {
         
         if (!"".equals(parte.getSubmittedFileName())) {            
             String arquivo = Paths.get(parte.getSubmittedFileName()).getFileName().toString();
-            String caminho = "C:/Users/Gustavo/Arquivos/UFSCar/6º Semestre/Matérias/Projeto e Desenvolvimento de Sistemas/Projeto/PDS-Projeto/ExtraCurricular/web/media";
+            String caminho = "C:/Users/Pedro Pires/Documents/GitHub/PDS-Projeto/ExtraCurricular/web/media";
             midia = caminho + "/" + arquivo;
             
             Files.copy(parte.getInputStream(), Paths.get(midia), REPLACE_EXISTING);
