@@ -36,7 +36,8 @@ if (codigo == null) {
 }
 
 DAOAtividade daoAtividade = new DAOAtividade();
-ArrayList<Informacao> informacoes = daoAtividade.exibeInformacoesAtividade(new Atividade(codigo, null));
+Atividade atividade = daoAtividade.recuperaAtividade(new Atividade(codigo));
+ArrayList<Informacao> informacoes = daoAtividade.exibeInformacoesAtividade(atividade);
 %>
 
 <!DOCTYPE html>
@@ -112,7 +113,7 @@ ArrayList<Informacao> informacoes = daoAtividade.exibeInformacoesAtividade(new A
             <% if (usuario.getTipo().equals("P")) { %>
             <input id="postar" type="button" value="Realizar postagem"/>
             <% } %>
-            <div class="atividade">Título da atividade</div>
+            <div class="atividade"><%= atividade.getNome() %></div>
             <% if (informacoes.isEmpty()) { %>
             <div class="vazio">
                 Não foram realizadas postagens nesta atividade.
