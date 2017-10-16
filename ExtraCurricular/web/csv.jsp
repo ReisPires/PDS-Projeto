@@ -59,13 +59,13 @@ boolean success = request.getAttribute("success") != null;
                     <div><input id="professores" name="professores" type="file" accept=".csv"/></div>
                 </div>
                 <div class="grupo">
-                    <div><label for="atividades">Cadastro de atividades:</label></div>
-                    <div><input id="atividades" name="atividades" type="file" accept=".csv"/></div>
-                </div>
-                <div class="grupo">
                     <div><label for="pais-alunos">Cadastro de pais e alunos:</label></div>
                     <div><input id="pais-alunos" name="pais-alunos" type="file" accept=".csv"/></div>
                 </div>
+                <div class="grupo">
+                    <div><label for="atividades">Cadastro de atividades:</label></div>
+                    <div><input id="atividades" name="atividades" type="file" accept=".csv"/></div>
+                </div>                
                 <div style="margin-top: 15px">
                     <input id="retornar" type="button" value="Retornar"/>
                     <input id="cadastrar" type="submit" value="Cadastrar"/>

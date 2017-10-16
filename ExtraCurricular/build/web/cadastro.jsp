@@ -37,7 +37,7 @@ boolean incorrect = request.getAttribute("incorrect") != null;
                 width: 75px;
             }
             
-            #buscar {
+            #cadastrar {
                 float: right;
             }
         </style>

@@ -57,9 +57,51 @@ public class CSV extends HttpServlet {
                 String email = csvReader.next();
                
                 // Cadastra o professor
-                Professor professor = new Professor(codigo, new Usuario(codigo, null), new DadosPessoais(email, nome), new Endereco());
+                Professor professor = new Professor(codigo, new Usuario(codigo, codigo), new DadosPessoais(email, nome), new Endereco());
                 daoUsuario.cadastraProfessor(professor);                
 
+            }          
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        
+        // Pais e alunos
+        try {
+            InputStream inputStream = request.getPart("pais-alunos").getInputStream();
+            InputStreamReader streamReader = new InputStreamReader(inputStream, "UTF-8");
+            BufferedReader fileReader = new BufferedReader(streamReader);
+            String line = fileReader.readLine();
+            
+            while ((line = fileReader.readLine()) != null) {                
+                Scanner csvReader = new Scanner(line);
+                csvReader.useDelimiter(",");
+                
+                // Le a linha do CSV
+                String rm = csvReader.next();
+                String nome = csvReader.next();
+                String turma = csvReader.next();
+                String emailAluno = csvReader.next();
+                String cpfPai = csvReader.next();
+                String emailPai = csvReader.next();
+                String telefonePai = csvReader.next();
+                String cpfMae = csvReader.next();
+                String emailMae = csvReader.next();
+                String telefoneMae = csvReader.next();  
+                
+                // Cadastra o aluno
+                Aluno aluno = new Aluno(rm, turma, new Usuario(rm, rm), new DadosPessoais(emailAluno, nome), new Endereco());
+                daoUsuario.cadastraAluno(aluno);    
+                
+                // Cadastra o pai
+                if (!cpfPai.trim().isEmpty()) {
+                    Responsavel pai = new Responsavel(new Usuario(cpfPai, cpfPai), new DadosPessoais(cpfPai, emailPai, telefonePai), new Endereco());
+                    daoUsuario.cadastraResponsavel(pai, aluno);
+                }                
+                // Cadastra a mae
+                if (!cpfMae.trim().isEmpty()) {
+                    Responsavel mae = new Responsavel(new Usuario(cpfMae, cpfMae), new DadosPessoais(cpfMae, emailMae, telefoneMae), new Endereco());
+                    daoUsuario.cadastraResponsavel(mae, aluno);
+                }
             }          
         } catch (Exception ex) {
             System.out.println(ex);
@@ -97,49 +139,7 @@ public class CSV extends HttpServlet {
             }
         } catch (Exception ex) {
             System.out.println(ex);
-        }
-        
-        // Pais e alunos
-        try {
-            InputStream inputStream = request.getPart("pais-alunos").getInputStream();
-            InputStreamReader streamReader = new InputStreamReader(inputStream, "UTF-8");
-            BufferedReader fileReader = new BufferedReader(streamReader);
-            String line = fileReader.readLine();
-            
-            while ((line = fileReader.readLine()) != null) {                
-                Scanner csvReader = new Scanner(line);
-                csvReader.useDelimiter(",");
-                
-                // Le a linha do CSV
-                String rm = csvReader.next();
-                String nome = csvReader.next();
-                String turma = csvReader.next();
-                String emailAluno = csvReader.next();
-                String cpfPai = csvReader.next();
-                String emailPai = csvReader.next();
-                String telefonePai = csvReader.next();
-                String cpfMae = csvReader.next();
-                String emailMae = csvReader.next();
-                String telefoneMae = csvReader.next();  
-                
-                // Cadastra o aluno
-                Aluno aluno = new Aluno(rm, turma, new Usuario(rm), new DadosPessoais(emailAluno, nome), new Endereco());
-                daoUsuario.cadastraAluno(aluno);    
-                
-                // Cadastra o pai
-                if (!cpfPai.trim().isEmpty()) {
-                    Responsavel pai = new Responsavel(new Usuario(cpfPai), new DadosPessoais(cpfPai, emailPai, telefonePai), new Endereco());
-                    daoUsuario.cadastraResponsavel(pai, aluno);
-                }                
-                // Cadastra a mae
-                if (!cpfMae.trim().isEmpty()) {
-                    Responsavel mae = new Responsavel(new Usuario(cpfMae), new DadosPessoais(cpfMae, emailMae, telefoneMae), new Endereco());
-                    daoUsuario.cadastraResponsavel(mae, aluno);
-                }
-            }          
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
+        }                
         
         request.setAttribute("success", true);
         request.getRequestDispatcher("csv.jsp").forward(request, response);

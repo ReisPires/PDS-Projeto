@@ -58,8 +58,8 @@ def geraCodAtv():
     return str(cod)
 
 def geraNomeAtv(cod):    
-    n1 = ['Futebol', 'Xadrez', 'Meditação', 'Basquete', 'Pintura', 'Robótica', 'Judô', 'Programação', 'Dança']
-    n2 = ['', '', '', '', 'Básico', 'Avançado', 'Noturno', 'Integral', 'com Música', 'Especial']
+    n1 = ['Futebol', 'Xadrez', 'Meditacao', 'Basquete', 'Pintura', 'Robotica', 'Judo', 'Programacao', 'Danca']
+    n2 = ['', '', '', '', 'Basico', 'Avancado', 'Noturno', 'Integral', 'com Múusica', 'Especial']
     return n1[int(cod[0])-1] + ' ' + n2[int(cod[1])]
 
 def geraProfsAtv():
@@ -102,18 +102,18 @@ with open('alunos.csv', 'w') as f:
                 l.append(row['name'] + ' ' + row['nickname'])
                 
             random.shuffle(l)
-            for i in range(0,1000):        
+            for i in range(0,300):        
                 rm = geraRM()
                 cw.writerow({'RM': rm, 'Aluno': l[i], 'Turma': geraAno(), 'E-mail aluno': geraEmail(str(rm), 'aluno'),
                              'CPF pai': geraCPF(), 'E-mail pai': geraEmail(str(rm),'pai'), 'Tel pai': geraTelefone(),
                              'CPF mae': geraCPF(), 'E-mail mae': geraEmail(str(rm),'mae'), 'Tel mae': geraTelefone()})        
 
-            for i in range(0,124):
+            for i in range(0,50):
                 pw.writerow({'Codigo': geraCodProf(), 'Professor': l[i], 'E-mail': l[i].split()[0].lower() + str(random.randint(0,10)) + '@escola.br'})
 
 with open('atividades.csv', 'w') as a:
     aw = csv.DictWriter(a, ['Codigo', 'Atividade', 'Cod professores', 'Cod alunos'])
     aw.writeheader()
-    for i in range(0,25):
+    for i in range(0,15):
         codAtv = geraCodAtv()
         aw.writerow({'Codigo': codAtv, 'Atividade': geraNomeAtv(codAtv), 'Cod professores': geraProfsAtv(), 'Cod alunos': geraAlunosAtv()})

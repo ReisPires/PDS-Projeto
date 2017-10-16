@@ -160,6 +160,14 @@ END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
 
+CREATE OR REPLACE FUNCTION listaAtividadesEscola()
+RETURNS table (codigo VARCHAR(20), nome VARCHAR(100)) AS $$
+BEGIN
+	RETURN QUERY SELECT t.codigo, t.nome FROM atividade t;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
 CREATE OR REPLACE FUNCTION exibeInformacoesAtividade(atvCodigo VARCHAR(20))
 RETURNS table (professor VARCHAR (100), titulo VARCHAR(100), datahora TIMESTAMP, texto VARCHAR(1000), midia VARCHAR(1000)) AS $$
 BEGIN
@@ -191,4 +199,12 @@ CREATE OR REPLACE FUNCTION recuperaProfessor(profId BIGINT)
 RETURNS table (pcodigo VARCHAR(10), pcpf VARCHAR(11), pemail VARCHAR(80), ptelefone VARCHAR(14), pnome VARCHAR(100), psexo CHARACTER, ppais VARCHAR(50), pcidade VARCHAR(60), pcep VARCHAR(10), pbairro VARCHAR(50), prua VARCHAR(100), pnumero INTEGER, pcomplemento VARCHAR(80)) AS $$
 BEGIN
 	RETURN QUERY SELECT codigo, cpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento FROM professor WHERE id = profId;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION exibeTodasMensagens()
+RETURNS table (rem BIGINT, dest BIGINT, datahora TIMESTAMP, texto VARCHAR(1000), lida BOOLEAN) AS $$
+BEGIN
+	RETRUN QUERY SELECT remetente, destinatario, datahora, texto, lida FROM mensagem;
 END $$ LANGUAGE 'plpgsql';

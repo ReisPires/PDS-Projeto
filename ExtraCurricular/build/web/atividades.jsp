@@ -1,4 +1,4 @@
-<%@page import="java.util.ArrayList"%>
+    <%@page import="java.util.ArrayList"%>
 <%@page import="Model.*"%>
 <%@page import="DAO.*"%>
 
@@ -93,7 +93,9 @@ ArrayList<Atividade> listaAtividades = daoAtividade.listaAtividades(usuario);
             </div>
             <% if (usuario.getTipo().equals("E")) { %>
             <input id="csv" type="button" value="Cadastrar por CSV" style="margin-bottom: 15px; width: 100%"/>
+            <input id="notificacao" type="button" value="Enviar notificação" style="margin-bottom: 15px; width: 100%"/>
             <% } %>
+            <input id="notificacoes" type="button" value="Ver notificações" style="margin-bottom: 15px; width: 100%"/>
             <div class="pagina">Lista de atividades</div>
             <% if (listaAtividades.isEmpty()) { %>
             <div class="vazio">
@@ -105,8 +107,7 @@ ArrayList<Atividade> listaAtividades = daoAtividade.listaAtividades(usuario);
                     <tr>
                         <td>
                             <a class="atividade" href="atividade.jsp?codigo=<%= atividade.getCodigo() %>">
-                                <div class="titulo"><%= atividade.getNome() %></div>
-                                <div class="data">Data</div>    
+                                <div class="titulo"><%= atividade.getNome() %></div>                                    
                             </a>
                         </td>
                     </tr>
@@ -116,6 +117,12 @@ ArrayList<Atividade> listaAtividades = daoAtividade.listaAtividades(usuario);
         <script>
             csv.onclick = function () {
                 window.location.href = "csv.jsp";
+            };
+            notificacao.onclick = function () {
+                window.location.href = "notificacao.jsp";
+            };
+            notificacoes.onclick = function () {
+                window.location.href = "notificacoes.jsp";
             };
         </script>
     </body>

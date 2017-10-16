@@ -1,4 +1,4 @@
-    <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="Model.*"%>
 <%@page import="DAO.*"%>
 
@@ -9,15 +9,15 @@ if (usuario == null) {
     return;
 }
 
-DAOAtividade daoAtividade = new DAOAtividade();
-ArrayList<Atividade> listaAtividades = daoAtividade.listaAtividades(usuario);
+DAOMensagem daoMensagem = new DAOMensagem();
+ArrayList<Mensagem> mensagens = daoMensagem.todasMensagens();
 %>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>ExtraCurricular - Atividades</title>
+        <title>ExtraCurricular - Notificações</title>
         <link rel="stylesheet" type="text/css" href="styles/main.css">
         <style>
             .janela {
@@ -75,7 +75,7 @@ ArrayList<Atividade> listaAtividades = daoAtividade.listaAtividades(usuario);
                 text-decoration: none;
             }
             
-            .titulo {
+            .texto {
                 
             }
             
@@ -86,43 +86,28 @@ ArrayList<Atividade> listaAtividades = daoAtividade.listaAtividades(usuario);
     </head>
     <body>
         <div class="janela">
-            <div style="margin-bottom: 15px">
-                <form action="sair" method="post">
-                    <input type="submit" value="Sair" style="width: 100%"/>
-                </form>
-            </div>
-            <% if (usuario.getTipo().equals("E")) { %>
-            <input id="csv" type="button" value="Cadastrar por CSV" style="margin-bottom: 15px; width: 100%"/>
-            <input id="notificacao" type="button" value="Enviar notificação" style="margin-bottom: 15px; width: 100%"/>
-            <% } %>
-            <input id="notificacoes" type="button" value="Ver notificações" style="margin-bottom: 15px; width: 100%"/>
-            <div class="pagina">Lista de atividades</div>
-            <% if (listaAtividades.isEmpty()) { %>
+            <input id="retornar" type="button" value="Retornar" style="margin-bottom: 15px; width: 100%"/>
+            <div class="pagina">Notificações</div>
+            <% if (mensagens.isEmpty()) { %>
             <div class="vazio">
-                Não existem atividades cadastradas
+                Não existem notificações.
             </div>
-            <% } %>
+            <% } else {%>
             <table>
-                <% for (Atividade atividade : listaAtividades) { %>
+                <% for (Mensagem mensagem : mensagens) { %>
                     <tr>
                         <td>
-                            <a class="atividade" href="atividade.jsp?codigo=<%= atividade.getCodigo() %>">
-                                <div class="titulo"><%= atividade.getNome() %></div>                                    
-                            </a>
+                            <div class="texto"><%= mensagem.getTexto() %></div>
+                            <div class="data"><%= mensagem.getDia() %> - <%= mensagem.getHorario() %></div>    
                         </td>
                     </tr>
                 <% } %>
             </table>
+            <% } %>
         </div>
         <script>
-            csv.onclick = function () {
-                window.location.href = "csv.jsp";
-            };
-            notificacao.onclick = function () {
-                window.location.href = "notificacao.jsp";
-            };
-            notificacoes.onclick = function () {
-                window.location.href = "notificacoes.jsp";
+            retornar.onclick = function () {
+                window.location.href = "atividades.jsp";
             };
         </script>
     </body>
