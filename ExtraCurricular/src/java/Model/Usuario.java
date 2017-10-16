@@ -18,14 +18,17 @@ public class Usuario {
         this.senha = senha;        
     }
 
-    public Usuario(String login, String senha) {        
+    public Usuario(String login, String senha) {
+        this.id = null;
         this.login = login;
-        this.senha = senha;        
+        this.senha = senha;
+        this.tipo = null;
     }
 
     public Usuario(Integer id, String login, String tipo) {
         this.id = id;
-        this.login = login;        
+        this.login = login;
+        this.senha = null;
         this.tipo = tipo;
     }          
 
