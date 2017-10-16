@@ -20,3 +20,8 @@ ExtraCurricular/nbproject/ant-deploy.xml
 ExtraCurricular/nbproject/build-impl.xml~
 *.properties
 ExtraCurricular/src/java/DAO/DAOLogin.java
+/ExtraCurricular/nbproject/private/
+/ExtraCurricular/dist/
+/ExtraCurricular/build/
+ExtraCurricular/nbproject/build-impl.xml~
+*.properties
