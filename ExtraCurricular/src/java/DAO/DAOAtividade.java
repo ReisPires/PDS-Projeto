@@ -103,17 +103,22 @@ public class DAOAtividade {
             switch (usuario.getTipo()) {
                 case "A":
                     stmt = conn.prepareCall("{ call listaAtividadesAluno(?) }");                                    
+                    stmt.setInt(1, usuario.getId()); 
                     break;                    
                 case "P":
                     stmt = conn.prepareCall("{ call listaAtividadesProfessor(?) }");                                    
+                    stmt.setInt(1, usuario.getId()); 
                     break;
                 case "R":
                     stmt = conn.prepareCall("{ call listaAtividadesResponsavel(?) }");                                    
+                    stmt.setInt(1, usuario.getId()); 
+                    break;
+                case "E":
+                    stmt = conn.prepareCall("{ call listaAtividadesEscola() }");
                     break;
                 default:
                     return atividades;                    
-            }            
-            stmt.setInt(1, usuario.getId());            
+            }                                   
             // Executa o comando
             stmt.execute();
             ResultSet rs = (ResultSet) stmt.getResultSet();
