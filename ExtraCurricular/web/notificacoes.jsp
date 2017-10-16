@@ -86,7 +86,7 @@ ArrayList<Mensagem> mensagens = daoMensagem.todasMensagens();
     </head>
     <body>
         <div class="janela">
-            <input id="retornar" type="button" value="Retornar" style="margin-bottom: 15px; width: 100%"/>
+            <input id="retornar" type="button" value="Retornar" style="margin-bottom: 15px; width: 100%" onclick="window.location.href = 'atividades.jsp'"/>
             <div class="pagina">Notificações</div>
             <% if (mensagens == null || mensagens.isEmpty()) { %>
             <div class="vazio">
@@ -105,10 +105,5 @@ ArrayList<Mensagem> mensagens = daoMensagem.todasMensagens();
             </table>
             <% } %>
         </div>
-        <script>
-            retornar.onclick = function () {
-                window.location.href = "atividades.jsp";
-            };
-        </script>
     </body>
 </html>

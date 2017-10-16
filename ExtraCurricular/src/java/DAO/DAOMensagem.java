@@ -53,8 +53,7 @@ public class DAOMensagem {
             ArrayList<Mensagem> msgs = new ArrayList<>();            
             while (rs.next())                 
                 msgs.add(new Mensagem(rs.getInt(1), rs.getInt(2), rs.getTimestamp(3), rs.getString(4), rs.getBoolean(5)));
-            if (msgs.isEmpty())
-                return null;
+            
             return msgs;          
         } catch (SQLException ex) {  
             System.out.println(ex);
@@ -73,8 +72,7 @@ public class DAOMensagem {
             ArrayList<Mensagem> msgs = new ArrayList<>();            
             while (rs.next())                 
                 msgs.add(new Mensagem(rs.getInt(1), rs.getInt(2), rs.getTimestamp(3), rs.getString(4), rs.getBoolean(5)));
-            if (msgs.isEmpty())
-                return null;
+            
             return msgs;          
         } catch (SQLException ex) {  
             System.out.println(ex);

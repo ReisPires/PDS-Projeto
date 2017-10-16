@@ -66,15 +66,10 @@ boolean incorrect = request.getAttribute("incorrect") != null;
                     <div><input id="senha" name="senha" type="password"/></div>
                 </div>
                 <div style="margin-top: 15px">
-                    <input id="retornar" type="button" value="Retornar"/>
+                    <input id="retornar" type="button" value="Retornar" onclick="window.location.href = 'index.jsp'"/>
                     <input id="cadastrar" type="submit" value="Cadastrar"/>
                 </div>
             </form>
         </div>
-        <script>
-            retornar.onclick = function () {
-                window.location.href = "index.jsp";
-            };
-        </script>
     </body>
 </html>
