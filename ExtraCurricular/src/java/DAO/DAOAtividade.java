@@ -96,6 +96,8 @@ public class DAOAtividade {
     
     public ArrayList<Atividade> listaAtividades(Usuario usuario) {
          try {             
+            ArrayList<Atividade> atividades = new ArrayList<>();  
+            
             // Cria o comando
             CallableStatement stmt;
             switch (usuario.getTipo()) {
@@ -109,14 +111,13 @@ public class DAOAtividade {
                     stmt = conn.prepareCall("{ call listaAtividadesResponsavel(?) }");                                    
                     break;
                 default:
-                    return null;                    
+                    return atividades;                    
             }            
             stmt.setInt(1, usuario.getId());            
             // Executa o comando
             stmt.execute();
             ResultSet rs = (ResultSet) stmt.getResultSet();
             
-            ArrayList<Atividade> atividades = new ArrayList<>();            
             while (rs.next())
                 atividades.add(new Atividade(rs.getString(1), rs.getString(2)));
             

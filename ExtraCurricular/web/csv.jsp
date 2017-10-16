@@ -11,6 +11,8 @@ if (!usuario.getTipo().equals("E")) {
     request.getRequestDispatcher("atividades.jsp").forward(request, response);
     return;
 }
+
+boolean success = request.getAttribute("success") != null;
 %>
 
 <!DOCTYPE html>
@@ -32,11 +34,7 @@ if (!usuario.getTipo().equals("E")) {
                 margin-bottom: 5px;
             }
             
-            input[type=text], input[type=password] {
-                width: 170px;
-            }
-            
-            input[type=button] {
+            input[type=button], input[type=submit] {
                 width: 130px;
             }
             
@@ -50,6 +48,11 @@ if (!usuario.getTipo().equals("E")) {
             <div style="text-align: center; margin-bottom: 10px">
                 Cadastro por CSV
             </div>
+            <% if (success) { %>
+            <div style="text-align: center; color: green">
+                Cadastro realizado com sucesso.
+            </div>
+            <% } %>
             <form action="csv" method="post" enctype="multipart/form-data">
                 <div class="grupo">
                     <div><label for="professores">Cadastro de professores:</label></div>
@@ -65,7 +68,7 @@ if (!usuario.getTipo().equals("E")) {
                 </div>
                 <div style="margin-top: 15px">
                     <input id="retornar" type="button" value="Retornar"/>
-                    <input id="cadastrar" type="button" value="Cadastrar"/>
+                    <input id="cadastrar" type="submit" value="Cadastrar"/>
                 </div>
             </form>
         </div>

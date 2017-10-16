@@ -12,6 +12,11 @@ if (atividade == null) {
     request.getRequestDispatcher("atividades.jsp").forward(request, response);
     return;
 }
+
+if (!usuario.getTipo().equals("P")) {
+    request.getRequestDispatcher("atividade.jsp?codigo=" + atividade).forward(request, response);
+    return;
+}
     
 boolean success = request.getAttribute("success") != null;
 %>
@@ -83,7 +88,7 @@ boolean success = request.getAttribute("success") != null;
                 </div>
                 <div class="grupo">
                     <div><label for="midia">Mídia:</label></div>
-                    <div><input id="midia" name="midia" type="file"/></div>
+                    <div><input id="midia" name="midia" type="file" accept="image/*, video/*"/></div>
                 </div>
                 <div style="margin-top: 15px">
                     <input id="retornar" type="button" value="Retornar"/>

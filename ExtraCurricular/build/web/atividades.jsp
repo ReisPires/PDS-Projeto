@@ -1,6 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="Model.*"%>
 <%@page import="DAO.*"%>
+
 <%
 Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
 if (usuario == null) {
@@ -90,6 +91,9 @@ ArrayList<Atividade> listaAtividades = daoAtividade.listaAtividades(usuario);
                     <input type="submit" value="Sair" style="width: 100%"/>
                 </form>
             </div>
+            <% if (usuario.getTipo().equals("E")) { %>
+            <input id="csv" type="button" value="Cadastrar por CSV" style="margin-bottom: 15px; width: 100%"/>
+            <% } %>
             <div class="pagina">Lista de atividades</div>
             <% if (listaAtividades.isEmpty()) { %>
             <div class="vazio">
@@ -101,12 +105,18 @@ ArrayList<Atividade> listaAtividades = daoAtividade.listaAtividades(usuario);
                     <tr>
                         <td>
                             <a class="atividade" href="atividade.jsp?codigo=<%= atividade.getCodigo() %>">
-                                <div class="titulo"><%= atividade.getNome() %></div>                                
+                                <div class="titulo"><%= atividade.getNome() %></div>
+                                <div class="data">Data</div>    
                             </a>
                         </td>
                     </tr>
                 <% } %>
             </table>
         </div>
+        <script>
+            csv.onclick = function () {
+                window.location.href = "csv.jsp";
+            };
+        </script>
     </body>
 </html>
