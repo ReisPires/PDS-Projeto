@@ -49,6 +49,7 @@ public class Postar extends HttpServlet {
         
         Part parte = request.getPart("midia");
         String midia = null;        
+        
         if (!"".equals(parte.getSubmittedFileName())) {            
             String arquivo = Paths.get(parte.getSubmittedFileName()).getFileName().toString();
             String caminho = "C:/Users/Pedro Pires/Documents/GitHub/PDS-Projeto/ExtraCurricular/web/media";
