@@ -124,8 +124,7 @@ ArrayList<Informacao> informacoes = daoAtividade.exibeInformacoesAtividade(ativi
                 <div class="titulo"><%= informacao.getTitulo() %></div>
                 <div class="data"><%= informacao.getDia() %> - <%= informacao.getHorario() %></div>
                 <div class="legenda"><%= informacao.getTexto()%></div>
-                <% if (isImage(informacao.getMidia())) { %>
-                <% if (isImage(informacao.getMidia())) { %>
+                <% if (isImage(informacao.getMidia())) { %>                
                 <div><img style="width: 445px; height: auto;" src="media<%= informacao.getMidia().substring(informacao.getMidia().lastIndexOf('/')) %>"/></div>
                 <% } else if (isVideo(informacao.getMidia())) { %>
                 <div><video style="width: 445px; height: auto;" src="media<%= informacao.getMidia().substring(informacao.getMidia().lastIndexOf('/')) %>"></video></div>
