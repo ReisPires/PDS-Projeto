@@ -69,15 +69,10 @@ boolean success = request.getAttribute("success") != null;
                     <div><textarea id="texto" name="texto"></textarea></div>
                 </div>
                 <div style="margin-top: 15px">
-                    <input id="retornar" type="button" value="Retornar"/>
+                    <input id="retornar" type="button" value="Retornar" onclick="window.location.href = 'atividades.jsp'"/>
                     <input id="enviar" type="submit" value="Enviar"/>
                 </div>
             </form>
         </div>
-        <script>
-            retornar.onclick = function () {
-                window.location.href = "atividades.jsp";
-            };
-        </script>
     </body>
 </html>

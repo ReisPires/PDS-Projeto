@@ -91,15 +91,10 @@ boolean success = request.getAttribute("success") != null;
                     <div><input id="midia" name="midia" type="file" accept="image/*, video/*"/></div>
                 </div>
                 <div style="margin-top: 15px">
-                    <input id="retornar" type="button" value="Retornar"/>
+                    <input id="retornar" type="button" value="Retornar" onclick="window.location.href = 'atividade.jsp?codigo=<%= atividade %>'"/>
                     <input id="enviar" type="submit" value="Enviar"/>
                 </div>
             </form>
         </div>
-        <script>
-            retornar.onclick = function () {
-                window.location.href = "atividade.jsp?codigo=<%= atividade %>";
-            };
-        </script>
     </body>
 </html>

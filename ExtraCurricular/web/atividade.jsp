@@ -109,9 +109,9 @@ ArrayList<Informacao> informacoes = daoAtividade.exibeInformacoesAtividade(ativi
     </head>
     <body>
         <div class="janela">
-            <input id="retornar" type="button" value="Retornar à lista de atividades"/>
+            <input id="retornar" type="button" value="Retornar à lista de atividades" onclick="window.location.href = 'atividades.jsp'"/>
             <% if (usuario.getTipo().equals("P")) { %>
-            <input id="postar" type="button" value="Realizar postagem"/>
+            <input id="postar" type="button" value="Realizar postagem" onclick="window.location.href = 'postar.jsp?atividade=<%= codigo %>'"/>
             <% } %>
             <div class="atividade"><%= atividade.getNome() %></div>
             <% if (informacoes.isEmpty()) { %>
@@ -132,13 +132,5 @@ ArrayList<Informacao> informacoes = daoAtividade.exibeInformacoesAtividade(ativi
             </div>
             <% } %>
         </div>
-        <script>
-            retornar.onclick = function () {
-                window.location.href = "atividades.jsp";
-            };
-            postar.onclick = function () {
-                window.location.href = "postar.jsp?atividade=<%= codigo %>";
-            };
-        </script>
     </body>
 </html>
