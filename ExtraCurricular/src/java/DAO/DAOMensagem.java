@@ -61,4 +61,24 @@ public class DAOMensagem {
         }    
         return null;
     }
+    
+    public ArrayList<Mensagem> todasMensagens() {
+         try {
+            // Cria o comando
+            CallableStatement stmt = conn.prepareCall("{ call exibeTodasMensagens() }");            
+            // Executa o comando
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();
+            
+            ArrayList<Mensagem> msgs = new ArrayList<>();            
+            while (rs.next())                 
+                msgs.add(new Mensagem(rs.getInt(1), rs.getInt(2), rs.getTimestamp(3), rs.getString(4), rs.getBoolean(5)));
+            if (msgs.isEmpty())
+                return null;
+            return msgs;          
+        } catch (SQLException ex) {  
+            System.out.println(ex);
+        }    
+        return null;
+    }
 }

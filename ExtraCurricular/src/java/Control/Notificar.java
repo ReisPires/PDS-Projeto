@@ -5,9 +5,10 @@
  */
 package Control;
 
-import DAO.*;
-import Model.*;
+import DAO.DAOMensagem;
+import Model.Mensagem;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Gustavo
  */
-@WebServlet(name = "Cadastrar", urlPatterns = {"/cadastrar"})
-public class Cadastrar extends HttpServlet {
+@WebServlet(name = "Notificar", urlPatterns = {"/notificar"})
+public class Notificar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,21 +33,12 @@ public class Cadastrar extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String login1 = (String)request.getParameter("identidade");
-        String login2 = (String)request.getParameter("email");
-        String senha = (String)request.getParameter("senha");
+        String texto = request.getParameter("texto");
         
-        DAOLogin daoLogin = new DAOLogin();
-        Usuario usuario = daoLogin.realizaPrimeiroAcesso(login1, login2);
+        new DAOMensagem().enviaMensagem(new Mensagem(1, 1, texto));
         
-        if (usuario == null || !daoLogin.atualizaSenha(usuario.getId(), usuario.getLogin(), senha)) {
-            request.setAttribute("incorrect", true);
-            request.getRequestDispatcher("cadastro.jsp").forward(request, response);            
-            return;
-        }                
-                        
-        request.getSession().setAttribute("usuario", usuario);
-        request.getRequestDispatcher("atividades.jsp").forward(request, response);
+        request.setAttribute("success", true);
+        request.getRequestDispatcher("notificacao.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

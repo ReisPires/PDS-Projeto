@@ -28,3 +28,5 @@ ExtraCurricular/nbproject/build-impl.xml~
 ExtraCurricular/web/META-INF/context.xml
 *.jar
 *.png
+*.csv
+*.py

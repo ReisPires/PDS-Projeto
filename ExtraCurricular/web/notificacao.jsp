@@ -11,6 +11,8 @@ if (!usuario.getTipo().equals("E")) {
     request.getRequestDispatcher("atividades.jsp").forward(request, response);
     return;
 }
+
+boolean success = request.getAttribute("success") != null;
 %>
 
 <!DOCTYPE html>
@@ -56,18 +58,26 @@ if (!usuario.getTipo().equals("E")) {
             <div style="text-align: center; margin-bottom: 10px">
                 Envio de notificação
             </div>
-            <div class="grupo">
-                <div><label for="destino">Destinatário:</label></div>
-                <div><input id="destino" type="text"/></div>
+            <% if (success) { %>
+            <div style="text-align: center; color: green">
+                Notificação enviada com sucesso
             </div>
-            <div class="grupo">
-                <div><label for="texto">Texto:</label></div>
-                <div><textarea id="texto"></textarea></div>
-            </div>
-            <div style="margin-top: 15px">
-                <input id="retornar" type="button" value="Retornar"/>
-                <input id="enviar" type="button" value="Enviar"/>
-            </div>
+            <% } %>
+            <form action="notificar" method="post">
+                <div class="grupo">
+                    <div><label for="texto">Texto:</label></div>
+                    <div><textarea id="texto" name="texto"></textarea></div>
+                </div>
+                <div style="margin-top: 15px">
+                    <input id="retornar" type="button" value="Retornar"/>
+                    <input id="enviar" type="submit" value="Enviar"/>
+                </div>
+            </form>
         </div>
+        <script>
+            retornar.onclick = function () {
+                window.location.href = "atividades.jsp";
+            };
+        </script>
     </body>
 </html>
