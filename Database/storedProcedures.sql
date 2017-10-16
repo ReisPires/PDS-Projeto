@@ -184,3 +184,11 @@ RETURNS table (anome VARCHAR(100), aano INTEGER, asemestre VARCHAR(5), ahorario 
 BEGIN
 	RETURN QUERY SELECT nome, ano, semestre, horario FROM atividade WHERE codigo = atvCod;
 END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION recuperaProfessor(profId BIGINT)
+RETURNS table (pcodigo VARCHAR(10), pcpf VARCHAR(11), pemail VARCHAR(80), ptelefone VARCHAR(14), pnome VARCHAR(100), psexo CHARACTER, ppais VARCHAR(50), pcidade VARCHAR(60), pcep VARCHAR(10), pbairro VARCHAR(50), prua VARCHAR(100), pnumero INTEGER, pcomplemento VARCHAR(80)) AS $$
+BEGIN
+	RETURN QUERY SELECT codigo, cpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento FROM professor WHERE id = profId;
+END $$ LANGUAGE 'plpgsql';
