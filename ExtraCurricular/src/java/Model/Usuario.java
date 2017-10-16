@@ -15,24 +15,23 @@ public class Usuario {
     
     public Usuario(Integer id, String senha) {
         this.id = id;
-        this.login = null;
         this.senha = senha;
-        this.tipo = null;
     }
 
-    public Usuario(String login, String senha) {
-        this.id = null;
+    public Usuario(String login, String senha) {        
         this.login = login;
-        this.senha = senha;
-        this.tipo = null;
+        this.senha = senha;        
     }
 
     public Usuario(Integer id, String login, String tipo) {
         this.id = id;
-        this.login = login;
-        this.senha = null;
+        this.login = login;        
         this.tipo = tipo;
     }    
+
+    public Usuario(Integer id) {
+        this.id = id;
+    }        
 
     public int getId() {
         return (id != null ? id : -1);
