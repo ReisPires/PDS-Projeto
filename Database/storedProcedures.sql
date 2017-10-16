@@ -204,7 +204,7 @@ END $$ LANGUAGE 'plpgsql';
 /* ========================================================== */
 
 CREATE OR REPLACE FUNCTION exibeTodasMensagens()
-RETURNS table (rem BIGINT, dest BIGINT, datahora TIMESTAMP, texto VARCHAR(1000), lida BOOLEAN) AS $$
+RETURNS table (rem BIGINT, dest BIGINT, dh TIMESTAMP, txt VARCHAR(1000), foilida BOOLEAN) AS $$
 BEGIN
-	RETRUN QUERY SELECT remetente, destinatario, datahora, texto, lida FROM mensagem;
+	RETURN QUERY SELECT remetente, destinatario, datahora, texto, lida FROM mensagem;
 END $$ LANGUAGE 'plpgsql';

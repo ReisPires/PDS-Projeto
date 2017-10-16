@@ -1,4 +1,4 @@
-    <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="Model.*"%>
 <%@page import="DAO.*"%>
 
@@ -8,7 +8,6 @@ if (usuario == null) {
     request.getRequestDispatcher("index.jsp").forward(request, response);
     return;
 }
-
 DAOAtividade daoAtividade = new DAOAtividade();
 ArrayList<Atividade> listaAtividades = daoAtividade.listaAtividades(usuario);
 %>
@@ -97,11 +96,11 @@ ArrayList<Atividade> listaAtividades = daoAtividade.listaAtividades(usuario);
             <% } %>
             <input id="notificacoes" type="button" value="Ver notificações" style="margin-bottom: 15px; width: 100%" onclick="window.location.href = 'notificacoes.jsp'"/>
             <div class="pagina">Lista de atividades</div>
-            <% if (listaAtividades.isEmpty()) { %>
+            <% if (listaAtividades == null || listaAtividades.isEmpty()) { %>
             <div class="vazio">
                 Não existem atividades cadastradas
             </div>
-            <% } %>
+            <% } else {%>
             <table>
                 <% for (Atividade atividade : listaAtividades) { %>
                     <tr>
@@ -111,8 +110,9 @@ ArrayList<Atividade> listaAtividades = daoAtividade.listaAtividades(usuario);
                             </a>
                         </td>
                     </tr>
-                <% } %>
+                <% } %>            
             </table>
+            <% } %>
         </div>
     </body>
 </html>

@@ -30,3 +30,5 @@ ExtraCurricular/web/META-INF/context.xml
 *.png
 *.csv
 *.py
+ExtraCurricular/web/media/passe-futebol.mp4
+ExtraCurricular/web/media/sonhar-com-robo.jpg
