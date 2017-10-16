@@ -3,10 +3,7 @@
 <%
 Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
 if (usuario != null) {
-    if (usuario.getTipo().equals("P"))
-        request.getRequestDispatcher("csv.jsp").forward(request, response);
-    else
-        request.getRequestDispatcher("atividades.jsp").forward(request, response);
+    request.getRequestDispatcher("atividades.jsp").forward(request, response);
     return;
 }
 

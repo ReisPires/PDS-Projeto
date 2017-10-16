@@ -104,25 +104,4 @@ public class DAOUsuario {
         }
         return false;
     }
-    
-    public Professor recuperaProfessor(Professor professor) {
-        try {
-            // Cria o comando
-            CallableStatement stmt = conn.prepareCall("{ call recuperaProfessor(?) }");
-            // Recupera os dados
-            stmt.setInt(1, professor.getDadosUsuario().getId());            
-            // Executa o comando
-            stmt.execute();
-            ResultSet rs = (ResultSet) stmt.getResultSet();                        
-            if (rs.next()) {   
-                professor.setCodigo(rs.getString(1));
-                professor.setDadosPessoais(new DadosPessoais(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
-                professor.setEndereco(new Endereco(rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getInt(12), rs.getString(13)));
-                return professor;
-            } else return null;                                                
-        } catch (SQLException ex) {  
-            System.out.println(ex);
-        }    
-        return null;
-    }
 }

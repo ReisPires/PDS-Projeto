@@ -6,6 +6,11 @@ if (usuario == null) {
     request.getRequestDispatcher("index.jsp").forward(request, response);
     return;
 }
+
+if (!usuario.getTipo().equals("E")) {
+    request.getRequestDispatcher("atividades.jsp").forward(request, response);
+    return;
+}
 %>
 
 <!DOCTYPE html>

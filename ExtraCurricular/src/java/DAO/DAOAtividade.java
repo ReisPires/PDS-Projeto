@@ -72,30 +72,10 @@ public class DAOAtividade {
         return false;
     }
     
-    public Atividade recuperaAtividade(Atividade atividade) {
-        try {
-            // Cria o comando
-            CallableStatement stmt = conn.prepareCall("{ call recuperaAtividade(?) }");
-            // Recupera os dados
-            stmt.setString(1, atividade.getCodigo());            
-            // Executa o comando
-            stmt.execute();
-            ResultSet rs = (ResultSet) stmt.getResultSet();                        
-            if (rs.next()) {   
-                atividade.setNome(rs.getString(1));
-                atividade.setAno(rs.getInt(2));
-                atividade.setSemestre(rs.getString(3));
-                atividade.setHorario(rs.getString(4));
-                return atividade;
-            } else return null;                                                
-        } catch (SQLException ex) {  
-            System.out.println(ex);
-        }    
-        return null;
-    }
-    
     public ArrayList<Atividade> listaAtividades(Usuario usuario) {
          try {             
+            ArrayList<Atividade> atividades = new ArrayList<>();  
+            
             // Cria o comando
             CallableStatement stmt;
             switch (usuario.getTipo()) {
@@ -109,14 +89,13 @@ public class DAOAtividade {
                     stmt = conn.prepareCall("{ call listaAtividadesResponsavel(?) }");                                    
                     break;
                 default:
-                    return null;                    
+                    return atividades;                    
             }            
             stmt.setInt(1, usuario.getId());            
             // Executa o comando
             stmt.execute();
             ResultSet rs = (ResultSet) stmt.getResultSet();
             
-            ArrayList<Atividade> atividades = new ArrayList<>();            
             while (rs.next())
                 atividades.add(new Atividade(rs.getString(1), rs.getString(2)));
             

@@ -3,10 +3,7 @@
 <%
 Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
 if (usuario != null) {
-    if (usuario.getTipo().equals("P"))
-        request.getRequestDispatcher("csv.jsp").forward(request, response);
-    else
-        request.getRequestDispatcher("atividades.jsp").forward(request, response);
+    request.getRequestDispatcher("atividades.jsp").forward(request, response);
     return;
 }
 
@@ -70,7 +67,7 @@ boolean incorrect = request.getAttribute("incorrect") != null;
                 </div>
                 <div style="margin-top: 15px">
                     <input id="retornar" type="button" value="Retornar"/>
-                    <input id="buscar" type="submit" value="Cadastrar"/>
+                    <input id="cadastrar" type="submit" value="Cadastrar"/>
                 </div>
             </form>
         </div>

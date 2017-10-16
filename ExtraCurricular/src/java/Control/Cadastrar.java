@@ -40,17 +40,13 @@ public class Cadastrar extends HttpServlet {
         Usuario usuario = daoLogin.realizaPrimeiroAcesso(login1, login2);
         
         if (usuario == null || !daoLogin.atualizaSenha(usuario.getId(), usuario.getLogin(), senha)) {
-            request.setAttribute("incorrect", new Boolean(true));
+            request.setAttribute("incorrect", true);
             request.getRequestDispatcher("cadastro.jsp").forward(request, response);            
             return;
         }                
                         
         request.getSession().setAttribute("usuario", usuario);
-        
-        if (usuario.getTipo().equals("E"))
-            request.getRequestDispatcher("csv.jsp").forward(request, response);
-        else
-            request.getRequestDispatcher("atividades.jsp").forward(request, response);
+        request.getRequestDispatcher("atividades.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

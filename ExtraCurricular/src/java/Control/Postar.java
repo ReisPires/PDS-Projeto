@@ -7,11 +7,7 @@ package Control;
 
 import DAO.*;
 import Model.*;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
@@ -48,17 +44,16 @@ public class Postar extends HttpServlet {
         String texto = request.getParameter("texto");
         
         Part parte = request.getPart("midia");
-        String midia = null;        
-        if (!"".equals(parte.getSubmittedFileName())) {            
+        String midia = "";
+        if (parte != null) {
             String arquivo = Paths.get(parte.getSubmittedFileName()).getFileName().toString();
-            String caminho = "C:/Users/Pedro Pires/Documents/GitHub/PDS-Projeto/ExtraCurricular/web/media";
+            String caminho = "C:/Users/Gustavo/Arquivos/UFSCar/6º Semestre/Matérias/Projeto e Desenvolvimento de Sistemas/Projeto/PDS-Projeto/ExtraCurricular/web/media";
             midia = caminho + "/" + arquivo;
             
             Files.copy(parte.getInputStream(), Paths.get(midia), REPLACE_EXISTING);
         }
         
-        DAOUsuario daoUsuario = new DAOUsuario();               
-        new DAOAtividade().insereInformacao(new Informacao(daoUsuario.recuperaProfessor(new Professor(new Usuario(Integer.valueOf(professor)))).getCodigo(), atividade, titulo, texto, midia));
+        new DAOAtividade().insereInformacao(new Informacao(professor, atividade, titulo, texto, midia));
         
         request.setAttribute("success", true);
         request.getRequestDispatcher("postar.jsp?atividade=" + atividade).forward(request, response);

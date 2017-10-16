@@ -48,17 +48,13 @@ public class Entrar extends HttpServlet {
         // Verifica se o usuário conseguiu logar
         if (usuario == null) {
             // O usuário não conseguiu logar
-            request.setAttribute("incorrect", new Boolean(true));
+            request.setAttribute("incorrect", true);
             request.getRequestDispatcher("index.jsp").forward(request, response);
             return;
         }
         
         request.getSession().setAttribute("usuario", usuario);
-        
-        if (usuario.getTipo().equals("E"))
-            request.getRequestDispatcher("csv.jsp").forward(request, response);
-        else
-            request.getRequestDispatcher("atividades.jsp").forward(request, response);
+        request.getRequestDispatcher("atividades.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
