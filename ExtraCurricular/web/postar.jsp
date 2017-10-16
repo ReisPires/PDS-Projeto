@@ -1,14 +1,26 @@
+<%@page import="Model.*"%>
+
 <%
-// Verifica se o usu·rio n„o est· logado
-if (request.getSession().getAttribute("usuario") == null)
+Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+if (usuario == null) {
     request.getRequestDispatcher("index.jsp").forward(request, response);
+    return;
+}
+
+String atividade = request.getParameter("atividade");
+if (atividade == null) {
+    request.getRequestDispatcher("atividades.jsp").forward(request, response);
+    return;
+}
+    
+boolean success = request.getAttribute("success") != null;
 %>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Inser√ß√£o e remo√ß√£o</title>
+        <title>ExtraCurricular - Realizar postagem</title>
         <link rel="stylesheet" type="text/css" href="styles/main.css">
         <style>
             .janela {
@@ -17,6 +29,12 @@ if (request.getSession().getAttribute("usuario") == null)
                 border: 1px solid black;
                 
                 padding: 15px;
+                
+                width: 315px;
+            }
+            
+            form {
+                margin: 0px;
             }
             
             .grupo {
@@ -24,17 +42,17 @@ if (request.getSession().getAttribute("usuario") == null)
             }
             
             input[type=text], input[type=file], textarea {
-                width: 290px;
+                width: 100%;
             }
             
-            #legenda {
-                height: 80px;
+            #texto {
+                height: 100px;
             
                 resize: none;
             }
             
-            input[type=button] {
-                width: 135px;
+            input[type=button], input[type=submit] {
+                width: 120px;
             }
             
             #enviar {
@@ -45,24 +63,38 @@ if (request.getSession().getAttribute("usuario") == null)
     <body>
         <div class="janela">
             <div style="text-align: center; margin-bottom: 10px">
-                Inser√ß√£o e formata√ß√£o
+                Realizar postagem
             </div>
-            <div class="grupo">
-                <div><label for="titulo">T√≠tulo:</label></div>
-                <div><input id="titulo" type="text"/></div>
+            <% if (success) { %>
+            <div style="text-align: center; color: green">
+                Postagem realizada com sucesso
             </div>
-            <div class="grupo">
-                <div><label for="imagem">Imagem:</label></div>
-                <div><input id="imagem" type="file"/></div>
-            </div>
-            <div class="grupo">
-                <div><label for="legenda">Legenda:</label></div>
-                <div><textarea id="legenda"></textarea></div>
-            </div>
-            <div style="margin-top: 15px">
-                <input id="retornar" type="button" value="Retornar"/>
-                <input id="enviar" type="button" value="Enviar"/>
-            </div>
+            <% } %>
+            <form action="postar" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="professor" value="<%= usuario.getId() %>"/>
+                <input type="hidden" name="atividade" value="<%= atividade %>"/>
+                <div class="grupo">
+                    <div><label for="titulo">TÌtulo:</label></div>
+                    <div><input id="titulo" name="titulo" type="text"/></div>
+                </div>
+                <div class="grupo">
+                    <div><label for="texto">Texto:</label></div>
+                    <div><textarea id="texto" name="texto"></textarea></div>
+                </div>
+                <div class="grupo">
+                    <div><label for="midia">MÌdia:</label></div>
+                    <div><input id="midia" name="midia" type="file"/></div>
+                </div>
+                <div style="margin-top: 15px">
+                    <input id="retornar" type="button" value="Retornar"/>
+                    <input id="enviar" type="submit" value="Enviar"/>
+                </div>
+            </form>
         </div>
+        <script>
+            retornar.onclick = function () {
+                window.location.href = "atividade.jsp?codigo=<%= atividade %>";
+            };
+        </script>
     </body>
 </html>

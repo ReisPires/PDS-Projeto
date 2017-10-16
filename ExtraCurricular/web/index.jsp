@@ -1,7 +1,14 @@
+<%@page import="Model.*"%>
+
 <%
-// Verifica se o usuário já está logado
-if (request.getSession().getAttribute("usuario") != null)
-    request.getRequestDispatcher("atividades.jsp").forward(request, response);
+Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+if (usuario != null) {
+    if (usuario.getTipo().equals("P"))
+        request.getRequestDispatcher("csv.jsp").forward(request, response);
+    else
+        request.getRequestDispatcher("atividades.jsp").forward(request, response);
+    return;
+}
 
 boolean incorrect = request.getAttribute("incorrect") != null;
 %>
@@ -10,7 +17,7 @@ boolean incorrect = request.getAttribute("incorrect") != null;
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Login</title>
+        <title>ExtraCurricular - Login</title>
         <link rel="stylesheet" type="text/css" href="styles/main.css">
         <style>
             .janela {
@@ -54,8 +61,8 @@ boolean incorrect = request.getAttribute("incorrect") != null;
             <% } %>
             <form action="entrar" method="post">
                 <div class="grupo">
-                    <div><label for="usuario">Usuário:</label></div>
-                    <div><input id="usuario" name="usuario" type="text"/></div>
+                    <div><label for="usuario">Login:</label></div>
+                    <div><input id="login" name="login" type="text"/></div>
                 </div>
                 <div class="grupo">
                     <div><label for="senha">Senha:</label></div>
@@ -69,7 +76,7 @@ boolean incorrect = request.getAttribute("incorrect") != null;
         </div>
         <script>
             cadastrar.onclick = function () {
-                window.location.href = "busca.jsp";
+                window.location.href = "cadastro.jsp";
             };
         </script>
     </body>

@@ -97,8 +97,7 @@ public class DAOAtividade {
             ArrayList<Atividade> atividades = new ArrayList<>();            
             while (rs.next())
                 atividades.add(new Atividade(rs.getString(1), rs.getString(2)));
-            if (atividades.isEmpty())
-                return null;
+            
             return atividades;
         } catch (SQLException ex) {  
             System.out.println(ex);
@@ -137,8 +136,7 @@ public class DAOAtividade {
             ArrayList<Informacao> infos = new ArrayList<>();            
             while (rs.next())                 
                 infos.add(new Informacao(rs.getString(1), rs.getString(2), rs.getTimestamp(3), rs.getString(4), rs.getString(5)));            
-            if (infos.isEmpty())
-                return null;
+            
             return infos;          
         } catch (SQLException ex) {  
             System.out.println(ex);

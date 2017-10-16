@@ -1,8 +1,23 @@
+<%@page import="Model.*"%>
+
+<%
+Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+if (usuario != null) {
+    if (usuario.getTipo().equals("P"))
+        request.getRequestDispatcher("csv.jsp").forward(request, response);
+    else
+        request.getRequestDispatcher("atividades.jsp").forward(request, response);
+    return;
+}
+
+boolean incorrect = request.getAttribute("incorrect") != null;
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Cadastro de Conta</title>
+        <title>ExtraCurricular - Cadastro</title>
         <link rel="stylesheet" type="text/css" href="styles/main.css">
         <style>
             .janela {
@@ -17,15 +32,15 @@
                 margin-bottom: 5px;
             }
             
-            input[type=password] {
-                width: 160px;
+            input[type=text], input[type=email] {
+                width: 170px;
             }
             
-            input[type=button] {
-                width: 70px;
+            input[type=button], input[type=submit] {
+                width: 75px;
             }
             
-            #cadastrar {
+            #buscar {
                 float: right;
             }
         </style>
@@ -33,16 +48,36 @@
     <body>
         <div class="janela">
             <div style="text-align: center; margin-bottom: 10px">
-                Cadastro de conta
+                Cadastro
             </div>
-            <div class="grupo">
-                <div><label for="senha">Nova senha:</label></div>
-                <div><input id="senha" type="password"/></div>
+            <% if (incorrect) { %>
+            <div style="text-align: center; color: red">
+                Usuário não encontrado
             </div>
-            <div style="margin-top: 15px">
-                <input id="retornar" type="button" value="Retornar"/>
-                <input id="cadastrar" type="button" value="Cadastrar"/>
-            </div>
+            <% } %>
+            <form action="cadastrar" method="post">
+                <div class="grupo">
+                    <div><label for="identidade">CPF ou Matrícula:</label></div>
+                    <div><input id="identidade" name="identidade" type="text"/></div>
+                </div>
+                <div class="grupo">
+                    <div><label for="email">E-mail:</label></div>
+                    <div><input id="email" name="email" type="email"/></div>
+                </div>
+                <div class="grupo">
+                    <div><label for="senha">Nova senha:</label></div>
+                    <div><input id="senha" name="senha" type="password"/></div>
+                </div>
+                <div style="margin-top: 15px">
+                    <input id="retornar" type="button" value="Retornar"/>
+                    <input id="buscar" type="submit" value="Buscar"/>
+                </div>
+            </form>
         </div>
+        <script>
+            retornar.onclick = function () {
+                window.location.href = "index.jsp";
+            };
+        </script>
     </body>
 </html>

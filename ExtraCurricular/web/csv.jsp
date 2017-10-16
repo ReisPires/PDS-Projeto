@@ -1,14 +1,22 @@
+<%@page import="Model.*"%>
 <%
-// Verifica se o usuário não está logado
-if (request.getSession().getAttribute("usuario") == null)
+Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+if (usuario == null) {
     request.getRequestDispatcher("index.jsp").forward(request, response);
+    return;
+}
+
+if (!usuario.getTipo().equals("P")) {
+    request.getRequestDispatcher("index.jsp").forward(request, response);
+    return;
+}
 %>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Cadastro por CSV</title>
+        <title>ExtraCurricular - Cadastro por CSV</title>
         <link rel="stylesheet" type="text/css" href="styles/main.css">
         <style>
             .janela {
