@@ -9,7 +9,7 @@ boolean isImage(String fileName) {
     
     String extension = fileName.substring(fileName.lastIndexOf('.'));
     
-    return extension == ".png" || extension == ".jpg" || extension == ".bmp";
+    return ".png".equals(extension) || ".jpg".equals(extension) || ".bmp".equals(extension);
 }
 
 boolean isVideo(String fileName) {
@@ -18,7 +18,7 @@ boolean isVideo(String fileName) {
     
     String extension = fileName.substring(fileName.lastIndexOf('.'));
     
-    return extension == ".mp4" || extension == ".avi" || extension == ".wmv";
+    return ".mp4".equals(extension) || ".avi".equals(extension) || ".wmv".equals(extension);
 }
 %>
 
@@ -108,14 +108,14 @@ ArrayList<Informacao> informacoes = daoAtividade.exibeInformacoesAtividade(new A
     </head>
     <body>
         <div class="janela">
-            <input id="retornar" type="button" value="Retornar à lista de atividades"/>
+            <input id="retornar" type="button" value="Retornar Ã  lista de atividades"/>
             <% if (usuario.getTipo().equals("P")) { %>
             <input id="postar" type="button" value="Realizar postagem"/>
             <% } %>
-            <div class="atividade">Título da atividade</div>
+            <div class="atividade">TÃ­tulo da atividade</div>
             <% if (informacoes.isEmpty()) { %>
             <div class="vazio">
-                Não foram realizadas postagens nesta atividade.
+                NÃ£o foram realizadas postagens nesta atividade.
             </div>
             <% } %>
             <% for (Informacao informacao : informacoes) { %>
@@ -124,9 +124,10 @@ ArrayList<Informacao> informacoes = daoAtividade.exibeInformacoesAtividade(new A
                 <div class="data"><%= informacao.getDia() %> - <%= informacao.getHorario() %></div>
                 <div class="legenda"><%= informacao.getTexto()%></div>
                 <% if (isImage(informacao.getMidia())) { %>
-                <div><img src="posts/<%= informacao.getMidia() %>"/></div>
+                <% if (isImage(informacao.getMidia())) { %>
+                <div><img style="width: 445px; height: auto;" src="media<%= informacao.getMidia().substring(informacao.getMidia().lastIndexOf('/')) %>"/></div>
                 <% } else if (isVideo(informacao.getMidia())) { %>
-                <div><video src="posts/<%= informacao.getMidia() %>"></video></div>
+                <div><video style="width: 445px; height: auto;" src="media<%= informacao.getMidia().substring(informacao.getMidia().lastIndexOf('/')) %>"></video></div>
                 <% } %>
             </div>
             <% } %>
