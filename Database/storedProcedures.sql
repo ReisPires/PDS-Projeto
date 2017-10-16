@@ -178,3 +178,9 @@ BEGIN
 END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
+
+CREATE OR REPLACE FUNCTION recuperaAtividade(atvCod VARCHAR(20))
+RETURNS table (anome VARCHAR(100), aano INTEGER, asemestre VARCHAR(5), ahorario VARCHAR(200)) AS $$
+BEGIN
+	RETURN QUERY SELECT nome, ano, semestre, horario FROM atividade WHERE codigo = atvCod;
+END $$ LANGUAGE 'plpgsql';
