@@ -101,8 +101,7 @@ ArrayList<Atividade> listaAtividades = daoAtividade.listaAtividades(usuario);
                     <tr>
                         <td>
                             <a class="atividade" href="atividade.jsp?codigo=<%= atividade.getCodigo() %>">
-                                <div class="titulo"><%= atividade.getNome() %></div>
-                                <div class="data">Data</div>    
+                                <div class="titulo"><%= atividade.getNome() %></div>                                
                             </a>
                         </td>
                     </tr>

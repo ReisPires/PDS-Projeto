@@ -48,16 +48,17 @@ public class Postar extends HttpServlet {
         String texto = request.getParameter("texto");
         
         Part parte = request.getPart("midia");
-        String midia = "";
-        if (parte != null) {
+        String midia = null;        
+        if (!"".equals(parte.getSubmittedFileName())) {            
             String arquivo = Paths.get(parte.getSubmittedFileName()).getFileName().toString();
-            String caminho = "C:/Users/Gustavo/Arquivos/UFSCar/6º Semestre/Matérias/Projeto e Desenvolvimento de Sistemas/Projeto/PDS-Projeto/ExtraCurricular/web/media";
+            String caminho = "C:/Users/Pedro Pires/Documents/GitHub/PDS-Projeto/ExtraCurricular/web/media";
             midia = caminho + "/" + arquivo;
             
             Files.copy(parte.getInputStream(), Paths.get(midia), REPLACE_EXISTING);
         }
         
-        new DAOAtividade().insereInformacao(new Informacao(professor, atividade, titulo, texto, midia));
+        DAOUsuario daoUsuario = new DAOUsuario();               
+        new DAOAtividade().insereInformacao(new Informacao(daoUsuario.recuperaProfessor(new Professor(new Usuario(Integer.valueOf(professor)))).getCodigo(), atividade, titulo, texto, midia));
         
         request.setAttribute("success", true);
         request.getRequestDispatcher("postar.jsp?atividade=" + atividade).forward(request, response);

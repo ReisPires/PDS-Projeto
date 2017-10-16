@@ -70,7 +70,7 @@ boolean incorrect = request.getAttribute("incorrect") != null;
                 </div>
                 <div style="margin-top: 15px">
                     <input id="retornar" type="button" value="Retornar"/>
-                    <input id="buscar" type="submit" value="Buscar"/>
+                    <input id="buscar" type="submit" value="Cadastrar"/>
                 </div>
             </form>
         </div>

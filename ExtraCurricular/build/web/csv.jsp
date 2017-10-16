@@ -1,4 +1,5 @@
 <%@page import="Model.*"%>
+
 <%
 Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
 if (usuario == null) {
@@ -6,8 +7,8 @@ if (usuario == null) {
     return;
 }
 
-if (!usuario.getTipo().equals("P")) {
-    request.getRequestDispatcher("index.jsp").forward(request, response);
+if (!usuario.getTipo().equals("E")) {
+    request.getRequestDispatcher("atividades.jsp").forward(request, response);
     return;
 }
 %>
@@ -49,22 +50,29 @@ if (!usuario.getTipo().equals("P")) {
             <div style="text-align: center; margin-bottom: 10px">
                 Cadastro por CSV
             </div>
-            <div class="grupo">
-                <div><label for="professores">Cadastro de professores:</label></div>
-                <div><input id="professores" type="file" accept=".csv"/></div>
-            </div>
-            <div class="grupo">
-                <div><label for="atividades">Cadastro de atividades:</label></div>
-                <div><input id="atividades" type="file" accept=".csv"/></div>
-            </div>
-            <div class="grupo">
-                <div><label for="pais-alunos">Cadastro de pais e alunos:</label></div>
-                <div><input id="pais-alunos" type="file" accept=".csv"/></div>
-            </div>
-            <div style="margin-top: 15px">
-                <input id="retornar" type="button" value="Retornar"/>
-                <input id="cadastrar" type="button" value="Cadastrar"/>
-            </div>
+            <form action="csv" method="post" enctype="multipart/form-data">
+                <div class="grupo">
+                    <div><label for="professores">Cadastro de professores:</label></div>
+                    <div><input id="professores" name="professores" type="file" accept=".csv"/></div>
+                </div>
+                <div class="grupo">
+                    <div><label for="atividades">Cadastro de atividades:</label></div>
+                    <div><input id="atividades" name="atividades" type="file" accept=".csv"/></div>
+                </div>
+                <div class="grupo">
+                    <div><label for="pais-alunos">Cadastro de pais e alunos:</label></div>
+                    <div><input id="pais-alunos" name="pais-alunos" type="file" accept=".csv"/></div>
+                </div>
+                <div style="margin-top: 15px">
+                    <input id="retornar" type="button" value="Retornar"/>
+                    <input id="cadastrar" type="button" value="Cadastrar"/>
+                </div>
+            </form>
         </div>
+        <script>
+            retornar.onclick = function () {
+                window.location.href = "atividades.jsp";
+            };
+        </script>
     </body>
 </html>

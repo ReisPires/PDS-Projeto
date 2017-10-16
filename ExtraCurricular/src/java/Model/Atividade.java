@@ -20,6 +20,10 @@ public class Atividade {
         this.codigo = codigo;
         this.nome = nome;
     }
+        
+    public Atividade(String codigo) {
+        this.codigo = codigo;
+    }
 
     public String getCodigo() {
         return codigo;

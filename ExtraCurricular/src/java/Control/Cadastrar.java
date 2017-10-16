@@ -47,7 +47,7 @@ public class Cadastrar extends HttpServlet {
                         
         request.getSession().setAttribute("usuario", usuario);
         
-        if (usuario.getTipo().equals("P"))
+        if (usuario.getTipo().equals("E"))
             request.getRequestDispatcher("csv.jsp").forward(request, response);
         else
             request.getRequestDispatcher("atividades.jsp").forward(request, response);

@@ -14,6 +14,10 @@ public class Professor {
         this.dadosPessoais = dadosPessoais;
         this.endereco = endereco;
     }
+    
+    public Professor(Usuario dadosUsuario) {
+        this.dadosUsuario = dadosUsuario;
+    }
 
     public String getCodigo() {
         return codigo;
