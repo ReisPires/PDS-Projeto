@@ -109,7 +109,7 @@ ArrayList<Informacao> informacoes = daoAtividade.exibeInformacoesAtividade(ativi
     </head>
     <body>
         <div class="janela">
-            <input id="retornar" type="button" value="Retornar ├а lista de atividades"/>
+            <input id="retornar" type="button" value="Retornar ра lista de atividades"/>
             <% if (usuario.getTipo().equals("P")) { %>
             <input id="postar" type="button" value="Realizar postagem"/>
             <% } %>

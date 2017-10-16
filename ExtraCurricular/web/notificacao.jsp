@@ -44,10 +44,10 @@ boolean success = request.getAttribute("success") != null;
                 resize: none;
             }
             
-            input[type=button] {
+            input[type=button],input[type=submit] {
                 width: 120px;
             }
-            
+                        
             #enviar {
                 float: right;
             }

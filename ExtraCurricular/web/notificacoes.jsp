@@ -88,7 +88,7 @@ ArrayList<Mensagem> mensagens = daoMensagem.todasMensagens();
         <div class="janela">
             <input id="retornar" type="button" value="Retornar" style="margin-bottom: 15px; width: 100%"/>
             <div class="pagina">Notificações</div>
-            <% if (mensagens.isEmpty()) { %>
+            <% if (mensagens == null || mensagens.isEmpty()) { %>
             <div class="vazio">
                 Não existem notificações.
             </div>
