@@ -25,4 +25,5 @@ ExtraCurricular/src/java/DAO/DAOLogin.java
 /ExtraCurricular/build/
 ExtraCurricular/nbproject/build-impl.xml~
 *.properties
+ExtraCurricular/web/META-INF/context.xml
 *.jar

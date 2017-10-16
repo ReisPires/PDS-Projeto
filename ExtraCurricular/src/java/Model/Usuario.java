@@ -14,10 +14,8 @@ public class Usuario {
     }              
     
     public Usuario(Integer id, String senha) {
-        this.id = id;
-        this.login = null;
-        this.senha = senha;
-        this.tipo = null;
+        this.id = id;        
+        this.senha = senha;        
     }
 
     public Usuario(String login, String senha) {
@@ -32,12 +30,16 @@ public class Usuario {
         this.login = login;
         this.senha = null;
         this.tipo = tipo;
-    }    
+    }          
 
-    public Usuario(String rm) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Usuario(Integer id) {
+        this.id = id;
     }
 
+    public Usuario(String login) {
+        this.login = login;
+    }        
+            
     public int getId() {
         return (id != null ? id : -1);
     }
