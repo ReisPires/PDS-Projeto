@@ -1,4 +1,4 @@
-    <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="Model.*"%>
 <%@page import="DAO.*"%>
 
@@ -8,7 +8,6 @@ if (usuario == null) {
     request.getRequestDispatcher("index.jsp").forward(request, response);
     return;
 }
-
 DAOAtividade daoAtividade = new DAOAtividade();
 ArrayList<Atividade> listaAtividades = daoAtividade.listaAtividades(usuario);
 %>
@@ -92,10 +91,10 @@ ArrayList<Atividade> listaAtividades = daoAtividade.listaAtividades(usuario);
                 </form>
             </div>
             <% if (usuario.getTipo().equals("E")) { %>
-            <input id="csv" type="button" value="Cadastrar por CSV" style="margin-bottom: 15px; width: 100%"/>
-            <input id="notificacao" type="button" value="Enviar notificação" style="margin-bottom: 15px; width: 100%"/>
+            <input id="csv" type="button" value="Cadastrar por CSV" style="margin-bottom: 15px; width: 100%" onclick="window.location.href = 'csv.jsp'"/>
+            <input id="notificacao" type="button" value="Enviar notificação" style="margin-bottom: 15px; width: 100%" onclick="window.location.href = 'notificacao.jsp'"/>
             <% } %>
-            <input id="notificacoes" type="button" value="Ver notificações" style="margin-bottom: 15px; width: 100%"/>
+            <input id="notificacoes" type="button" value="Ver notificações" style="margin-bottom: 15px; width: 100%" onclick="window.location.href = 'notificacoes.jsp'"/>
             <div class="pagina">Lista de atividades</div>
             <% if (listaAtividades.isEmpty()) { %>
             <div class="vazio">
@@ -114,16 +113,5 @@ ArrayList<Atividade> listaAtividades = daoAtividade.listaAtividades(usuario);
                 <% } %>
             </table>
         </div>
-        <script>
-            csv.onclick = function () {
-                window.location.href = "csv.jsp";
-            };
-            notificacao.onclick = function () {
-                window.location.href = "notificacao.jsp";
-            };
-            notificacoes.onclick = function () {
-                window.location.href = "notificacoes.jsp";
-            };
-        </script>
     </body>
 </html>
