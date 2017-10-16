@@ -1,14 +1,22 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="Model.*"%>
+<%@page import="DAO.*"%>
 <%
-// Verifica se o usuário não está logado
-if (request.getSession().getAttribute("usuario") == null)
+Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+if (usuario == null) {
     request.getRequestDispatcher("index.jsp").forward(request, response);
+    return;
+}
+
+DAOAtividade daoAtividade = new DAOAtividade();
+ArrayList<Atividade> listaAtividades = daoAtividade.listaAtividades(usuario);
 %>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Lista de Atividades</title>
+        <title>ExtraCurricular - Atividades</title>
         <link rel="stylesheet" type="text/css" href="styles/main.css">
         <style>
             .janela {
@@ -21,7 +29,7 @@ if (request.getSession().getAttribute("usuario") == null)
                 padding: 15px;
             }
             
-            .lista-atividades {
+            .pagina {
                 margin-bottom: 15px;
                 
                 border: 1px solid black;
@@ -30,6 +38,14 @@ if (request.getSession().getAttribute("usuario") == null)
             
                 font-size: 25px;
                 font-weight: bold;
+                text-align: center;
+            }
+            
+            .vazio {
+                border: 1px solid black;
+                
+                padding: 10px 0px;
+                
                 text-align: center;
             }
             
@@ -44,8 +60,22 @@ if (request.getSession().getAttribute("usuario") == null)
                 
                 width: 100%;
                 
-                padding: 5px 0px;
                 text-align: center;
+            }
+            
+            .atividade {
+                display: block;
+                
+                padding: 5px 0px;
+                
+                width: 100%;
+                height: 100%;
+                
+                text-decoration: none;
+            }
+            
+            .titulo {
+                
             }
             
             .data {
@@ -55,21 +85,28 @@ if (request.getSession().getAttribute("usuario") == null)
     </head>
     <body>
         <div class="janela">
-            <div style="text-align: center; margin-bottom: 15px">
+            <div style="margin-bottom: 15px">
                 <form action="sair" method="post">
                     <input type="submit" value="Sair" style="width: 100%"/>
                 </form>
             </div>
-            <div class="lista-atividades">Lista de atividades</div>
+            <div class="pagina">Lista de atividades</div>
+            <% if (listaAtividades.isEmpty()) { %>
+            <div class="vazio">
+                Não existem atividades cadastradas
+            </div>
+            <% } %>
             <table>
-                <tr><td>
-                    <div class="atividade">VII Festa Junina</div>
-                    <div class="data">13/06/2017</div>
-                </td></tr>
-                <tr><td>
-                    <div class="atividade">III Campeonato de Futebol</div>
-                    <div class="data">02/04/2017</div>
-                </td></tr>
+                <% for (Atividade atividade : listaAtividades) { %>
+                    <tr>
+                        <td>
+                            <a class="atividade" href="atividade.jsp?codigo=<%= atividade.getCodigo() %>">
+                                <div class="titulo"><%= atividade.getNome() %></div>
+                                <div class="data">Data</div>    
+                            </a>
+                        </td>
+                    </tr>
+                <% } %>
             </table>
         </div>
     </body>

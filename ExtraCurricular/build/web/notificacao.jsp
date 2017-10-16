@@ -1,14 +1,18 @@
+<%@page import="Model.*"%>
+
 <%
-// Verifica se o usu·rio n„o est· logado
-if (request.getSession().getAttribute("usuario") == null)
+Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+if (usuario == null) {
     request.getRequestDispatcher("index.jsp").forward(request, response);
+    return;
+}
 %>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Envio de notifica√ß√£o</title>
+        <title>ExtraCurricular - Envio de notificaÁ„o</title>
         <link rel="stylesheet" type="text/css" href="styles/main.css">
         <style>
             .janela {
@@ -45,10 +49,10 @@ if (request.getSession().getAttribute("usuario") == null)
     <body>
         <div class="janela">
             <div style="text-align: center; margin-bottom: 10px">
-                Envio de notifica√ß√£o
+                Envio de notificaÁ„o
             </div>
             <div class="grupo">
-                <div><label for="destino">Destinat√°rio:</label></div>
+                <div><label for="destino">Destinat·rio:</label></div>
                 <div><input id="destino" type="text"/></div>
             </div>
             <div class="grupo">

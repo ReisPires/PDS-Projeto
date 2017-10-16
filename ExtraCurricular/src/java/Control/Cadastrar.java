@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Gustavo
  */
-@WebServlet(name = "Entrar", urlPatterns = {"/entrar"})
-public class Entrar extends HttpServlet {
+@WebServlet(name = "Cadastrar", urlPatterns = {"/cadastrar"})
+public class Cadastrar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,30 +32,22 @@ public class Entrar extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Verifica se o usuário já está logado
-        if (request.getSession().getAttribute("usuario") != null) {
-            request.getRequestDispatcher("atividades.jsp").forward(request, response);
-            return;
-        }
-        
-        // Caso não estiver logado, tentar logar
-        String login = (String)request.getParameter("login");
+        String login1 = (String)request.getParameter("identidade");
+        String login2 = (String)request.getParameter("email");
         String senha = (String)request.getParameter("senha");
         
         DAOLogin daoLogin = new DAOLogin();
-        Usuario usuario = daoLogin.realizaLogin(new Usuario(login, senha));
+        Usuario usuario = daoLogin.realizaPrimeiroAcesso(login1, login2);
         
-        // Verifica se o usuário conseguiu logar
-        if (usuario == null) {
-            // O usuário não conseguiu logar
+        if (usuario == null || !daoLogin.atualizaSenha(usuario.getId(), usuario.getLogin(), senha)) {
             request.setAttribute("incorrect", new Boolean(true));
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("cadastro.jsp").forward(request, response);            
             return;
-        }
-        
+        }                
+                        
         request.getSession().setAttribute("usuario", usuario);
         
-        if (usuario.getTipo().equals("E"))
+        if (usuario.getTipo().equals("P"))
             request.getRequestDispatcher("csv.jsp").forward(request, response);
         else
             request.getRequestDispatcher("atividades.jsp").forward(request, response);

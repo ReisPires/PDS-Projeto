@@ -7,19 +7,29 @@ package Control;
 
 import DAO.*;
 import Model.*;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author Gustavo
  */
-@WebServlet(name = "Entrar", urlPatterns = {"/entrar"})
-public class Entrar extends HttpServlet {
+@WebServlet(name = "Postar", urlPatterns = {"/postar"})
+@MultipartConfig
+public class Postar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,33 +42,25 @@ public class Entrar extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Verifica se o usuário já está logado
-        if (request.getSession().getAttribute("usuario") != null) {
-            request.getRequestDispatcher("atividades.jsp").forward(request, response);
-            return;
+        String professor = request.getParameter("professor");
+        String atividade = request.getParameter("atividade");
+        String titulo = request.getParameter("titulo");
+        String texto = request.getParameter("texto");
+        
+        Part parte = request.getPart("midia");
+        String midia = "";
+        if (parte != null) {
+            String arquivo = Paths.get(parte.getSubmittedFileName()).getFileName().toString();
+            String caminho = "C:/Users/Gustavo/Arquivos/UFSCar/6º Semestre/Matérias/Projeto e Desenvolvimento de Sistemas/Projeto/PDS-Projeto/ExtraCurricular/web/media";
+            midia = caminho + "/" + arquivo;
+            
+            Files.copy(parte.getInputStream(), Paths.get(midia), REPLACE_EXISTING);
         }
         
-        // Caso não estiver logado, tentar logar
-        String login = (String)request.getParameter("login");
-        String senha = (String)request.getParameter("senha");
+        new DAOAtividade().insereInformacao(new Informacao(professor, atividade, titulo, texto, midia));
         
-        DAOLogin daoLogin = new DAOLogin();
-        Usuario usuario = daoLogin.realizaLogin(new Usuario(login, senha));
-        
-        // Verifica se o usuário conseguiu logar
-        if (usuario == null) {
-            // O usuário não conseguiu logar
-            request.setAttribute("incorrect", new Boolean(true));
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-            return;
-        }
-        
-        request.getSession().setAttribute("usuario", usuario);
-        
-        if (usuario.getTipo().equals("E"))
-            request.getRequestDispatcher("csv.jsp").forward(request, response);
-        else
-            request.getRequestDispatcher("atividades.jsp").forward(request, response);
+        request.setAttribute("success", true);
+        request.getRequestDispatcher("postar.jsp?atividade=" + atividade).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
