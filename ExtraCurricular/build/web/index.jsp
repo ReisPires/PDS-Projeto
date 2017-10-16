@@ -67,14 +67,9 @@ boolean incorrect = request.getAttribute("incorrect") != null;
                 </div>
                 <div style="margin-top: 15px">
                     <input id="entrar" type="submit" value="Entrar"/>
-                    <input id="cadastrar" type="button" value="Cadastrar"/>
+                    <input id="cadastrar" type="button" value="Cadastrar" onclick="window.location.href = 'cadastro.jsp'"/>
                 </div>
             </form>
         </div>
-        <script>
-            cadastrar.onclick = function () {
-                window.location.href = "cadastro.jsp";
-            };
-        </script>
     </body>
 </html>

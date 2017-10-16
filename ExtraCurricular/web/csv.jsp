@@ -67,15 +67,10 @@ boolean success = request.getAttribute("success") != null;
                     <div><input id="atividades" name="atividades" type="file" accept=".csv"/></div>
                 </div>                
                 <div style="margin-top: 15px">
-                    <input id="retornar" type="button" value="Retornar"/>
+                    <input id="retornar" type="button" value="Retornar" onclick="window.location.href = 'atividades.jsp'"/>
                     <input id="cadastrar" type="submit" value="Cadastrar"/>
                 </div>
             </form>
         </div>
-        <script>
-            retornar.onclick = function () {
-                window.location.href = "atividades.jsp";
-            };
-        </script>
     </body>
 </html>
