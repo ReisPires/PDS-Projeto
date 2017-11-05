@@ -16,7 +16,7 @@ public class Usuario {
     public Usuario(Integer id, String senha) {
         this.id = id;        
         this.senha = senha;        
-    }
+    }        
 
     public Usuario(String login, String senha) {
         this.id = null;
@@ -35,10 +35,10 @@ public class Usuario {
     public Usuario(Integer id) {
         this.id = id;
     }
-
-    public Usuario(String login) {
-        this.login = login;
-    }        
+    
+    public Usuario (String senha) {
+        this.senha = senha;
+    }
             
     public int getId() {
         return (id != null ? id : -1);

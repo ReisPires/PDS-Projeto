@@ -12,7 +12,7 @@ if (!usuario.getTipo().equals("E")) {
     return;
 }
 
-boolean success = request.getAttribute("success") != null;
+boolean success = (boolean)request.getAttribute("success");
 %>
 
 <!DOCTYPE html>

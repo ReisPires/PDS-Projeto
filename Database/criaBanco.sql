@@ -125,3 +125,6 @@ CREATE TABLE professor_atividade(
 	atividade_codigo VARCHAR(20) REFERENCES atividade (codigo),
 	PRIMARY KEY (professor_codigo, atividade_codigo)
 );
+
+INSERT INTO usuario(id, login1, login2, senha, tipo) VALUES (1, 'escola', NULL, 'admin', 'E');
+INSERT INTO administrador(nome, id) VALUES ('escola', 1);

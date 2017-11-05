@@ -92,6 +92,9 @@ ArrayList<Atividade> listaAtividades = daoAtividade.listaAtividades(usuario);
             </div>
             <% if (usuario.getTipo().equals("E")) { %>
             <input id="csv" type="button" value="Cadastrar por CSV" style="margin-bottom: 15px; width: 100%" onclick="window.location.href = 'csv.jsp'"/>
+            <input id="aluno" type="button" value="Cadastro de aluno" style="margin-bottom: 15px; width: 100%" onclick="window.location.href = 'cadastro-aluno.jsp'"/>
+            <input id="responsavel" type="button" value="Cadastro de responsavel" style="margin-bottom: 15px; width: 100%" onclick="window.location.href = 'cadastro-responsavel.jsp'"/>
+            <input id="professor" type="button" value="Cadastro de professor" style="margin-bottom: 15px; width: 100%" onclick="window.location.href = 'cadastro-professor.jsp'"/>
             <input id="notificacao" type="button" value="Enviar notificação" style="margin-bottom: 15px; width: 100%" onclick="window.location.href = 'notificacao.jsp'"/>
             <% } %>
             <input id="notificacoes" type="button" value="Ver notificações" style="margin-bottom: 15px; width: 100%" onclick="window.location.href = 'notificacoes.jsp'"/>

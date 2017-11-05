@@ -15,7 +15,7 @@ public class Aluno {
         this.dadosUsuario = dadosUsuario;
         this.dadosPessoais = dadosPessoais;
         this.endereco = endereco;
-    }   
+    }
     
     public String getMatricula() {
         return matricula;
