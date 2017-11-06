@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>ExtraCurricular - Cadastro</title>
+        <link rel="stylesheet" type="text/css" href="styles/main.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+        <style>
+            .janela {
+                margin: auto;
+                
+                border: 1px solid black;
+                
+                width: 320px;
+                
+                padding: 15px;
+            }
+            
+            .grupo {
+                margin-bottom: 5px;
+            }
+            
+            input[type=text], input[type=email], input[type=password] {
+                width: 100%;
+            }
+            
+            input[type=button], input[type=submit] {
+                width: 130px;
+            }
+            
+            .professor {
+                display: flex;
+            }
+            
+            .professor:not(:first-child) {
+                margin-top: 5px;
+            }
+            
+            .deletar {
+                margin-left: 10px;
+            
+                width: 25px !important;
+            }
+            
+            #adicionar {
+                margin-top: 10px;
+            
+                width: 100%;
+            }
+            
+            #cadastrar {
+                float: right;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="janela">
+            <div style="text-align: center; margin-bottom: 10px">
+                Cadastro de atividade
+            </div>
+            <form action="cadastrar" method="post">
+                <div class="grupo">
+                    <div><label for="codigo">Código:</label></div>
+                    <div><input id="codigo" name="codigo" type="text"/></div>
+                </div>
+                <div class="grupo">
+                    <div><label for="nome">Nome:</label></div>
+                    <div><input id="nome" name="nome" type="email"/></div>
+                </div>
+                <div class="grupo">
+                    <div><label>Professores:</label></div>
+                    <div id="professores">
+                        <div id="professor1" class="professor">
+                            <input name="professores" type="text"/>
+                            <input class="deletar" type="button" value="-" onclick="deletarProfessor(1)" style="display: none"/>
+                        </div>
+                    </div>
+                    <div><input id="adicionar" type="button" value="Adicionar professor" onclick="adicionarProfessor()"/></div>
+                </div>
+                <div style="margin-top: 15px">
+                    <input id="retornar" type="button" value="Retornar" onclick="window.location.href = 'index.jsp'"/>
+                    <input id="cadastrar" type="submit" value="Cadastrar"/>
+                </div>
+            </form>
+        </div>
+        
+        <script>
+            var proxProfessor = 2;
+        
+            function adicionarProfessor() {
+                if ($("[name=professores]").length === 5)
+                    return;
+                
+                if ($("[name=professores]").length === 1)
+                    $(".deletar").css("display", "");
+                    
+                $("#professores").append(
+                    '<div id="professor' + proxProfessor + '" class="professor">' +
+                        '<input name="professores" type="text"/>' +
+                        '<input class="deletar" type="button" value="-" onclick="deletarProfessor(' + proxProfessor++ + ')"/>' +
+                    '</div>'
+                );
+                
+                if ($("[name=professores]").length === 5)
+                    $("#adicionar").css("display", "none");
+            }
+            
+            function deletarProfessor(id) {
+                if ($("[name=professores]").length === 5)
+                    $("#adicionar").css("display", "");
+                    
+                $("#professor" + id).remove();
+                
+                if ($("[name=professores]").length === 1)
+                    $(".deletar").css("display", "none");
+            }
+        </script>
+    </body>
+</html>
