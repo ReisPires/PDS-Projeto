@@ -1,0 +1,105 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0px;
+    
+    text-align: center;
+}
+
+.frame {
+    display: inline-block;
+    
+    margin: 0px auto;
+    
+    padding: 120px;
+    padding-top: 100px;
+    
+    text-align: center;
+}
+
+.pagina {
+    font-size: 50px;
+    font-family: "Segoe UI";
+    color: rgb(71, 70, 70);
+    line-height: 1.2;
+}
+
+.formulario {
+    display: inline-block;
+    
+    margin-top: 15px;
+    
+    text-align: left;
+}
+
+.campo {
+    display: block;
+    
+    margin-top: 10px;
+    
+    border-width: 1px;
+    border-color: rgb(33, 33, 33);
+    border-style: solid;
+    
+    width: 260px;
+    height: 28px;
+    
+    padding-left: 3px;
+
+    font-size: 16.667px;
+    font-family: "Segoe UI";
+    color: rgb(85, 85, 85);
+    line-height: 1.2;
+}
+
+.grupo:not(:first-child) {
+    margin-top: 10px;
+}
+
+.grupo > label {
+    display: block;
+
+    font-size: 21px;
+    font-family: "Segoe UI";
+    color: rgb(71, 70, 70);
+    line-height: 1.2;
+}
+
+.grupo > input {
+    display: block;
+
+    font-size: 16.667px;
+    font-family: "Segoe UI";
+    color: rgb(85, 85, 85);
+    line-height: 1.2;
+}
+
+.botoes {
+    margin-top: 10px;
+    
+    text-align: center;
+}
+
+.botoes > input {
+    border: none;
+    
+    width: 126px;
+    height: 33px;
+    
+    background-color: rgb(163, 168, 166);
+    
+    font-size: 21px;
+    font-family: "Segoe UI";
+    color: rgb(255, 255, 255);
+    line-height: 1.2;
+}
+
+.botoes > input:not(:first-child) {
+    margin-left: 4px;
+}
+
+.submeter {
+    background-color: rgb(78, 171, 124) !important;
+}

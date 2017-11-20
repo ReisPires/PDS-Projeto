@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Sistema London - Envio de Notificação</title>
+        <link rel="stylesheet" type="text/css" href="styles/cinza.css">
+        <style>
+            .texto {
+                height: 184px;
+            }
+        </style>
+    </head>
+    <body>
+		<div class="cabecalho">
+            <div class="limite-cabecalho">
+                <img class="logo" src="img/SistemaLogo.png"/>
+                <div class="pagina pagina-centro">Envio de Notificação</div>
+            </div>
+		</div>
+        <div class="corpo">
+            <div class="limite-corpo">
+                <form action="notificar" method="post">
+                    <div class="painel">
+                        <label class="label" for="texto">Texto:</label>
+                        <textarea id="texto" class="campo texto"></textarea>
+                    </div>
+                    <div class="botoes">
+                        <input type="button" value="Retornar" onclick="location.href = 'atividades.html'"/>
+                        <input class="submeter" type="submit" value="Enviar"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

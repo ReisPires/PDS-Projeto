@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Sistema London - Cadastro por CSV</title>
+        <link rel="stylesheet" type="text/css" href="styles/branco.css">
+    </head>
+    <body>
+		<div class="frame">
+			<img src="img/SistemaLogoGrande.png"/>
+			<div class="pagina">Cadastro por CSV</div>
+			<form class="formulario" action="atividades.html" method="post">
+                <div class="grupo">
+                    <label for="professores">Cadastro de Professores:</label>
+                    <input id="professores" type="file"/>
+                </div>
+                <div class="grupo">
+                    <label for="pais-alunos">Cadastro de Pais e Alunos:</label>
+                    <input id="pais-alunos" type="file"/>
+                </div>
+                <div class="grupo">
+                    <label for="atividades">Cadastro de Atividades:</label>
+                    <input id="atividades" type="file"/>
+                </div>
+				<div class="botoes">
+					<input type="button" value="Retornar" onclick="location.href = 'atividades.html'"/>
+					<input class="submeter" type="submit" value="Cadastrar"/>
+				</div>
+			</form>
+		</div>
+    </body>
+</html>
