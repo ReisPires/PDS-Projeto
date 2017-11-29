@@ -24,55 +24,54 @@ public class Atividade {
         this.nome = nome;
         this.concluida = concluida;
     }
-        
 
     public String getCodigo() {
         return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public int getAno() {
         return ano;
-    }
-
-    public void setAno(int ano) {
-        this.ano = ano;
     }
 
     public String getSemestre() {
         return semestre;
     }
 
-    public void setSemestre(String semestre) {
-        this.semestre = semestre;
-    }
-
     public String getHorario() {
         return horario;
-    }
-
-    public void setHorario(String horario) {
-        this.horario = horario;
     }
 
     public boolean isConcluida() {
         return concluida;
     }
 
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
+
+    public void setSemestre(String semestre) {
+        this.semestre = semestre;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
+    }
+
     public void setConcluida(boolean concluida) {
         this.concluida = concluida;
     }
-
+    
     
 }

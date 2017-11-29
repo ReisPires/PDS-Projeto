@@ -19,11 +19,8 @@ public class DAOLogin extends DAOConnection {
             // Executa o comando
             stmt.execute();
             ResultSet rs = (ResultSet) stmt.getResultSet();
-            if (rs.next()) {
-                usuario.setId(rs.getInt(1));
-                usuario.setTipo(rs.getString(2));
-                return usuario;
-            }                               
+            if (rs.next())
+                return new Usuario(rs.getInt(1), rs.getString(2));                                   
         } catch (SQLException e) {                          
             System.out.println(e);
         }   
@@ -42,7 +39,7 @@ public class DAOLogin extends DAOConnection {
             stmt.execute();
             ResultSet rs = (ResultSet) stmt.getResultSet();
             if (rs.next())
-                return new Usuario(rs.getInt(1), login1, rs.getString(2));                                                            
+                return new Usuario(rs.getInt(1), rs.getString(2));                                                            
         } catch (SQLException e) {              
             System.out.println(e);
         }   

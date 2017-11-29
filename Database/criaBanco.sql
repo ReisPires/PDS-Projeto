@@ -7,7 +7,6 @@ DROP TABLE IF EXISTS dados_pessoais;
 DROP TABLE IF EXISTS midia;
 DROP TABLE IF EXISTS postagem;
 DROP TABLE IF EXISTS atividade;
-DROP TABLE IF EXISTS administrador;
 DROP TABLE IF EXISTS professor;
 DROP TABLE IF EXISTS aluno;
 DROP TABLE IF EXISTS responsavel;
@@ -72,7 +71,7 @@ CREATE TABLE postagem(
 	codigo BIGSERIAL,
 	atividade VARCHAR(20) REFERENCES atividade (codigo),
 	professor BIGINT REFERENCES professor (id),
-	titulo VARCHAR(100),
+	titulo VARCHAR(140),
 	datahora TIMESTAMP,
 	texto VARCHAR(1000),	
 	PRIMARY KEY(codigo)
@@ -86,6 +85,7 @@ CREATE TABLE midia(
 
 CREATE TABLE mensagem(
 	codigo BIGSERIAL,
+	titulo VARCHAR(140),
 	remetente BIGINT REFERENCES usuario (id),	
 	datahora TIMESTAMP,
 	texto VARCHAR(1000),	

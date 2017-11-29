@@ -27,59 +27,73 @@ public class DAOMensagem extends DAOConnection {
         return -1;
     }
     
-    /*public Boolean enviaMensagem(Mensagem mensagem) {
+    public boolean leMensagens(Usuario usuario) {
         try {
             // Cria o comando
-            CallableStatement stmt = conn.prepareCall("{ call enviaMensagem(?, ?, ?) }");
+            CallableStatement stmt = conn.prepareCall("{ call leMensagens(?) }");
             // Recupera os dados
-            stmt.setInt(1, mensagem.getRemetente());
-            stmt.setInt(2, mensagem.getDestinatario());
-            stmt.setString(3, mensagem.getTexto());
+            stmt.setInt(1, usuario.getId());
             // Executa o comando
-            return (stmt.execute());
-        } catch (SQLException ex) {  
-            System.out.println(ex);
+            return(stmt.execute());            
+        } catch (SQLException e) {
+            System.out.println(e);
         }
         return false;
     }
     
-    public ArrayList<Mensagem> exibeMensagens(Usuario usuario) {
+    public boolean enviaMensagem(Mensagem mensagem) {
+        try {
+            Integer codigo;            
+            // Cria o comando
+            CallableStatement stmt = conn.prepareCall("{ call criaMensagem(?, ?, ?) }");
+            // Recupera os dados
+            stmt.setInt(1, mensagem.getRemetente());
+            stmt.setString(2, mensagem.getTitulo());
+            stmt.setString(3, mensagem.getTexto());
+            // Executa o comando
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();
+            if (rs.next()) {
+                codigo = rs.getInt(1);
+            } else return false;
+            rs.close();
+            stmt.close();
+            
+            for (Integer destinatario : mensagem.getDestinatarios()) {
+                // Cria o comando
+                stmt = conn.prepareCall("{ call enviaMensagem(?, ?) }");
+                // Recupera os dados
+                stmt.setInt(1, codigo);
+                stmt.setInt(2, destinatario);                
+                // Executa o comando
+                stmt.execute();
+                stmt.close();
+            }
+            
+            return true;
+        } catch (SQLException ex) {  
+            System.out.println(ex);
+        }     
+        return false;
+    }
+    
+    public ArrayList<Mensagem> listaMensagens(Usuario usuario) {
          try {
             // Cria o comando
-            CallableStatement stmt = conn.prepareCall("{ call exibeMensagens(?) }");
+            CallableStatement stmt = conn.prepareCall("{ call listaMensagens(?) }");
             // Recupera os dados
             stmt.setInt(1, usuario.getId());            
             // Executa o comando
             stmt.execute();
             ResultSet rs = (ResultSet) stmt.getResultSet();
             
-            ArrayList<Mensagem> msgs = new ArrayList<>();            
+            ArrayList<Mensagem> mensagens = new ArrayList<>();            
             while (rs.next())                 
-                msgs.add(new Mensagem(rs.getInt(1), rs.getInt(2), rs.getTimestamp(3), rs.getString(4), rs.getBoolean(5)));
-            
-            return msgs;          
+                mensagens.add(new Mensagem(rs.getString(1), rs.getString(2), rs.getTimestamp(3), rs.getString(4)));            
+            return mensagens;          
         } catch (SQLException ex) {  
             System.out.println(ex);
         }    
         return null;
-    }
-    
-    public ArrayList<Mensagem> todasMensagens() {
-         try {
-            // Cria o comando
-            CallableStatement stmt = conn.prepareCall("{ call exibeTodasMensagens() }");            
-            // Executa o comando
-            stmt.execute();
-            ResultSet rs = (ResultSet) stmt.getResultSet();
-            
-            ArrayList<Mensagem> msgs = new ArrayList<>();            
-            while (rs.next())                 
-                msgs.add(new Mensagem(rs.getInt(1), rs.getInt(2), rs.getTimestamp(3), rs.getString(4), rs.getBoolean(5)));
-            
-            return msgs;          
-        } catch (SQLException ex) {  
-            System.out.println(ex);
-        }    
-        return null;
-    }*/
+    }        
 }

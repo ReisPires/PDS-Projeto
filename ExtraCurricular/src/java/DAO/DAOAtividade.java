@@ -118,7 +118,7 @@ public class DAOAtividade extends DAOConnection {
         return null;
     }        
     
-    /*public Atividade recuperaAtividade(Atividade atividade) {
+    public Atividade recuperaAtividade(Atividade atividade) {
         try {
             // Cria o comando
             CallableStatement stmt = conn.prepareCall("{ call recuperaAtividade(?) }");
@@ -132,15 +132,52 @@ public class DAOAtividade extends DAOConnection {
                 atividade.setAno(rs.getInt(2));
                 atividade.setSemestre(rs.getString(3));
                 atividade.setHorario(rs.getString(4));
+                atividade.setConcluida(rs.getBoolean(5));
                 return atividade;
-            } else return null;                                                
+            }
         } catch (SQLException ex) {  
             System.out.println(ex);
         }    
         return null;
-    }*/
-    
-    
+    }    
+
+    public ArrayList<Postagem> listaPostagens(Atividade atividade) {
+         try {
+            // Cria o comando
+            CallableStatement stmt = conn.prepareCall("{ call listaPostagens(?) }");
+            // Recupera os dados
+            stmt.setString(1, atividade.getCodigo());            
+            // Executa o comando
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();
+            
+            ArrayList<Postagem> postagens = new ArrayList<>();            
+            while (rs.next())                 
+                postagens.add(new Postagem(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4), rs.getString(5)));                        
+            rs.close();
+            stmt.close();
+                        
+            for (Postagem p : postagens) {
+                ArrayList<String> midias = new ArrayList<>();
+                // Cria o comando
+                stmt = conn.prepareCall("{ call recuperaMidiasPostagem(?) }");
+                // Recupera os dados
+                stmt.setString(1, atividade.getCodigo());
+                // Executa o comando
+                stmt.execute();
+                rs = (ResultSet) stmt.getResultSet();
+                
+                while(rs.next())
+                    midias.add(rs.getString(1));
+                p.setMidias(midias);                
+            }
+                        
+            return postagens;
+        } catch (SQLException ex) {  
+            System.out.println(ex);
+        }    
+        return null;
+    }    
     
    /* public Boolean insereInformacao (Informacao informacao) {
         try {
@@ -158,27 +195,5 @@ public class DAOAtividade extends DAOConnection {
             System.out.println(ex);
         }
         return false;
-    }
-    
-    public ArrayList<Informacao> exibeInformacoesAtividade(Atividade atividade) {
-         try {
-            // Cria o comando
-            CallableStatement stmt = conn.prepareCall("{ call exibeInformacoesAtividade(?) }");
-            // Recupera os dados
-            stmt.setString(1, atividade.getCodigo());            
-            // Executa o comando
-            stmt.execute();
-            ResultSet rs = (ResultSet) stmt.getResultSet();
-            
-            ArrayList<Informacao> infos = new ArrayList<>();            
-            while (rs.next())                 
-                infos.add(new Informacao(rs.getString(1), rs.getString(2), rs.getTimestamp(3), rs.getString(4), rs.getString(5)));            
-            
-            return infos;          
-        } catch (SQLException ex) {  
-            System.out.println(ex);
-        }    
-        return null;
-    }
-    */
+    }*/            
 }
