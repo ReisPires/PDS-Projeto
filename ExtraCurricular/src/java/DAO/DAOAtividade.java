@@ -4,27 +4,13 @@ import Model.*;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DAOAtividade {
-    private static Connection conn = null;    
-    
-    public static void initConnection() {
-        if (conn != null)
-            return;
-        
-        try{
-            Class.forName("org.postgresql.Driver").newInstance();
-            
-            conn = DriverManager.getConnection("jdbc:postgresql:" +
-                        "//localhost/ExtraCurricular?user=postgres&password=123");                        
-        } catch (Exception e){
-        }                
-    }
+public class DAOAtividade extends DAOConnection {
     
     public DAOAtividade() {
         initConnection();
     }
     
-    public Boolean cadastraAtividade(Atividade atividade) {
+    public int cadastraAtividade(Atividade atividade) {
         try {
             // Cria o comando
             CallableStatement stmt = conn.prepareCall("{ call cadastraAtividade(?, ?, ?, ?, ?) }");
@@ -35,14 +21,16 @@ public class DAOAtividade {
             stmt.setString(4, atividade.getSemestre());
             stmt.setString(5, atividade.getHorario());            
             // Executa o comando
-            return (stmt.execute());
-        } catch (SQLException ex) {  
-            System.out.println(ex);
-        }
-        return false;
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();
+            if (rs.next())
+                return rs.getInt(1);                       
+        } catch (SQLException ex) {                          
+        }    
+        return -1;
     }
     
-    public Boolean associaProfessor(ProfessorAtividade profAtv) {
+    /*public Boolean associaProfessor(ProfessorAtividade profAtv) {
         try {
             // Cria o comando
             CallableStatement stmt = conn.prepareCall("{ call associaProfessor(?, ?) }");
@@ -171,5 +159,5 @@ public class DAOAtividade {
         }    
         return null;
     }
-    
+    */
 }

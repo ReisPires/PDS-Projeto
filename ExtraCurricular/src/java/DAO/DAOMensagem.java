@@ -4,21 +4,7 @@ import Model.*;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DAOMensagem {
-     private static Connection conn = null;    
-    
-    public static void initConnection() {
-        if (conn != null)
-            return;
-        
-        try{
-            Class.forName("org.postgresql.Driver").newInstance();
-            
-            conn = DriverManager.getConnection("jdbc:postgresql:" +
-                        "//localhost/ExtraCurricular?user=postgres&password=123");                        
-        } catch (Exception e){
-        }                
-    }
+public class DAOMensagem extends DAOConnection {     
     
     public DAOMensagem() {
         initConnection();

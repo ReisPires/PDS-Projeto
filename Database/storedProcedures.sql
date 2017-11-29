@@ -1,210 +1,138 @@
-CREATE OR REPLACE FUNCTION cadastraAtividade(cod VARCHAR(20), nome VARCHAR(100), ano INTEGER, semestre VARCHAR(5), horario VARCHAR(200))
-RETURNS void AS $$
-DECLARE aux VARCHAR(10);
-BEGIN
-	SELECT codigo INTO aux FROM atividade WHERE codigo = cod;
-	IF NOT FOUND THEN
-		INSERT INTO atividade (codigo, nome, ano, semestre, horario) VALUES (cod, nome, ano, semestre, horario);
-	END IF;
-END $$ LANGUAGE 'plpgsql';
+/* 	Error guide 
+	-1 - Erro no banco
+ 	0 - Success!
+ 	1 - Duplicate login1 (Matricula do aluno, Codigo do professor, CPF do responsavel, Username do admin)
+ 	2 - Duplicate login2 (Email)
+ 	3 - Duplicate CPF
+ 	4 - Aluno nao encontrado
+*/
+
+/* Tipo de usuario
+	'A' - Aluno
+	'P' - Professor
+	'R' - Responsavel
+	'E' - Admin
+*/
 
 /* ========================================================== */
 
-CREATE OR REPLACE FUNCTION associaProfessor(codAtividade VARCHAR(20), codProfessor VARCHAR(10))
-RETURNS void AS $$
-DECLARE aux VARCHAR(10);
-BEGIN
-	SELECT codigo INTO aux FROM professor WHERE codigo = codProfessor;
+CREATE OR REPLACE FUNCTION cadastraAdministrador(senha VARCHAR(50), username VARCHAR(11), email VARCHAR(80), nome VARCHAR(100))
+RETURNS INTEGER AS $$
+DECLARE aux VARCHAR(80);
+DECLARE last_id BIGINT;
+BEGIN	
+	SELECT login1 INTO aux FROM usuario WHERE login1 = username LIMIT 1;
 	IF FOUND THEN
-		INSERT INTO professor_atividade (atividade_codigo, professor_codigo) VALUES (codAtividade, codProfessor);
-	END IF;
+		RETURN 1;
+	ELSE
+		SELECT login2 INTO aux FROM usuario WHERE login2 = email LIMIT 1;
+		IF FOUND THEN	
+			RETURN 2;		
+		ELSE			
+			INSERT INTO usuario(login1, login2, senha, tipo) VALUES (username, email, senha, 'E') RETURNING id INTO last_id;
+			INSERT INTO administrador(id, nome) VALUES (last_id, nome);
+			RETURN 0;
+		END IF;
+	END IF;		
 END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
 
-CREATE OR REPLACE FUNCTION matriculaAluno(codAtividade VARCHAR(20), matAluno VARCHAR(10))
-RETURNS void AS $$
-DECLARE aux VARCHAR(10);
-BEGIN
-	SELECT matricula INTO aux FROM aluno WHERE matricula = matAluno;
+CREATE OR REPLACE FUNCTION cadastraAluno(senha VARCHAR(50), matricula VARCHAR(10), turma VARCHAR(5), acpf VARCHAR(11), nome VARCHAR(100), email VARCHAR(80), 
+	telefone VARCHAR(14), sexo CHAR(1), pais VARCHAR(50), estado VARCHAR(50), cidade VARCHAR(60), cep VARCHAR(10), bairro VARCHAR(50), rua VARCHAR(100), 
+	numero INTEGER, complemento VARCHAR(80))
+RETURNS INTEGER AS $$
+DECLARE aux VARCHAR(80);
+DECLARE last_id BIGINT;
+BEGIN	
+	SELECT login1 INTO aux FROM usuario WHERE login1 = matricula LIMIT 1;
 	IF FOUND THEN
-		INSERT INTO aluno_atividade (atividade_codigo, aluno_matricula) VALUES (codAtividade, matAluno);
-	END IF;
+		RETURN 1;
+	ELSE
+		SELECT login2 INTO aux FROM usuario WHERE login2 = email LIMIT 1;
+		IF FOUND THEN	
+			RETURN 2;		
+		ELSE
+			SELECT cpf INTO aux FROM dados_pessoais WHERE acpf = cpf LIMIT 1;
+			IF FOUND THEN
+				RETURN 3;
+			ELSE
+				INSERT INTO usuario(login1, login2, senha, tipo) VALUES (matricula, email, senha, 'A') RETURNING id INTO last_id;
+				INSERT INTO aluno(id, matricula, turma) VALUES (last_id, matricula, turma);
+				INSERT INTO dados_pessoais(id, cpf, nome, email, telefone, sexo, pais, estado, cidade, cep, bairro, rua, numero, complemento) 
+					VALUES (last_id, acpf, nome, email, telefone, sexo, pais, estado, cidade, cep, bairro, rua, numero, complemento);
+				RETURN 0;
+			END IF;
+		END IF;
+	END IF;		
 END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
 
-CREATE OR REPLACE FUNCTION cadastraAluno(senha VARCHAR(50), matricula VARCHAR(10), turma VARCHAR(5), cpf VARCHAR(11), email VARCHAR(80), telefone VARCHAR(14), 
-	nome VARCHAR(100), sexo CHAR(1), pais VARCHAR(50), cidade VARCHAR(60), cep VARCHAR(10), bairro VARCHAR(50), rua VARCHAR(100), numero INTEGER, complemento VARCHAR(80))
-RETURNS void AS $$
+CREATE OR REPLACE FUNCTION cadastraResponsavel(senha VARCHAR(50), rcpf VARCHAR(11), nome VARCHAR(100), email VARCHAR(80), telefone VARCHAR(14),  sexo CHAR(1), 
+	pais VARCHAR(50), estado VARCHAR(50), cidade VARCHAR(60), cep VARCHAR(10), bairro VARCHAR(50), rua VARCHAR(100), numero INTEGER, complemento VARCHAR(80), 
+	mat_aluno VARCHAR(10))
+RETURNS INTEGER AS $$
+DECLARE aux VARCHAR(80);
+DECLARE aluno_id BIGINT;
 DECLARE last_id BIGINT;
 BEGIN	
-	INSERT INTO usuario(login1, login2, senha, tipo) VALUES (matricula, email, senha, 'A') RETURNING id INTO last_id;
-	INSERT INTO aluno(matricula, turma, id, cpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento) 
-		VALUES (matricula, turma, last_id, cpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento);
+	SELECT login1 INTO aux FROM usuario WHERE login1 = rcpf LIMIT 1;
+	IF FOUND THEN
+		RETURN 1;
+	ELSE
+		SELECT login2 INTO aux FROM usuario WHERE login2 = email LIMIT 1;
+		IF FOUND THEN	
+			RETURN 2;		
+		ELSE
+			SELECT cpf INTO aux FROM dados_pessoais WHERE rcpf = cpf LIMIT 1;
+			IF FOUND THEN
+				RETURN 3;
+			ELSE
+				SELECT id INTO aluno_id FROM aluno WHERE matricula = mat_aluno LIMIT 1;
+				IF NOT FOUND THEN
+					RETURN 4;
+				ELSE
+					INSERT INTO usuario(login1, login2, senha, tipo) VALUES (rcpf, email, senha, 'R') RETURNING id INTO last_id;
+					INSERT INTO responsavel(id) VALUES (last_id);
+					INSERT INTO dados_pessoais(id, cpf, nome, email, telefone, sexo, pais, estado, cidade, cep, bairro, rua, numero, complemento) 
+						VALUES (last_id, rcpf, nome, email, telefone, sexo, pais, estado, cidade, cep, bairro, rua, numero, complemento);
+					INSERT INTO responsavel_aluno(responsavel, aluno) VALUES (last_id, aluno_id);
+					RETURN 0;
+				END IF;
+			END IF;
+		END IF;
+	END IF;		
 END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
 
-CREATE OR REPLACE FUNCTION cadastraResponsavel(senha VARCHAR(50), responsavelCpf VARCHAR(11), email VARCHAR(80), telefone VARCHAR(14), nome VARCHAR(100), sexo CHAR(1), 
-	pais VARCHAR(50), cidade VARCHAR(60), cep VARCHAR(10), bairro VARCHAR(50), rua VARCHAR(100), numero INTEGER, complemento VARCHAR(80), aluno VARCHAR(10))
-RETURNS void AS $$
-DECLARE last_id BIGINT;
-DECLARE aux VARCHAR(14);
-BEGIN	
-	SELECT cpf INTO aux from responsavel where cpf = responsavelCpf;
-	IF NOT FOUND THEN
-		INSERT INTO usuario(login1, login2, senha, tipo) VALUES (responsavelCpf, email, senha, 'R') RETURNING id INTO last_id;
-		INSERT INTO responsavel(id, cpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento) 
-			VALUES (last_id, responsavelCpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento);
-	END IF;
-	INSERT INTO responsavel_aluno(responsavel_cpf, aluno_matricula) VALUES (responsavelCpf, aluno);
-END $$ LANGUAGE 'plpgsql';
-
-/* ========================================================== */
-
-CREATE OR REPLACE FUNCTION cadastraProfessor(senha VARCHAR(50), codigo VARCHAR(10), cpf VARCHAR(11), email VARCHAR(80), telefone VARCHAR(14), nome VARCHAR(100), 
-	sexo CHAR(1), pais VARCHAR(50), cidade VARCHAR(60), cep VARCHAR(10), bairro VARCHAR(50), rua VARCHAR(100), numero INTEGER, complemento VARCHAR(80))
-RETURNS void AS $$
-DECLARE last_id BIGINT;
-BEGIN	
-	INSERT INTO usuario(login1, login2, senha, tipo) VALUES (codigo, email, senha, 'P') RETURNING id INTO last_id;
-	INSERT INTO professor(codigo, id, cpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento) 
-		VALUES (codigo, last_id, cpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento);
-END $$ LANGUAGE 'plpgsql';
-
-/* ========================================================== */
-
-CREATE OR REPLACE FUNCTION cadastraAdministrador(nome VARCHAR(10), senha VARCHAR(50))
-RETURNS void AS $$
+CREATE OR REPLACE FUNCTION cadastraAluno(senha VARCHAR(50), codigo VARCHAR(10), pcpf VARCHAR(11), nome VARCHAR(100), email VARCHAR(80), telefone VARCHAR(14), 
+	sexo CHAR(1), pais VARCHAR(50), estado VARCHAR(50), cidade VARCHAR(60), cep VARCHAR(10), bairro VARCHAR(50), rua VARCHAR(100), numero INTEGER, complemento VARCHAR(80))
+RETURNS INTEGER AS $$
+DECLARE aux VARCHAR(80);
 DECLARE last_id BIGINT;
 BEGIN	
-	INSERT INTO usuario(login1, login2, senha, tipo) VALUES (nome, NULL, senha, 'E') RETURNING id INTO last_id;
-	INSERT INTO administrador(nome, id) 
-		VALUES (nome, last_id);
+	SELECT login1 INTO aux FROM usuario WHERE login1 = codigo LIMIT 1;
+	IF FOUND THEN
+		RETURN 1;
+	ELSE
+		SELECT login2 INTO aux FROM usuario WHERE login2 = email LIMIT 1;
+		IF FOUND THEN	
+			RETURN 2;		
+		ELSE
+			SELECT cpf INTO aux FROM dados_pessoais WHERE pcpf = cpf LIMIT 1;
+			IF FOUND THEN
+				RETURN 3;
+			ELSE
+				INSERT INTO usuario(login1, login2, senha, tipo) VALUES (codigo, email, senha, 'P') RETURNING id INTO last_id;
+				INSERT INTO professor(id, codigo) VALUES (last_id, codigo);
+				INSERT INTO dados_pessoais(id, cpf, nome, email, telefone, sexo, pais, estado, cidade, cep, bairro, rua, numero, complemento) 
+					VALUES (last_id, acpf, nome, email, telefone, sexo, pais, estado, cidade, cep, bairro, rua, numero, complemento);
+				RETURN 0;
+			END IF;
+		END IF;
+	END IF;		
 END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
-
-CREATE OR REPLACE FUNCTION insereInformacao(atividade VARCHAR(20), professor VARCHAR(10), titulo VARCHAR(100), texto VARCHAR(1000), midia VARCHAR(1000))
-RETURNS void AS $$
-BEGIN
-	INSERT INTO informacao(cod_atividade, cod_professor, titulo, datahora, texto, midia) VALUES (atividade, professor, titulo, now(), texto, midia);
-END $$ LANGUAGE 'plpgsql';
-
-/* ========================================================== */
-
-CREATE OR REPLACE FUNCTION enviaMensagem(remetente BIGINT, destinatario BIGINT, texto VARCHAR(1000))
-RETURNS void AS $$
-BEGIN
-	INSERT INTO mensagem(remetente, destinatario, datahora, texto, lida) VALUES (remetente, destinatario, now(), texto, FALSE);
-END $$ LANGUAGE 'plpgsql';
-
-/* ========================================================== */
-
-CREATE OR REPLACE FUNCTION realizaLogin(uLogin VARCHAR(80), uSenha VARCHAR(50))
-RETURNS TABLE(id BIGINT, tipo CHAR(1)) AS $$
-BEGIN
-	RETURN QUERY SELECT u.id, u.tipo FROM usuario u WHERE (u.login1 = uLogin OR u.login2 = uLogin) AND u.senha = uSenha AND u.senha != u.login1;
-END $$ LANGUAGE 'plpgsql';
-
-/* ========================================================== */
-
-CREATE OR REPLACE FUNCTION realizaPrimeiroAcesso(uLogin1 VARCHAR(11), uLogin2 VARCHAR(80))
-RETURNS TABLE(id BIGINT, tipo CHAR(1)) AS $$
-BEGIN
-	RETURN QUERY SELECT u.id, u.tipo FROM usuario u WHERE u.login1 = uLogin1 AND u.login2 = uLogin2 AND u.senha = u.login1;
-END $$ LANGUAGE 'plpgsql';
-
-/* ========================================================== */
-
-CREATE OR REPLACE FUNCTION atualizaSenha(uid BIGINT, senhaAntiga VARCHAR(50), senhaNova VARCHAR(50))
-RETURNS void AS $$
-BEGIN
-	UPDATE usuario SET id = uid, senha = senhaNova WHERE id = uid AND senha = senhaAntiga;	
-END $$ LANGUAGE 'plpgsql';
-
-/* ========================================================== */
-
-CREATE OR REPLACE FUNCTION listaAtividadesAluno(uid BIGINT)
-RETURNS table (codigo VARCHAR(20), nome VARCHAR(100)) AS $$
-BEGIN
-	RETURN QUERY SELECT t.codigo, t.nome FROM atividade t 
-	JOIN aluno_atividade l ON l.atividade_codigo = t.codigo 
-	JOIN aluno a ON a.matricula = l.aluno_matricula
-	WHERE a.id = uid;
-END $$ LANGUAGE 'plpgsql';
-
-/* ========================================================== */
-
-CREATE OR REPLACE FUNCTION listaAtividadesProfessor(uid BIGINT)
-RETURNS table (codigo VARCHAR(20), nome VARCHAR(100)) AS $$
-BEGIN
-	RETURN QUERY SELECT t.codigo, t.nome FROM atividade t 
-	JOIN professor_atividade a ON a.atividade_codigo = t.codigo 
-	JOIN professor p ON p.codigo = a.professor_codigo
-	WHERE p.id = uid;
-END $$ LANGUAGE 'plpgsql';
-
-/* ========================================================== */
-
-CREATE OR REPLACE FUNCTION listaAtividadesResponsavel(uid BIGINT)
-RETURNS table (codigo VARCHAR(20), nome VARCHAR(100)) AS $$
-BEGIN
-	RETURN QUERY SELECT t.codigo, t.nome FROM atividade t 
-	JOIN aluno_atividade l ON l.atividade_codigo = t.codigo 
-	JOIN responsavel_aluno e ON e.aluno_matricula = l.aluno_matricula
-	JOIN responsavel r ON e.responsavel_cpf = r.cpf
-	WHERE r.id = uid;
-END $$ LANGUAGE 'plpgsql';
-
-/* ========================================================== */
-
-CREATE OR REPLACE FUNCTION listaAtividadesEscola()
-RETURNS table (codigo VARCHAR(20), nome VARCHAR(100)) AS $$
-BEGIN
-	RETURN QUERY SELECT t.codigo, t.nome FROM atividade t;
-END $$ LANGUAGE 'plpgsql';
-
-/* ========================================================== */
-
-CREATE OR REPLACE FUNCTION exibeInformacoesAtividade(atvCodigo VARCHAR(20))
-RETURNS table (professor VARCHAR (100), titulo VARCHAR(100), datahora TIMESTAMP, texto VARCHAR(1000), midia VARCHAR(1000)) AS $$
-BEGIN
-	RETURN QUERY SELECT p.nome, i.titulo, i.datahora, i.texto, i.midia 
-	FROM informacao i JOIN professor p ON i.cod_professor = p.codigo
-	WHERE i.cod_atividade = atvCodigo
-	ORDER BY datahora DESC;
-END $$ LANGUAGE 'plpgsql';
-
-/* ========================================================== */
-
-CREATE OR REPLACE FUNCTION exibeMensagens(uid BIGINT)
-RETURNS table (rem BIGINT, dest BIGINT, datahora TIMESTAMP, texto VARCHAR(1000), lida BOOLEAN) AS $$
-BEGIN
-	RETURN QUERY SELECT * FROM mensagem WHERE destinatario = uid ORDER BY datahora DESC;
-END $$ LANGUAGE 'plpgsql';
-
-/* ========================================================== */
-
-CREATE OR REPLACE FUNCTION recuperaAtividade(atvCod VARCHAR(20))
-RETURNS table (anome VARCHAR(100), aano INTEGER, asemestre VARCHAR(5), ahorario VARCHAR(200)) AS $$
-BEGIN
-	RETURN QUERY SELECT nome, ano, semestre, horario FROM atividade WHERE codigo = atvCod;
-END $$ LANGUAGE 'plpgsql';
-
-/* ========================================================== */
-
-CREATE OR REPLACE FUNCTION recuperaProfessor(profId BIGINT)
-RETURNS table (pcodigo VARCHAR(10), pcpf VARCHAR(11), pemail VARCHAR(80), ptelefone VARCHAR(14), pnome VARCHAR(100), psexo CHARACTER, ppais VARCHAR(50), pcidade VARCHAR(60), pcep VARCHAR(10), pbairro VARCHAR(50), prua VARCHAR(100), pnumero INTEGER, pcomplemento VARCHAR(80)) AS $$
-BEGIN
-	RETURN QUERY SELECT codigo, cpf, email, telefone, nome, sexo, pais, cidade, cep, bairro, rua, numero, complemento FROM professor WHERE id = profId;
-END $$ LANGUAGE 'plpgsql';
-
-/* ========================================================== */
-
-CREATE OR REPLACE FUNCTION exibeTodasMensagens()
-RETURNS table (rem BIGINT, dest BIGINT, dh TIMESTAMP, txt VARCHAR(1000), foilida BOOLEAN) AS $$
-BEGIN
-	RETURN QUERY SELECT remetente, destinatario, datahora, texto, lida FROM mensagem;
-END $$ LANGUAGE 'plpgsql';
