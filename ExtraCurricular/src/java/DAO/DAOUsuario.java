@@ -22,7 +22,8 @@ public class DAOUsuario extends DAOConnection {
             ResultSet rs = (ResultSet) stmt.getResultSet();
             if (rs.next())
                 return rs.getInt(1);            
-        } catch (SQLException e) {              
+        } catch (SQLException e) {   
+            System.out.println(e);
         }
         return -1;
     }
@@ -54,6 +55,7 @@ public class DAOUsuario extends DAOConnection {
             if (rs.next())
                 return rs.getInt(1);            
         } catch (SQLException e) {
+            System.out.println(e);
         }
         return -1;
     }
@@ -83,7 +85,8 @@ public class DAOUsuario extends DAOConnection {
             ResultSet rs = (ResultSet) stmt.getResultSet();
             if (rs.next())
                 return rs.getInt(1);            
-        } catch (SQLException ex) {                          
+        } catch (SQLException e) {                          
+            System.out.println(e);
         }        
         return -1;
     }
@@ -112,7 +115,8 @@ public class DAOUsuario extends DAOConnection {
             ResultSet rs = (ResultSet) stmt.getResultSet();
             if (rs.next())
                 return rs.getInt(1);            
-        } catch (SQLException ex) {                          
+        } catch (SQLException e) {                          
+            System.out.println(e);
         }
         return -1;
     }   

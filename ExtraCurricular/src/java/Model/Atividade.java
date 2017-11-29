@@ -6,24 +6,25 @@ public class Atividade {
     private String nome;
     private int ano;
     private String semestre;
-    private String horario;    
+    private String horario;
+    private boolean concluida;
 
-    public Atividade(String codigo, String nome, int ano, String semestre, String horario) {
+    public Atividade(String codigo, String nome, int ano, String semestre, String horario, boolean concluida) {
         this.codigo = codigo;
         this.nome = nome;
         this.ano = ano;
         this.semestre = semestre;
-        this.horario = horario;        
+        this.horario = horario;
+        this.concluida = concluida;
     }
 
-    public Atividade(String codigo, String nome) {
+    /* Usado para a lista de atividades */
+    public Atividade(String codigo, String nome, boolean concluida) {
         this.codigo = codigo;
         this.nome = nome;
+        this.concluida = concluida;
     }
         
-    public Atividade(String codigo) {
-        this.codigo = codigo;
-    }
 
     public String getCodigo() {
         return codigo;
@@ -64,5 +65,14 @@ public class Atividade {
     public void setHorario(String horario) {
         this.horario = horario;
     }
-                
+
+    public boolean isConcluida() {
+        return concluida;
+    }
+
+    public void setConcluida(boolean concluida) {
+        this.concluida = concluida;
+    }
+
+    
 }

@@ -25,12 +25,13 @@ public class DAOAtividade extends DAOConnection {
             ResultSet rs = (ResultSet) stmt.getResultSet();
             if (rs.next())
                 return rs.getInt(1);                       
-        } catch (SQLException ex) {                          
+        } catch (SQLException e) {                          
+            System.out.println(e);
         }    
         return -1;
     }
     
-    /*public Boolean associaProfessor(ProfessorAtividade profAtv) {
+    public int associaProfessor(ProfessorAtividade profAtv) {
         try {
             // Cria o comando
             CallableStatement stmt = conn.prepareCall("{ call associaProfessor(?, ?) }");
@@ -38,14 +39,17 @@ public class DAOAtividade extends DAOConnection {
             stmt.setString(1, profAtv.getAtividade());
             stmt.setString(2, profAtv.getProfessor());
             // Executa o comando
-            return (stmt.execute());
-        } catch (SQLException ex) {  
-            System.out.println(ex);
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();
+            if (rs.next())
+                return rs.getInt(1);            
+        } catch (SQLException e) {  
+            System.out.println(e);
         }
-        return false;
+        return -1;
     }
     
-    public Boolean matriculaAluno(AlunoAtividade alunoAtv) {
+    public int matriculaAluno(AlunoAtividade alunoAtv) {
         try {
             // Cria o comando
             CallableStatement stmt = conn.prepareCall("{ call matriculaAluno(?, ?) }");
@@ -53,14 +57,68 @@ public class DAOAtividade extends DAOConnection {
             stmt.setString(1, alunoAtv.getAtividade());
             stmt.setString(2, alunoAtv.getAluno());
             // Executa o comando
-            return (stmt.execute());
-        } catch (SQLException ex) {  
-            System.out.println(ex);
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();
+            if (rs.next())
+                return rs.getInt(1); 
+        } catch (SQLException e) {  
+            System.out.println(e);
         }
-        return false;
+        return -1;
     }
     
-    public Atividade recuperaAtividade(Atividade atividade) {
+    public ListaAtividades listaAtividades(Usuario usuario) {
+         try {             
+            ArrayList<Atividade> atividades = new ArrayList<>();
+            ArrayList<AlunoAtividade> alunos = null;
+            
+            // Cria o comando
+            CallableStatement stmt;
+            switch (usuario.getTipo()) {
+                case "A":
+                    stmt = conn.prepareCall("{ call listaAtividadesAluno(?) }");                                    
+                    stmt.setInt(1, usuario.getId()); 
+                    break;                    
+                case "P":
+                    stmt = conn.prepareCall("{ call listaAtividadesProfessor(?) }");                                    
+                    stmt.setInt(1, usuario.getId()); 
+                    break;
+                case "R":
+                    stmt = conn.prepareCall("{ call listaAtividadesResponsavel(?) }");                                    
+                    stmt.setInt(1, usuario.getId()); 
+                    break;
+                case "E":
+                    stmt = conn.prepareCall("{ call listaAtividadesAdministrador() }");
+                    break;
+                default:
+                    return null;                    
+            }                                   
+            // Executa o comando
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet(); 
+            
+            while (rs.next())
+                atividades.add(new Atividade(rs.getString(1), rs.getString(2), rs.getBoolean(3)));    
+            rs.close();
+            stmt.close();
+            
+            if (usuario.getTipo().compareTo("R") == 0) {            
+                alunos = new ArrayList<>();
+                stmt = conn.prepareCall("{ call listaAlunosAtividadesResponsavel(?) }");
+                stmt.setInt(1, usuario.getId());
+                rs = (ResultSet) stmt.getResultSet();
+                while (rs.next())
+                    alunos.add(new AlunoAtividade(rs.getString(1), rs.getString(2)));
+            }
+            
+            return new ListaAtividades(atividades, alunos);
+        } catch (SQLException e) {      
+             System.err.println(e);
+        }             
+        return null;
+    }        
+    
+    /*public Atividade recuperaAtividade(Atividade atividade) {
         try {
             // Cria o comando
             CallableStatement stmt = conn.prepareCall("{ call recuperaAtividade(?) }");
@@ -80,48 +138,11 @@ public class DAOAtividade extends DAOConnection {
             System.out.println(ex);
         }    
         return null;
-    }
+    }*/
     
-    public ArrayList<Atividade> listaAtividades(Usuario usuario) {
-         try {             
-            ArrayList<Atividade> atividades = new ArrayList<>();  
-            
-            // Cria o comando
-            CallableStatement stmt;
-            switch (usuario.getTipo()) {
-                case "A":
-                    stmt = conn.prepareCall("{ call listaAtividadesAluno(?) }");                                    
-                    stmt.setInt(1, usuario.getId()); 
-                    break;                    
-                case "P":
-                    stmt = conn.prepareCall("{ call listaAtividadesProfessor(?) }");                                    
-                    stmt.setInt(1, usuario.getId()); 
-                    break;
-                case "R":
-                    stmt = conn.prepareCall("{ call listaAtividadesResponsavel(?) }");                                    
-                    stmt.setInt(1, usuario.getId()); 
-                    break;
-                case "E":
-                    stmt = conn.prepareCall("{ call listaAtividadesEscola() }");
-                    break;
-                default:
-                    return atividades;                    
-            }                                   
-            // Executa o comando
-            stmt.execute();
-            ResultSet rs = (ResultSet) stmt.getResultSet();
-            
-            while (rs.next())
-                atividades.add(new Atividade(rs.getString(1), rs.getString(2)));
-            
-            return atividades;
-        } catch (SQLException ex) {  
-            System.out.println(ex);
-        }    
-        return null;
-    }
     
-    public Boolean insereInformacao (Informacao informacao) {
+    
+   /* public Boolean insereInformacao (Informacao informacao) {
         try {
             // Cria o comando
             CallableStatement stmt = conn.prepareCall("{ call insereInformacao(?, ?, ?, ?, ?) }");

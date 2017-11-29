@@ -64,7 +64,7 @@ CREATE TABLE atividade(
 	ano INTEGER,
 	semestre VARCHAR(5),
 	horario VARCHAR(200),
-	concluida BOOLEAN,
+	concluida BOOLEAN NOT NULL,
 	PRIMARY KEY(codigo)
 );
 

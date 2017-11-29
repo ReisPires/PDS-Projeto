@@ -24,7 +24,8 @@ public class DAOLogin extends DAOConnection {
                 usuario.setTipo(rs.getString(2));
                 return usuario;
             }                               
-        } catch (SQLException ex) {                          
+        } catch (SQLException e) {                          
+            System.out.println(e);
         }   
         return null;   
     }
@@ -42,7 +43,8 @@ public class DAOLogin extends DAOConnection {
             ResultSet rs = (ResultSet) stmt.getResultSet();
             if (rs.next())
                 return new Usuario(rs.getInt(1), login1, rs.getString(2));                                                            
-        } catch (SQLException ex) {              
+        } catch (SQLException e) {              
+            System.out.println(e);
         }   
         return null; 
     }        

@@ -10,7 +10,24 @@ public class DAOMensagem extends DAOConnection {
         initConnection();
     }
     
-    public Boolean enviaMensagem(Mensagem mensagem) {
+    public int exibeMensagensNaoLidas(Usuario usuario) {
+        try {
+            // Cria o comando
+            CallableStatement stmt = conn.prepareCall("{ call exibeMensagensNaoLidas(?) }");
+            // Recupera os dados
+            stmt.setInt(1, usuario.getId());
+            // Executa o comando
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();
+            if (rs.next())
+                return rs.getInt(1);
+        } catch (SQLException e) {  
+            System.out.println(e);
+        }
+        return -1;
+    }
+    
+    /*public Boolean enviaMensagem(Mensagem mensagem) {
         try {
             // Cria o comando
             CallableStatement stmt = conn.prepareCall("{ call enviaMensagem(?, ?, ?) }");
@@ -64,5 +81,5 @@ public class DAOMensagem extends DAOConnection {
             System.out.println(ex);
         }    
         return null;
-    }
+    }*/
 }
