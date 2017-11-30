@@ -91,9 +91,71 @@ public class DAOMensagem extends DAOConnection {
             while (rs.next())                 
                 mensagens.add(new Mensagem(rs.getString(1), rs.getString(2), rs.getTimestamp(3), rs.getString(4)));            
             return mensagens;          
-        } catch (SQLException ex) {  
-            System.out.println(ex);
+        } catch (SQLException e) {  
+            System.out.println(e);
         }    
         return null;
     }        
+    
+    public ArrayList<Aluno> listaAlunos(Usuario usuario) {
+        try {
+            CallableStatement stmt;
+            switch (usuario.getTipo()) {
+                case "P":
+                    stmt = conn.prepareCall("{ call listaAlunosProfessor(?) }");                
+                    stmt.setInt(1, usuario.getId());
+                    break;
+                case "E":
+                    stmt = conn.prepareCall("{ call listaAlunosAdministrador() }");                
+                    break;
+                default:
+                    return null;
+            }
+            // Executa o comando
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();
+            
+            ArrayList<Aluno> alunos = new ArrayList<>();            
+            while (rs.next())                 
+                alunos.add(new Aluno(rs.getString(2), new Usuario(rs.getInt(1)), new DadosPessoais(rs.getString(3))));  
+            return alunos;          
+        } catch (SQLException e) {  
+            System.out.println(e);
+        }    
+        return null;
+    }
+    
+    public ArrayList<Professor> listaProfessor(Usuario usuario) {
+        try {
+            CallableStatement stmt;
+            switch (usuario.getTipo()) {
+                case "A":
+                    stmt = conn.prepareCall("{ call listaProfessoresAluno(?) }");                
+                    stmt.setInt(1, usuario.getId());
+                    break;
+                case "R":
+                    stmt = conn.prepareCall("{ call listaProfessoresResponsavel(?) }");                
+                    stmt.setInt(1, usuario.getId());
+                    break;
+                case "E":
+                    stmt = conn.prepareCall("{ call listaProfessoresAdministrador() }");                
+                    break;
+                default:
+                    return null;
+            }
+            // Executa o comando
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();
+            
+            ArrayList<Professor> professores = new ArrayList<>();            
+            while (rs.next())                 
+                professores.add(new Professor(new Usuario(rs.getInt(1)), rs.getString(3), new DadosPessoais(rs.getString(2)))); 
+            return professores;          
+        } catch (SQLException e) {  
+            System.out.println(e);
+        }    
+        return null;
+    }
 }
+
+

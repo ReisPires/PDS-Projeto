@@ -94,7 +94,7 @@ with open('alunos.csv', 'w') as f:
             cw = csv.DictWriter(f, ['RM', 'Aluno', 'Turma', 'E-mail aluno',
                                     'CPF pai', 'E-mail pai', 'Tel pai',
                                     'CPF mae', 'E-mail mae', 'Tel mae'])     
-            pw = csv.DictWriter(p, ['Codigo', 'Professor', 'E-mail'])
+            pw = csv.DictWriter(p, ['Codigo', 'Professor', 'CPF', 'E-mail'])
             pw.writeheader()   
             cw.writeheader()
             l = list()
@@ -109,7 +109,7 @@ with open('alunos.csv', 'w') as f:
                              'CPF mae': geraCPF(), 'E-mail mae': geraEmail(str(rm),'mae'), 'Tel mae': geraTelefone()})        
 
             for i in range(0,50):
-                pw.writerow({'Codigo': geraCodProf(), 'Professor': l[i], 'E-mail': l[i].split()[0].lower() + str(random.randint(0,10)) + '@escola.br'})
+                pw.writerow({'Codigo': geraCodProf(), 'Professor': l[i], 'CPF': geraCPF(), 'E-mail': l[i].split()[0].lower() + str(random.randint(0,10)) + '@escola.br'})
 
 with open('atividades.csv', 'w') as a:
     aw = csv.DictWriter(a, ['Codigo', 'Atividade', 'Cod professores', 'Cod alunos'])

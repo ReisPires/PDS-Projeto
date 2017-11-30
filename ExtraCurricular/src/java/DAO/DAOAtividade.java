@@ -179,21 +179,40 @@ public class DAOAtividade extends DAOConnection {
         return null;
     }    
     
-   /* public Boolean insereInformacao (Informacao informacao) {
+    public boolean realizaPostagem(Atividade atividade, Usuario usuario, Postagem postagem) {
         try {
+            Integer codigo;            
             // Cria o comando
-            CallableStatement stmt = conn.prepareCall("{ call insereInformacao(?, ?, ?, ?, ?) }");
+            CallableStatement stmt = conn.prepareCall("{ call realizaPostagem(?, ?, ?, ?) }");
             // Recupera os dados
-            stmt.setString(1, informacao.getCodAtividade());
-            stmt.setString(2, informacao.getCodProfessor());
-            stmt.setString(3, informacao.getTitulo());
-            stmt.setString(4, informacao.getTexto());
-            stmt.setString(5, informacao.getMidia());            
+            stmt.setString(1, atividade.getCodigo());      
+            stmt.setInt(2, usuario.getId());
+            stmt.setString(3, postagem.getTitulo());
+            stmt.setString(4, postagem.getTexto());
             // Executa o comando
-            return (stmt.execute());
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();
+            if (rs.next()) {
+                codigo = rs.getInt(1);
+            } else return false;
+            rs.close();
+            stmt.close();
+            
+            for (String midia : postagem.getMidias()) {
+                // Cria o comando
+                stmt = conn.prepareCall("{ call insereMidia(?, ?) }");
+                // Recupera os dados
+                stmt.setInt(1, codigo);
+                stmt.setString(2, midia);                
+                // Executa o comando
+                stmt.execute();
+                stmt.close();
+            }            
+            return true;
         } catch (SQLException ex) {  
             System.out.println(ex);
-        }
+        }     
         return false;
-    }*/            
+    }
+            
 }

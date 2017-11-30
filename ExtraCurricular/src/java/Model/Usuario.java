@@ -18,6 +18,10 @@ public class Usuario {
         this.tipo = tipo;
     }        
 
+    public Usuario(Integer id) {
+        this.id = id;
+    }       
+
     public Integer getId() {
         return id;
     }

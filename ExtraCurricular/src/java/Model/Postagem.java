@@ -13,6 +13,7 @@ public class Postagem {
     private String texto;
     private ArrayList<String> midias;
 
+    /* Visualizacao */
     public Postagem(Integer id, String professor, String titulo, Timestamp datahora, String texto) {
         this.id = id;
         this.professor = professor;
@@ -24,9 +25,29 @@ public class Postagem {
         this.texto = texto;        
     }      
 
+    /* Criacao */
+    public Postagem(String titulo, String texto, ArrayList<String> midias) {
+        this.titulo = titulo;
+        this.texto = texto;
+        this.midias = midias;
+    }        
+
     public void setMidias(ArrayList<String> midias) {
         this.midias = midias;
     }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getTexto() {
+        return texto;
+    }
+
+    public ArrayList<String> getMidias() {
+        return midias;
+    }
+    
     
     
 }

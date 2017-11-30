@@ -6,16 +6,21 @@ public class Aluno {
     private String turma;    
     // Gerais
     private Usuario dadosUsuario;
-    private DadosPessoais dadosPessoais;
-    private Endereco endereco;
+    private DadosPessoais dadosPessoais;    
 
-    public Aluno(String matricula, String turma, Usuario dadosUsuario, DadosPessoais dadosPessoais, Endereco endereco) {
+    public Aluno(String matricula, String turma, Usuario dadosUsuario, DadosPessoais dadosPessoais) {
         this.matricula = matricula;
         this.turma = turma;
         this.dadosUsuario = dadosUsuario;
+        this.dadosPessoais = dadosPessoais;        
+    }         
+
+    /* Retorno das mensagens */
+    public Aluno(String matricula, Usuario dadosUsuario, DadosPessoais dadosPessoais) {
+        this.matricula = matricula;
+        this.dadosUsuario = dadosUsuario;
         this.dadosPessoais = dadosPessoais;
-        this.endereco = endereco;
-    }            
+    }        
 
     public String getMatricula() {
         return matricula;
@@ -32,10 +37,5 @@ public class Aluno {
     public DadosPessoais getDadosPessoais() {
         return dadosPessoais;
     }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-    
-    
+      
 }
