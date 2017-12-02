@@ -1,4 +1,5 @@
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ListIterator"%>
 <%@page import="Model.*"%>
 <%@page import="DAO.*"%>
 
@@ -20,6 +21,15 @@ boolean isVideo(String fileName) {
     
     return ".mp4".equals(extension) || ".avi".equals(extension) || ".wmv".equals(extension);
 }
+
+boolean isAudio(String fileName) {
+    if (fileName == null)
+        return false;
+    
+    String extension = fileName.substring(fileName.lastIndexOf('.'));
+    
+    return ".mp3".equals(extension) || ".wav".equals(extension);
+}
 %>
 
 <%
@@ -36,101 +46,190 @@ if (codigo == null) {
 }
 
 DAOAtividade daoAtividade = new DAOAtividade();
-Atividade atividade = daoAtividade.recuperaAtividade(new Atividade(codigo));
-ArrayList<Informacao> informacoes = daoAtividade.exibeInformacoesAtividade(atividade);
+Atividade atividade = new Atividade(codigo, "");
+daoAtividade.recuperaAtividade(atividade);
+
+ArrayList<Postagem> postagens = daoAtividade.listaPostagens(atividade);
 %>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>ExtraCurricular - Atividade</title>
-        <link rel="stylesheet" type="text/css" href="styles/main.css">
+        <title>Sistema London - Atividade</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="styles/cinza.css">
+        <script src="scripts/atividade.js"></script>
         <style>
-            .janela {
-                margin: auto;
+            .menu {
+                position: absolute;
                 
-                border: 1px solid black;
-                
-                width: 500px;
-                
-                padding: 15px;
+                right: 10px;
+                bottom: 5px;
             }
             
-            input[type=button] {
-                display: block;
-                
-                margin-bottom: 15px;
-                
-                width: 100%;
+            .opcao {
+                display: inline-block;
+    
+                line-height: 1.1;
+                font-size: 14px;
+                color: #707070;
             }
             
-            .atividade {
-                margin-bottom: 15px;
-            
-                border: 1px solid black;
-                
-                padding: 10px 0px;
-            
-                font-size: 25px;
-                font-weight: bold;
-                text-align: center;
+            .opcao:not(:first-child) {
+                margin-left: 10px;
             }
             
-            .vazio {
-                border: 1px solid black;
+            .busca {
+                width: 50%;
                 
-                padding: 10px 0px;
-                
-                text-align: center;
+                font-size: 18px;
             }
             
-            .post {
-                margin-top: 10px;
+            .frame {
+                display: inline-block;
                 
-                border: 1px solid black;
-                
-                padding: 10px;
+                width: 768px;
+            }
+        
+            .postagens {
+                margin-top: 20px;
+            }
+            
+            .editar {
+                float: right;
             }
             
             .titulo {
-                font-weight: bold;
+                font-size: 29px;
+                font-family: "Segoe UI";
+                color: rgb(71, 70, 70);
+                line-height: 1.2;
             }
             
             .data {
-                color: #a0a0a0;
-                margin-bottom: 8px;
+                font-size: 21px;
+                font-family: "Segoe UI";
+                color: rgb(111, 110, 110);
+                line-height: 1.2;
             }
             
-            .legenda {
-                margin-bottom: 4px;
+            .texto {
+                margin-top: 10px;
+            
+                font-size: 14.583px;
+                font-family: "Segoe UI";
+                color: rgb(71, 70, 70);
+                line-height: 1.2;
+            }
+            
+            .nenhum {
+                margin-top: 50px;
+            
+                font-size: 20px;
+                font-family: "Segoe UI";
+                color: rgb(71, 70, 70);
+                line-height: 1.2;
+            }
+            
+            .retornar {
+                position: fixed;
+                
+                right: 30px;
+                bottom: 30px;
+            }
+            
+            .midias {
+                display: flex;
+                
+                flex-wrap: wrap;
+            }
+            
+            .midia {
+                margin-top: 15px;
+            
+                outline: 1px solid #c0c0c0;
+            
+                width: 227px;
+                height: 227px;
+                
+                overflow: hidden;
+            }
+            
+            .midia:not(:nth-child(3n)) {
+                margin-right: 15px;
+            }
+            
+            .midia > * {
+                left: 50%;
+                top: 50%;
+                
+                width: 100%;
+                height: 100%;
+                
+                object-fit: cover;
+                object-position: center;
+            }
+            
+            #fundo {
+                position: fixed;
+                left: 0px;
+                top: 0px;
+                width: 100vw;
+                height: 100vh;
+                zIndex: 9999;
+                
+                background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
             }
         </style>
     </head>
     <body>
-        <div class="janela">
-            <input id="retornar" type="button" value="Retornar à lista de atividades" onclick="window.location.href = 'atividades.jsp'"/>
-            <% if (usuario.getTipo().equals("P")) { %>
-            <input id="postar" type="button" value="Realizar postagem" onclick="window.location.href = 'postar.jsp?atividade=<%= codigo %>'"/>
-            <% } %>
-            <div class="atividade"><%= atividade.getNome() %></div>
-            <% if (informacoes.isEmpty()) { %>
-            <div class="vazio">
-                Não foram realizadas postagens nesta atividade.
+        <div class="cabecalho">
+            <div class="container">
+                <a href="atividades.jsp"><img class="logo" src="img/SistemaLogo.png"/></a>
+                <span class="pagina pagina-centro"><%= atividade.getNome() %></span>
+                <div class="menu">
+                    <a class="opcao" href="postar.jsp?atividade=<%= codigo %>">
+                        <img src="img/CadastrosIcone.png"/>
+                        <div>Realizar Postagem</div>
+                    </a>
+                </div>
             </div>
-            <% } %>
-            <% for (Informacao informacao : informacoes) { %>
-            <div class="post">
-                <div class="titulo"><%= informacao.getTitulo() %></div>
-                <div class="data"><%= informacao.getDia() %> - <%= informacao.getHorario() %></div>
-                <div class="legenda"><%= informacao.getTexto()%></div>
-                <% if (isImage(informacao.getMidia())) { %>                
-                <div><img style="width: 445px; height: auto;" src="media<%= informacao.getMidia().substring(informacao.getMidia().lastIndexOf('/')) %>"/></div>
-                <% } else if (isVideo(informacao.getMidia())) { %>
-                <div><video style="width: 445px; height: auto;" src="media<%= informacao.getMidia().substring(informacao.getMidia().lastIndexOf('/')) %>"></video></div>
-                <% } %>
-            </div>
-            <% } %>
         </div>
+        <div class="corpo">
+            <div class="container">
+                <div class="frame">
+                    <div><input id="busca" class="busca" type="text" placeholder="Busca"/></div>
+                    <div class="postagens">
+                        <% for (ListIterator i = postagens.listIterator(postagens.size()); i.hasPrevious();) { %>
+                            <% Postagem postagem = (Postagem)i.previous(); %>
+                        <div class="painel">
+                            <% if (usuario.getTipo().equals("P")) { %>
+                            <a href="editar-post.jsp?atividade=<%= codigo %>&codigo=<%= postagem.getId() %>"><img class="editar" src="img/EditarPostagemIcone.png"/></a>
+                            <% } %>
+                            <div class="autor">Postado por <%--= postagem.getAutor() --%></div>
+                            <div class="titulo"><%= postagem.getTitulo() %></div>
+                            <div class="data"><%= postagem.getDia() %> - <%= postagem.getHorario() %></div>
+                            <div class="texto"><%= postagem.getTexto() %></div>
+                            <div class="midias">
+                                <% for (String midia: postagem.getMidias()) { %>
+                                    <% if (isImage(midia)) { %>
+                                    <div class="midia"><img src="<%= midia %>"/></div>
+                                    <% } else if (isVideo(midia)) { %>
+                                <div class="midia"><video src="<%= midia %>" controls></video></div>
+                                    <% } else if (isAudio(midia)) { %>
+                                <div class="midia"><audio src="<%= midia %>" controls></audio></div>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                        </div>
+                        <% } %>
+                        <div class="nenhum" style="display: none">Nenhum resultado encontrado.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input class="botao retornar" type="button" value="Retornar" onclick="location.href = 'atividades.jsp'"/>
+        <div id="fundo" style="display: none"></div>
     </body>
 </html>

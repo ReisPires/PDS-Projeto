@@ -25,76 +25,50 @@ boolean success = request.getAttribute("success") != null;
 <html>
     <head>
         <meta charset="utf-8">
-        <title>ExtraCurricular - Realizar postagem</title>
-        <link rel="stylesheet" type="text/css" href="styles/main.css">
+        <title>Sistema London - Realizar Postagem</title>
+        <link rel="stylesheet" type="text/css" href="styles/cinza.css">
         <style>
-            .janela {
-                margin: auto;
-                
-                border: 1px solid black;
-                
-                padding: 15px;
-                
-                width: 315px;
+            .titulo {
+                height: 28px;
             }
             
-            form {
-                margin: 0px;
+            .texto {
+                height: 160px;
             }
             
-            .grupo {
-                margin-bottom: 5px;
-            }
-            
-            input[type=text], input[type=file], textarea {
-                width: 100%;
-            }
-            
-            #texto {
-                height: 100px;
-            
-                resize: none;
-            }
-            
-            input[type=button], input[type=submit] {
-                width: 120px;
-            }
-            
-            #enviar {
-                float: right;
+            .midias {
+                font-size: 16.667px;
+                font-family: "Segoe UI";
+                color: rgb(85, 85, 85);
+                line-height: 1.2;
             }
         </style>
     </head>
     <body>
-        <div class="janela">
-            <div style="text-align: center; margin-bottom: 10px">
-                Realizar postagem
+		<div class="cabecalho">
+            <div class="container">
+                <a href="atividades.jsp"><img class="logo" src="img/SistemaLogo.png"/></a>
+                <div class="pagina pagina-centro">Realizar Postagem</div>
             </div>
-            <% if (success) { %>
-            <div style="text-align: center; color: green">
-                Postagem realizada com sucesso
+		</div>
+        <div class="corpo">
+            <div class="container">
+                <form action="postar" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="atividade" value="<%= atividade %>"/>
+                    <div class="painel">
+                        <label class="label" for="titulo">Título:</label>
+                        <input id="titulo" name="titulo" class="campo titulo" type="text"/>
+                        <label class="label" for="texto">Texto:</label>
+                        <textarea id="texto" name="texto" class="campo texto"></textarea>
+                        <label class="label" for="midias">Mídia:</label>
+                        <input id="midias" name="midias" class="midias" type="file" multiple/>
+                    </div>
+                    <div class="botoes">
+                        <input class="botao" type="button" value="Retornar" onclick="location.href = 'atividade.jsp?codigo=<%= atividade %>'"/>
+                        <input class="botao submeter" type="submit" value="Enviar"/>
+                    </div>
+                </form>
             </div>
-            <% } %>
-            <form action="postar" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="professor" value="<%= usuario.getId() %>"/>
-                <input type="hidden" name="atividade" value="<%= atividade %>"/>
-                <div class="grupo">
-                    <div><label for="titulo">Título:</label></div>
-                    <div><input id="titulo" name="titulo" type="text"/></div>
-                </div>
-                <div class="grupo">
-                    <div><label for="texto">Texto:</label></div>
-                    <div><textarea id="texto" name="texto"></textarea></div>
-                </div>
-                <div class="grupo">
-                    <div><label for="midia">Mídia:</label></div>
-                    <div><input id="midia" name="midia" type="file" accept="image/*, video/*"/></div>
-                </div>
-                <div style="margin-top: 15px">
-                    <input id="retornar" type="button" value="Retornar" onclick="window.location.href = 'atividade.jsp?codigo=<%= atividade %>'"/>
-                    <input id="enviar" type="submit" value="Enviar"/>
-                </div>
-            </form>
         </div>
     </body>
 </html>

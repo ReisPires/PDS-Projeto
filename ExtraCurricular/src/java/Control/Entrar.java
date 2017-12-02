@@ -1,23 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Control;
 
-import DAO.*;
+import DAO.DAOAtividade;
+import DAO.DAOLogin;
 import Model.*;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Gustavo
- */
 @WebServlet(name = "Entrar", urlPatterns = {"/entrar"})
 public class Entrar extends HttpServlet {
 
@@ -38,20 +34,25 @@ public class Entrar extends HttpServlet {
             return;
         }
         
-        // Caso não estiver logado, tentar logar
-        String login = (String)request.getParameter("login");
-        String senha = (String)request.getParameter("senha");
-        
         DAOLogin daoLogin = new DAOLogin();
-        Usuario usuario = daoLogin.realizaLogin(new Usuario(login, senha));
+        Usuario usuario = null;
         
+        String id = (String)request.getParameter("id");
+        if (id != null) {
+            usuario = daoLogin.realizaLoginFacebook(id);            
+        } else {
+            String login = (String)request.getParameter("login");
+            String senha = (String)request.getParameter("senha");               
+            usuario = daoLogin.realizaLogin(new Usuario(login, senha));
+        }                
+                
         // Verifica se o usuário conseguiu logar
         if (usuario == null) {
             // O usuário não conseguiu logar
             request.setAttribute("incorrect", true);
             request.getRequestDispatcher("index.jsp").forward(request, response);
             return;
-        }
+        }              
         
         request.getSession().setAttribute("usuario", usuario);
         request.getRequestDispatcher("atividades.jsp").forward(request, response);

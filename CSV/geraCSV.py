@@ -35,7 +35,7 @@ def geraTelefone():
     return ('(' + c[:2] + ')' + c[2:7] + '-' + c[7:])
 
 def geraEmail(nome, parente):
-    s = random.randint(0,2)
+    s = random.randint(0,1)
     if (s == 0):
         return (nome + '_' + parente + '@email.com.br')
     elif (s == 1):
@@ -64,10 +64,10 @@ def geraNomeAtv(cod):
 
 def geraProfsAtv():
     global cprof_list    
-    p1 = random.randint(0, len(cprof_list))
+    p1 = random.randint(0, len(cprof_list)-1)
     n = random.randint(0,6)    
     if (n >= 4):
-        p2 = random.randint(0, len(cprof_list))
+        p2 = random.randint(0, len(cprof_list)-1)
         if (n == 5):
             p3 = random.randint(0, len(cprof_list))
             return str(cprof_list[p1]) + '/' + str(cprof_list[p2]) + '/' + str(cprof_list[p3])
@@ -80,9 +80,9 @@ def geraAlunosAtv():
     n = random.randint(15,31)
     saida = ''
     for i in range(0,n):
-        rm = random.randint(0, len(rm_list))
+        rm = random.randint(0, len(rm_list)-1)
         while (rm in alunos):
-            rm = random.randint(0, len(rm_list))
+            rm = random.randint(0, len(rm_list)-1)
         alunos.append(rm)
         saida += str(rm_list[rm]) + '/'
     return saida[:-2]
@@ -92,8 +92,8 @@ with open('alunos.csv', 'w') as f:
         with open('nicknames.csv', 'r') as n:
             nr = csv.DictReader(n)
             cw = csv.DictWriter(f, ['RM', 'Aluno', 'Turma', 'E-mail aluno',
-                                    'CPF pai', 'E-mail pai', 'Tel pai',
-                                    'CPF mae', 'E-mail mae', 'Tel mae'])     
+                                    'Pai', 'CPF pai', 'E-mail pai', 'Tel pai',
+                                    'Mae', 'CPF mae', 'E-mail mae', 'Tel mae'])     
             pw = csv.DictWriter(p, ['Codigo', 'Professor', 'CPF', 'E-mail'])
             pw.writeheader()   
             cw.writeheader()
@@ -102,11 +102,12 @@ with open('alunos.csv', 'w') as f:
                 l.append(row['name'] + ' ' + row['nickname'])
                 
             random.shuffle(l)
-            for i in range(0,300):        
+            for i in range(0,300,3):        
                 rm = geraRM()
                 cw.writerow({'RM': rm, 'Aluno': l[i], 'Turma': geraAno(), 'E-mail aluno': geraEmail(str(rm), 'aluno'),
-                             'CPF pai': geraCPF(), 'E-mail pai': geraEmail(str(rm),'pai'), 'Tel pai': geraTelefone(),
-                             'CPF mae': geraCPF(), 'E-mail mae': geraEmail(str(rm),'mae'), 'Tel mae': geraTelefone()})        
+                             'Pai': l[i+1], 'CPF pai': geraCPF(), 'E-mail pai': geraEmail(str(rm),'pai'), 'Tel pai': geraTelefone(),
+                             'Mae': l[i+2], 'CPF mae': geraCPF(), 'E-mail mae': geraEmail(str(rm),'mae'), 'Tel mae': geraTelefone()})
+
 
             for i in range(0,50):
                 pw.writerow({'Codigo': geraCodProf(), 'Professor': l[i], 'CPF': geraCPF(), 'E-mail': l[i].split()[0].lower() + str(random.randint(0,10)) + '@escola.br'})

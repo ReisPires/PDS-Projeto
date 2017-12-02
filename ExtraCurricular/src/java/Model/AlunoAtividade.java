@@ -1,10 +1,12 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class AlunoAtividade {
     private String aluno;
-    private String atividade;
+    private ArrayList<String> atividade;
 
-    public AlunoAtividade(String aluno, String atividade) {
+    public AlunoAtividade(String aluno, ArrayList<String> atividade) {
         this.aluno = aluno;
         this.atividade = atividade;
     }      
@@ -13,7 +15,7 @@ public class AlunoAtividade {
         return aluno;
     }
 
-    public String getAtividade() {
+    public ArrayList<String> getAtividade() {
         return atividade;
     }
     

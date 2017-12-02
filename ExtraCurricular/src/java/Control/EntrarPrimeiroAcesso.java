@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Control;
 
+import DAO.DAOLogin;
+import Model.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,12 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Pedro Pires
- */
-@WebServlet(name = "Sair", urlPatterns = {"/sair"})
-public class Sair extends HttpServlet {
+@WebServlet(name = "EntrarPrimeiroAcesso", urlPatterns = {"/entrarPrimeiroAcesso"})
+public class EntrarPrimeiroAcesso extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,9 +23,30 @@ public class Sair extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {        
-        request.getSession().invalidate();
-        request.getRequestDispatcher("index.jsp").forward(request, response);    
+            throws ServletException, IOException {
+        DAOLogin daoLogin = new DAOLogin();
+        
+        String login = request.getParameter("login");
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        String confirmacao = request.getParameter("confirmacao");
+        
+        if (!senha.equals(confirmacao)) {
+            request.getSession().setAttribute("errmsg", 0);
+            request.getRequestDispatcher("primeiro-acesso.jsp").forward(request, response);
+            return;
+        }        
+        
+        Usuario usuario = daoLogin.realizaPrimeiroAcesso(login, email, senha);
+        
+        if (usuario == null) {
+            request.getSession().setAttribute("errmsg", 1);
+            request.getRequestDispatcher("primeiro-acesso.jsp").forward(request, response);
+            return;
+        }
+        
+        request.getSession().setAttribute("usuario", usuario);
+        request.getRequestDispatcher("atividades.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

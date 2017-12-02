@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Control;
 
+import DAO.DAOUsuario;
+import Model.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,12 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Pedro Pires
- */
-@WebServlet(name = "Sair", urlPatterns = {"/sair"})
-public class Sair extends HttpServlet {
+@WebServlet(name = "RecupearPerfil", urlPatterns = {"/recuperarPerfil"})
+public class RecuperarPerfil extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,9 +23,21 @@ public class Sair extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {        
-        request.getSession().invalidate();
-        request.getRequestDispatcher("index.jsp").forward(request, response);    
+            throws ServletException, IOException {
+        
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        if (usuario == null) {
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+            return;
+        }
+        
+        DAOUsuario daoUsuario = new DAOUsuario();        
+        DadosPessoais dadosPessoais = daoUsuario.recuperaDadosPessoais(usuario);
+        String facebookId = daoUsuario.recuperaFacebook(usuario);
+                
+        request.getSession().setAttribute("dadosPessoais", dadosPessoais);
+        request.getSession().setAttribute("facebookId", facebookId);
+        request.getRequestDispatcher("perfil.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

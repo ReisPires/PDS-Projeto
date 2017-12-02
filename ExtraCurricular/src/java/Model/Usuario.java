@@ -12,10 +12,15 @@ public class Usuario {
         this.senha = senha;
         this.tipo = tipo;
     }
-
+    
     public Usuario(Integer id, String tipo) {
         this.id = id;
         this.tipo = tipo;
+    }        
+
+    public Usuario(String login, String senha) {
+        this.login = login;
+        this.senha = senha;
     }        
 
     public Usuario(Integer id) {

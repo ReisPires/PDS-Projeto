@@ -1,15 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Control;
 
 import DAO.DAOUsuario;
-import Model.Aluno;
-import Model.DadosPessoais;
-import Model.Endereco;
-import Model.Usuario;
+import Model.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -18,10 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Pedro Pires
- */
 @WebServlet(name = "CadastrarAluno", urlPatterns = {"/cadastrarAluno"})
 public class CadastrarAluno extends HttpServlet {
 
@@ -36,16 +24,25 @@ public class CadastrarAluno extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nome = request.getParameter("nome");
+        DAOUsuario daoUsuario = new DAOUsuario();
+        
         String matricula = request.getParameter("matricula");
         String turma = request.getParameter("turma");
+        String nome = request.getParameter("nome");
         String email = request.getParameter("email");
-        String senha = request.getParameter("senha");
+        String cpf = request.getParameter("cpf");
+        String telefone = request.getParameter("telefone");
+        String sexo = ("masc".equals(request.getParameter("sexo")) ? "M" : ("fem".equals(request.getParameter("sexo")) ? "F" : null));        
+        String pais = request.getParameter("pais");
+        String cep = request.getParameter("cep");
+        String estado = request.getParameter("estado");
+        String cidade = request.getParameter("cidade");
+        String bairro = request.getParameter("bairro");
+        String rua = request.getParameter("rua");
+        String numero = request.getParameter("numero");
+        String complemento = request.getParameter("complemento");
         
-        Aluno aluno = new Aluno(matricula, turma, new Usuario(senha), new DadosPessoais(email, nome), new Endereco());
-        
-        DAOUsuario daoUsuario = new DAOUsuario();
-        request.setAttribute("success", daoUsuario.cadastraAluno(aluno));
+        request.getSession().setAttribute("resultadoCadastro", daoUsuario.cadastraAluno(new Aluno(matricula, turma, new Usuario(matricula, matricula), new DadosPessoais(cpf, email, telefone, nome, sexo, new Endereco(pais, cep, estado, cidade, bairro, rua, numero, complemento)))));
         request.getRequestDispatcher("cadastro-aluno.jsp").forward(request, response);
     }
 

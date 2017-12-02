@@ -1,128 +1,65 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>ExtraCurricular - Cadastro</title>
-        <link rel="stylesheet" type="text/css" href="styles/main.css">
+        <meta charset="utf-8"/>
+        <title>Sistema London - Cadastro de Responsável</title>
+        <link rel="stylesheet" type="text/css" href="styles/branco.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        
         <style>
-            .janela {
-                margin: auto;
-                
-                border: 1px solid black;
-                
-                width: 320px;
-                
-                padding: 15px;
-            }
-            
-            .grupo {
-                margin-bottom: 5px;
-            }
-            
-            input[type=text], input[type=email], input[type=password] {
-                width: 100%;
-            }
-            
-            input[type=button], input[type=submit] {
-                width: 130px;
-            }
-            
-            .aluno {
-                display: flex;
-            }
-            
-            .aluno:not(:first-child) {
-                margin-top: 5px;
-            }
-            
             .deletar {
-                margin-left: 10px;
-            
-                width: 25px !important;
-            }
-            
-            #adicionar {
-                margin-top: 10px;
-            
-                width: 100%;
-            }
-            
-            #cadastrar {
                 float: right;
+                
+                margin-left: 8px;
+                
+                border: none;
+                
+                width: 28px;
+                height: 28px;
+                
+                background-color: #ff8080;
+    
+                font-size: 21px;
+                font-family: "Segoe UI";
+                color: rgb(255, 255, 255);
+                line-height: 1.2;
+            }
+            
+            .adicionar {
+                margin-top: 10px;
+                
+                border: none;
+                
+                width: 260px;
+                height: 33px;
+    
+                font-size: 21px;
+                font-family: "Segoe UI";
+                color: #404040;
+                line-height: 1.2;
             }
         </style>
+        <script src="scripts/alunos.js"></script>
     </head>
     <body>
-        <div class="janela">
-            <div style="text-align: center; margin-bottom: 10px">
-                Cadastro de respons�vel
-            </div>
-            <form action="cadastrar" method="post">
-                <div class="grupo">
-                    <div><label for="nome">Nome:</label></div>
-                    <div><input id="nome" name="nome" type="text"/></div>
-                </div>
-                <div class="grupo">
-                    <div><label for="cpf">CPF:</label></div>
-                    <div><input id="cpf" name="cpf" type="text"/></div>
-                </div>
-                <div class="grupo">
-                    <div><label for="email">E-mail:</label></div>
-                    <div><input id="email" name="email" type="email"/></div>
-                </div>
-                <div class="grupo">
-                    <div><label for="senha">Senha:</label></div>
-                    <div><input id="senha" name="senha" type="password"/></div>
-                </div>
-                <div class="grupo">
-                    <div><label>Alunos:</label></div>
-                    <div id="alunos">
-                        <div id="aluno1" class="aluno">
-                            <input name="alunos" type="text"/>
-                            <input class="deletar" type="button" value="-" onclick="deletarAluno(1)" style="display: none"/>
-                        </div>
+		<div class="frame">
+			<img src="img/SistemaLogoGrande.png"/>
+			<div class="pagina">Cadastro de Responsável</div>
+			<form class="formulario" action="cadastros.html" method="post">
+				<input class="campo" type="text" placeholder="CPF" spellcheck="false"/>
+				<input class="campo" type="email" placeholder="E-mail" spellcheck="false"/>
+				<input class="campo" type="password" placeholder="Senha"/>
+				<div id="alunos">
+                    <div id="aluno1">
+                        <input class="deletar" type="button" value="-" style="display: none" onclick="deletarAluno(1)">
+                        <input name="alunos" class="campo" type="text" placeholder="Aluno" spellcheck="false"/>
                     </div>
-                    <div><input id="adicionar" type="button" value="Adicionar aluno" onclick="adicionarAluno()"/></div>
                 </div>
-                <div style="margin-top: 15px">
-                    <input id="retornar" type="button" value="Retornar" onclick="window.location.href = 'index.jsp'"/>
-                    <input id="cadastrar" type="submit" value="Cadastrar"/>
-                </div>
-            </form>
-        </div>
-        
-        <script>
-            var proxAluno = 2;
-        
-            function adicionarAluno() {
-                if ($("[name=alunos]").length === 5)
-                    return;
-                
-                if ($("[name=alunos]").length === 1)
-                    $(".deletar").css("display", "");
-                    
-                $("#alunos").append(
-                    '<div id="aluno' + proxAluno + '" class="aluno">' +
-                        '<input name="alunos" type="text"/>' +
-                        '<input class="deletar" type="button" value="-" onclick="deletarAluno(' + proxAluno++ + ')"/>' +
-                    '</div>'
-                );
-                
-                if ($("[name=alunos]").length === 5)
-                    $("#adicionar").css("display", "none");
-            }
-            
-            function deletarAluno(id) {
-                if ($("[name=alunos]").length === 5)
-                    $("#adicionar").css("display", "");
-                    
-                $("#aluno" + id).remove();
-                
-                if ($("[name=alunos]").length === 1)
-                    $(".deletar").css("display", "none");
-            }
-        </script>
+                <input class="adicionar" type="button" value="Adicionar aluno" onclick="adicionarAluno()">
+				<div class="botoes">
+					<input type="button" value="Retornar" onclick="location.href = 'cadastros.html'"/>
+					<input class="submeter" type="submit" value="Cadastrar"/>
+				</div>
+			</form>
+		</div>
     </body>
 </html>

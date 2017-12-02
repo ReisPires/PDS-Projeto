@@ -13,11 +13,12 @@ DROP TABLE IF EXISTS responsavel;
 DROP TABLE IF EXISTS usuario;
 
 CREATE TABLE usuario(
-	id BIGSERIAL NOT NULL,	
+	id BIGSERIAL NOT NULL,
 	login1 VARCHAR(11) NOT NULL, /* CPF/Matricula/Codigo de prof/Nome de admin */
 	login2 VARCHAR(80), /* Email */
 	senha VARCHAR(50) NOT NULL,
 	tipo CHAR(1) NOT NULL,
+	facebook VARCHAR(20),
 	PRIMARY KEY(id)
 );
 

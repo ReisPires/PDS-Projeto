@@ -3,6 +3,7 @@ package DAO;
 import Model.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DAOAtividade extends DAOConnection {
     
@@ -54,13 +55,13 @@ public class DAOAtividade extends DAOConnection {
             // Cria o comando
             CallableStatement stmt = conn.prepareCall("{ call matriculaAluno(?, ?) }");
             // Recupera os dados
-            stmt.setString(1, alunoAtv.getAtividade());
+            stmt.setString(1, alunoAtv.getAtividade().get(0));
             stmt.setString(2, alunoAtv.getAluno());
             // Executa o comando
             stmt.execute();
             ResultSet rs = (ResultSet) stmt.getResultSet();
             if (rs.next())
-                return rs.getInt(1); 
+                return rs.getInt(1);      
         } catch (SQLException e) {  
             System.out.println(e);
         }
@@ -106,9 +107,10 @@ public class DAOAtividade extends DAOConnection {
                 alunos = new ArrayList<>();
                 stmt = conn.prepareCall("{ call listaAlunosAtividadesResponsavel(?) }");
                 stmt.setInt(1, usuario.getId());
+                stmt.execute();
                 rs = (ResultSet) stmt.getResultSet();
                 while (rs.next())
-                    alunos.add(new AlunoAtividade(rs.getString(1), rs.getString(2)));
+                    alunos.add(new AlunoAtividade(rs.getString(1), new ArrayList<String>(Arrays.asList(rs.getString(2).split("/")))));                
             }
             
             return new ListaAtividades(atividades, alunos);
@@ -162,7 +164,7 @@ public class DAOAtividade extends DAOConnection {
                 // Cria o comando
                 stmt = conn.prepareCall("{ call recuperaMidiasPostagem(?) }");
                 // Recupera os dados
-                stmt.setString(1, atividade.getCodigo());
+                stmt.setInt(1, p.getId());
                 // Executa o comando
                 stmt.execute();
                 rs = (ResultSet) stmt.getResultSet();
@@ -213,6 +215,73 @@ public class DAOAtividade extends DAOConnection {
             System.out.println(ex);
         }     
         return false;
-    }
+    }            
+    
+    public Postagem recuperaPostagem(Integer id) {
+         try {
+            // Cria o comando
+            CallableStatement stmt = conn.prepareCall("{ call recuperaPostagem(?) }");
+            // Recupera os dados
+            stmt.setInt(1, id);            
+            // Executa o comando
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();
             
+            Postagem postagem;
+            
+            if (rs.next())                 
+                postagem = new Postagem(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getTimestamp(4), rs.getString(5));                        
+            else
+                return null;
+            
+            rs.close();
+            stmt.close();
+                                    
+            ArrayList<String> midias = new ArrayList<>();
+            // Cria o comando
+            stmt = conn.prepareCall("{ call recuperaMidiasPostagem(?) }");
+            // Recupera os dados
+            stmt.setInt(1, postagem.getId());
+            // Executa o comando
+            stmt.execute();
+            rs = (ResultSet) stmt.getResultSet();
+            while(rs.next())
+                midias.add(rs.getString(1));
+            postagem.setMidias(midias);                            
+                        
+            return postagem;
+        } catch (SQLException ex) {  
+            System.out.println(ex);
+        }    
+        return null;
+    } 
+    
+    public boolean atualizaPostagem(Postagem postagem) {
+         try {
+            // Cria o comando
+            CallableStatement stmt = conn.prepareCall("{ call atualizaPostagem(?, ?, ?) }");
+            // Recupera os dados
+            stmt.setInt(1, postagem.getId());            
+            stmt.setString(2, postagem.getTitulo());
+            stmt.setString(3, postagem.getTexto());
+            // Executa o comando
+            stmt.execute();                                    
+            stmt.close();
+                                    
+           for (String midia : postagem.getMidias()) {
+                // Cria o comando
+                stmt = conn.prepareCall("{ call insereMidia(?, ?) }");
+                // Recupera os dados
+                stmt.setInt(1, postagem.getId());
+                stmt.setString(2, midia);                
+                // Executa o comando
+                stmt.execute();
+                stmt.close();
+            }            
+            return true;                                                               
+        } catch (SQLException ex) {  
+            System.out.println(ex);
+        }    
+        return false;
+    } 
 }

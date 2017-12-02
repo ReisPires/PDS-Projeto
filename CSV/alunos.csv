@@ -1,301 +1,101 @@
-RM,Aluno,Turma,E-mail aluno,CPF pai,E-mail pai,Tel pai,CPF mae,E-mail mae,Tel mae
-989515,Anne Nana,7º C,989515_aluno@email.com.br,82565321802,pai.989515.33@gmail.com,(70)77954-3911,71705662581,mae.989515.10@gmail.com,(65)96007-7807
-988231,Margaret Peggy,2º A,contatoaluno988231@hotmail.com,22941217882,pai.988231.55@gmail.com,(51)79668-1312,57602931497,988231_mae@email.com.br,(80)39611-1289
-984633,Adaline Dell,3º A,984633_aluno@email.com.br,64991201223,984633_pai@email.com.br,(72)48531-8387,30930489951,984633_mae@email.com.br,(25)72144-4693
-983848,Brady Brody,9º C,983848_aluno@email.com.br,72079857606,983848_pai@email.com.br,(63)90657-1492,31096489835,mae.983848.61@gmail.com,(26)23140-4556
-982377,Joan Jo,3º A,aluno.982377.92@gmail.com,80536537127,contatopai982377@hotmail.com,(93)37813-0285,91275788951,982377_mae@email.com.br,(31)53925-6508
-980859,Hubert Bert,9º A,aluno.980859.55@gmail.com,83036912149,pai.980859.58@gmail.com,(12)82828-0521,89462104212,980859_mae@email.com.br,(90)06758-7647
-979620,Letitia Lettice,7º A,979620_aluno@email.com.br,11417554312,pai.979620.10@gmail.com,(45)94939-9281,99825062683,contatomae979620@hotmail.com,(94)35935-2056
-978242,Elizabeth Lizzie,8º B,contatoaluno978242@hotmail.com,29851508981,pai.978242.62@gmail.com,(30)20722-5137,14518306456,contatomae978242@hotmail.com,(61)88063-1248
-977573,Debora Debbie,6º A,977573_aluno@email.com.br,35608073048,977573_pai@email.com.br,(39)40682-9373,83571670954,contatomae977573@hotmail.com,(47)08445-8521
-975316,Woodrow Woody,1º C,975316_aluno@email.com.br,62835954931,975316_pai@email.com.br,(59)13177-8775,41774658207,975316_mae@email.com.br,(73)90116-5840
-972465,Laurence Lorne,6º B,contatoaluno972465@hotmail.com,36603323453,contatopai972465@hotmail.com,(44)16432-2549,23523357140,contatomae972465@hotmail.com,(45)77132-2524
-968462,Kingsley King,3º A,contatoaluno968462@hotmail.com,24436375619,contatopai968462@hotmail.com,(82)95358-5511,49098263316,mae.968462.36@gmail.com,(11)92415-1773
-968131,Christina Christy,2º C,968131_aluno@email.com.br,16351469374,pai.968131.92@gmail.com,(36)16968-3203,15943640978,contatomae968131@hotmail.com,(69)90983-4190
-965239,Joseph Jos,7º A,contatoaluno965239@hotmail.com,25934735410,contatopai965239@hotmail.com,(25)89399-6304,26838776139,965239_mae@email.com.br,(92)48958-7644
-963861,Katherine Kittie,4º C,contatoaluno963861@hotmail.com,79114026053,963861_pai@email.com.br,(81)97537-2979,91601401288,contatomae963861@hotmail.com,(10)15969-7562
-954259,Paula Lina,2º C,954259_aluno@email.com.br,10624694582,pai.954259.11@gmail.com,(52)88146-5385,15220936410,954259_mae@email.com.br,(11)88554-4362
-940417,Katherine Katy,2º C,aluno.940417.81@gmail.com,91713838607,pai.940417.24@gmail.com,(87)32643-3489,49973172021,940417_mae@email.com.br,(67)20346-5058
-935139,Augustina Aggy,6º A,contatoaluno935139@hotmail.com,63463724435,935139_pai@email.com.br,(19)95033-9758,47164452965,935139_mae@email.com.br,(22)92683-6454
-934460,Shelton Shel,9º A,934460_aluno@email.com.br,49404494417,contatopai934460@hotmail.com,(60)59537-4808,23842401026,contatomae934460@hotmail.com,(33)90396-2801
-933939,Asahel Asa,2º B,contatoaluno933939@hotmail.com,33912370198,contatopai933939@hotmail.com,(10)86211-7973,63046218661,mae.933939.39@gmail.com,(11)65016-4608
-931631,Ann Nana,9º A,aluno.931631.26@gmail.com,20008758472,pai.931631.68@gmail.com,(66)02863-0653,66720199769,contatomae931631@hotmail.com,(99)88998-5411
-930155,Bertha Birdie,2º A,aluno.930155.86@gmail.com,38617810297,contatopai930155@hotmail.com,(34)71001-7309,25641511417,mae.930155.22@gmail.com,(39)91953-2067
-927341,Obadiah Obed,4º A,contatoaluno927341@hotmail.com,44810798048,927341_pai@email.com.br,(18)45806-6783,97491936549,927341_mae@email.com.br,(64)50761-1089
-925444,Tom Tommy,1º A,contatoaluno925444@hotmail.com,32633690174,pai.925444.97@gmail.com,(72)28583-1541,88402755546,925444_mae@email.com.br,(90)85712-3712
-919453,Katherine Kate,4º C,contatoaluno919453@hotmail.com,32384276738,contatopai919453@hotmail.com,(67)78998-9177,49523180784,919453_mae@email.com.br,(76)95339-8216
-917136,Clarissa Cissy,6º A,aluno.917136.42@gmail.com,65784112167,917136_pai@email.com.br,(88)62076-4081,62703498448,mae.917136.29@gmail.com,(17)11847-6093
-915722,Darlene Lena,9º A,contatoaluno915722@hotmail.com,90037883881,pai.915722.47@gmail.com,(64)91006-2009,11717252545,mae.915722.11@gmail.com,(13)49226-0653
-915421,Susan Sue,5º B,contatoaluno915421@hotmail.com,52025766863,contatopai915421@hotmail.com,(56)49615-5768,26845713000,mae.915421.59@gmail.com,(17)30930-0333
-913991,Dan Danny,2º C,contatoaluno913991@hotmail.com,31009445647,contatopai913991@hotmail.com,(60)29441-7415,30183948276,mae.913991.23@gmail.com,(73)99996-3990
-913357,Geoffrey Jeff,6º B,913357_aluno@email.com.br,16937957581,pai.913357.90@gmail.com,(47)64970-2303,87896948681,contatomae913357@hotmail.com,(17)03915-6068
-912806,Matilda Matty,5º B,contatoaluno912806@hotmail.com,29396397230,pai.912806.73@gmail.com,(25)16419-5815,57013344083,mae.912806.96@gmail.com,(23)55759-1461
-910766,Christian Chris,5º B,910766_aluno@email.com.br,94097685323,contatopai910766@hotmail.com,(85)89206-2495,66303744561,910766_mae@email.com.br,(19)10128-0830
-902212,Alberta Allie,9º C,902212_aluno@email.com.br,74052258751,contatopai902212@hotmail.com,(81)36134-6422,79469904022,mae.902212.49@gmail.com,(70)15160-7331
-898686,Sheridan Sher,3º C,898686_aluno@email.com.br,72747521759,898686_pai@email.com.br,(17)83652-9503,51305197563,contatomae898686@hotmail.com,(46)71152-2707
-895373,Rosabel Rose,8º C,contatoaluno895373@hotmail.com,62434802063,contatopai895373@hotmail.com,(44)75992-7272,28552835721,895373_mae@email.com.br,(90)51092-9370
-893319,Leslie Les,6º C,contatoaluno893319@hotmail.com,82161845337,pai.893319.68@gmail.com,(10)09401-9160,34134184707,893319_mae@email.com.br,(14)88831-5219
-889633,Rudolph Dolph,7º A,contatoaluno889633@hotmail.com,37805393957,pai.889633.87@gmail.com,(78)88673-6908,32193456152,889633_mae@email.com.br,(25)98403-7259
-886514,Valentine Felty,1º B,contatoaluno886514@hotmail.com,65061022099,886514_pai@email.com.br,(25)93409-3645,28212451026,mae.886514.25@gmail.com,(67)87361-3128
-885102,Philetus Phil,4º C,aluno.885102.18@gmail.com,47976754194,pai.885102.39@gmail.com,(61)56677-2547,71085330229,contatomae885102@hotmail.com,(43)21971-1977
-882306,Cornelia Nelly,3º B,aluno.882306.35@gmail.com,46658636009,882306_pai@email.com.br,(51)84524-9878,88634255992,882306_mae@email.com.br,(53)94401-9645
-881255,Elmira Elly,6º A,contatoaluno881255@hotmail.com,71415326074,881255_pai@email.com.br,(36)51210-8815,75740077641,mae.881255.33@gmail.com,(41)56035-9899
-877163,Fredericka Freddy,9º B,contatoaluno877163@hotmail.com,26338450074,contatopai877163@hotmail.com,(50)12579-7836,29410502247,contatomae877163@hotmail.com,(29)80360-6885
-868143,Richard Rick,7º C,contatoaluno868143@hotmail.com,72175252144,pai.868143.33@gmail.com,(35)15770-3311,74434500559,868143_mae@email.com.br,(27)03648-1236
-866096,Christiana Kristy,8º B,aluno.866096.85@gmail.com,67659656078,866096_pai@email.com.br,(91)89179-5982,31679189029,866096_mae@email.com.br,(66)85464-2383
-861026,Augusta Aggy,2º C,contatoaluno861026@hotmail.com,10286312224,pai.861026.72@gmail.com,(90)76439-7908,51204517759,contatomae861026@hotmail.com,(93)47707-5867
-859452,Sylvester Syl,2º C,contatoaluno859452@hotmail.com,51974836148,contatopai859452@hotmail.com,(40)05932-8230,95954096366,859452_mae@email.com.br,(41)13494-1331
-853527,Valerie Val,6º B,853527_aluno@email.com.br,61723315718,853527_pai@email.com.br,(62)60252-4359,98691102057,853527_mae@email.com.br,(96)74322-5555
-840858,Gert Gertie,6º A,840858_aluno@email.com.br,64498178673,840858_pai@email.com.br,(40)95769-1531,61932252071,contatomae840858@hotmail.com,(46)85069-3505
-839321,Christine Tina,9º C,contatoaluno839321@hotmail.com,60065615736,839321_pai@email.com.br,(25)88398-2920,35239878544,839321_mae@email.com.br,(63)32601-4638
-834908,Letitia Lettie,6º A,834908_aluno@email.com.br,78464452407,834908_pai@email.com.br,(60)97513-5765,87320638878,834908_mae@email.com.br,(24)07542-4947
-834189,Natalie Natty,4º A,aluno.834189.17@gmail.com,47590721198,834189_pai@email.com.br,(71)77491-2573,87785624397,mae.834189.28@gmail.com,(63)39274-9753
-829028,Veronica Frony,2º C,829028_aluno@email.com.br,40793947220,829028_pai@email.com.br,(79)56413-3543,81928885822,mae.829028.72@gmail.com,(12)62074-8016
-826656,Ignatius Iggy,5º B,aluno.826656.49@gmail.com,83249872887,contatopai826656@hotmail.com,(23)78460-7729,32052244850,826656_mae@email.com.br,(68)11320-4691
-822441,Raphael Ralph,7º A,aluno.822441.27@gmail.com,16990966816,pai.822441.59@gmail.com,(22)64618-0009,88455194480,mae.822441.20@gmail.com,(27)35110-7891
-818753,Broderick Ricky,5º C,aluno.818753.20@gmail.com,30105175866,818753_pai@email.com.br,(62)37143-0599,46541801483,mae.818753.78@gmail.com,(96)32094-5724
-817805,Peter Pete,3º A,817805_aluno@email.com.br,38770037288,817805_pai@email.com.br,(63)13857-0578,30339408362,mae.817805.36@gmail.com,(55)92612-4398
-815159,Gilbert Gil,3º A,contatoaluno815159@hotmail.com,98197408683,contatopai815159@hotmail.com,(75)34168-1304,26008343354,contatomae815159@hotmail.com,(63)99238-3086
-813758,Theodore Theo,3º B,contatoaluno813758@hotmail.com,58033848191,pai.813758.22@gmail.com,(26)54936-4309,79260083939,mae.813758.22@gmail.com,(60)76343-9901
-804068,Elizabeth Beth,5º B,aluno.804068.70@gmail.com,46501359455,804068_pai@email.com.br,(40)50349-0887,99337845865,mae.804068.81@gmail.com,(68)97317-7293
-803674,Anne Nanny,9º B,contatoaluno803674@hotmail.com,11589297734,803674_pai@email.com.br,(26)22625-9519,28527799398,contatomae803674@hotmail.com,(17)97843-4530
-798641,Vincenzo Vinny,5º A,798641_aluno@email.com.br,73862150108,798641_pai@email.com.br,(93)14595-3756,37316999650,798641_mae@email.com.br,(59)13795-3714
-796103,Kristen Chris,6º C,796103_aluno@email.com.br,41618058017,contatopai796103@hotmail.com,(21)24633-5650,59569475836,mae.796103.31@gmail.com,(28)19551-9653
-787398,Azariah Aze,9º B,contatoaluno787398@hotmail.com,97575668075,787398_pai@email.com.br,(59)09739-0339,54125393012,787398_mae@email.com.br,(77)17579-0833
-783242,Kristine Crissy,5º A,aluno.783242.70@gmail.com,93108880640,pai.783242.67@gmail.com,(66)18431-0704,77942726174,783242_mae@email.com.br,(44)79647-5289
-782208,Eleanor Elaine,9º C,contatoaluno782208@hotmail.com,81761781816,782208_pai@email.com.br,(65)75670-3803,60019320615,contatomae782208@hotmail.com,(23)43524-1489
-776316,Geoffrey Geoff,3º B,776316_aluno@email.com.br,28701042610,contatopai776316@hotmail.com,(10)41516-6516,63353066087,776316_mae@email.com.br,(60)88203-5241
-774787,Randolph Dolph,2º A,774787_aluno@email.com.br,21724085800,pai.774787.63@gmail.com,(71)57829-0981,46318979175,mae.774787.53@gmail.com,(35)90210-2252
-763272,Thomas Tommy,7º B,763272_aluno@email.com.br,53217176007,763272_pai@email.com.br,(67)61645-7924,38654319786,mae.763272.45@gmail.com,(31)52993-6807
-762503,Johannah Joan,6º C,762503_aluno@email.com.br,61782399154,pai.762503.34@gmail.com,(18)81647-6291,67038455852,mae.762503.13@gmail.com,(56)16411-4364
-762386,Elijah Eli,1º A,aluno.762386.26@gmail.com,66980052984,pai.762386.93@gmail.com,(72)08865-3869,28279336018,contatomae762386@hotmail.com,(51)35275-1722
-761442,Kristy Chris,8º A,761442_aluno@email.com.br,21384556530,contatopai761442@hotmail.com,(13)70488-6161,25303597372,contatomae761442@hotmail.com,(98)98231-5813
-761032,Henrietta Hank,8º A,contatoaluno761032@hotmail.com,14702277475,contatopai761032@hotmail.com,(83)92480-5498,53418579933,mae.761032.58@gmail.com,(72)54064-1973
-759059,Vicki Vicky,2º C,aluno.759059.95@gmail.com,76799541769,pai.759059.92@gmail.com,(57)22351-4527,79145780771,mae.759059.98@gmail.com,(24)00160-1785
-758620,Roger Roge,8º C,aluno.758620.27@gmail.com,90997111271,pai.758620.86@gmail.com,(18)94597-9026,72803690203,mae.758620.52@gmail.com,(42)00073-6073
-745225,Alice Lisa,2º B,contatoaluno745225@hotmail.com,55639675304,contatopai745225@hotmail.com,(64)47541-2594,36752125752,mae.745225.93@gmail.com,(71)02086-5505
-744491,Ted Teddy,6º C,744491_aluno@email.com.br,21096447862,contatopai744491@hotmail.com,(13)37095-0023,84861726928,contatomae744491@hotmail.com,(54)14561-3903
-744327,Vincent Vinnie,1º B,aluno.744327.39@gmail.com,90272330968,contatopai744327@hotmail.com,(32)50711-2113,74064192470,mae.744327.75@gmail.com,(98)81210-8018
-742178,Katelin Kay,4º A,aluno.742178.57@gmail.com,77904734671,pai.742178.29@gmail.com,(43)05267-3454,53447426830,contatomae742178@hotmail.com,(62)41004-5490
-737694,Rosalinda Linda,2º B,contatoaluno737694@hotmail.com,26719811950,737694_pai@email.com.br,(93)71901-8103,68739575392,737694_mae@email.com.br,(50)77909-9399
-737678,Katherine Kathy,9º B,737678_aluno@email.com.br,34636463821,737678_pai@email.com.br,(36)33221-2343,73857387155,contatomae737678@hotmail.com,(81)86157-3354
-734555,Theresa Tessie,2º A,aluno.734555.91@gmail.com,96080796007,contatopai734555@hotmail.com,(92)98320-6355,10944695433,contatomae734555@hotmail.com,(18)96659-6662
-731323,Janet Jan,7º B,contatoaluno731323@hotmail.com,14274852276,pai.731323.64@gmail.com,(42)19050-7553,51086545246,mae.731323.36@gmail.com,(17)31465-1808
-728428,Lucille Cille,6º C,contatoaluno728428@hotmail.com,93017358814,728428_pai@email.com.br,(66)20740-6084,25008297895,contatomae728428@hotmail.com,(17)48643-0226
-727962,Madeline Maggie,2º B,contatoaluno727962@hotmail.com,37816077191,contatopai727962@hotmail.com,(95)69846-6069,18086869191,mae.727962.18@gmail.com,(38)68407-2391
-725816,Winnifred Winnie,7º B,aluno.725816.58@gmail.com,75947519768,contatopai725816@hotmail.com,(42)75227-9967,14715000477,contatomae725816@hotmail.com,(15)12375-2520
-720887,Arabelle Arry,3º B,720887_aluno@email.com.br,13963697252,contatopai720887@hotmail.com,(13)30418-1986,98078042295,contatomae720887@hotmail.com,(91)95680-7739
-719926,Lisa Liz,8º B,719926_aluno@email.com.br,28481171976,pai.719926.32@gmail.com,(89)17149-1742,28998029558,719926_mae@email.com.br,(44)19366-8392
-718160,Elmira Mira,7º B,718160_aluno@email.com.br,26114865688,718160_pai@email.com.br,(57)81469-5764,22068022264,mae.718160.49@gmail.com,(44)21189-1590
-717021,Kent Kenny,7º A,aluno.717021.46@gmail.com,86570471218,contatopai717021@hotmail.com,(17)16847-8757,81683402573,717021_mae@email.com.br,(56)47720-4187
-715053,Francis Frank,3º B,contatoaluno715053@hotmail.com,36970863446,contatopai715053@hotmail.com,(64)73992-1113,58848526433,715053_mae@email.com.br,(45)61742-2294
-713823,Debora Deb,5º B,713823_aluno@email.com.br,33279203876,pai.713823.77@gmail.com,(92)37414-0080,63381811192,713823_mae@email.com.br,(66)93163-0825
-710290,Ignatius Natius,4º A,710290_aluno@email.com.br,18518568050,pai.710290.34@gmail.com,(59)09586-6640,69098117237,mae.710290.54@gmail.com,(72)45064-2007
-709844,Emeline Emmy,2º B,contatoaluno709844@hotmail.com,12996639366,pai.709844.22@gmail.com,(78)93786-0755,75546242502,mae.709844.90@gmail.com,(45)61461-8797
-706270,Amelia Amy,3º C,aluno.706270.48@gmail.com,86606849743,contatopai706270@hotmail.com,(39)42552-2354,59543400908,mae.706270.36@gmail.com,(61)26812-5722
-704232,Isabella Ib,2º A,704232_aluno@email.com.br,52023443380,704232_pai@email.com.br,(25)69073-9576,41702575738,mae.704232.22@gmail.com,(24)54982-5272
-695315,Marjorie Margy,1º C,aluno.695315.31@gmail.com,70564967434,695315_pai@email.com.br,(94)54660-1856,46612112203,contatomae695315@hotmail.com,(47)99696-9704
-693900,Kate Kay,6º A,693900_aluno@email.com.br,87045837265,pai.693900.15@gmail.com,(24)28675-5626,95071650166,contatomae693900@hotmail.com,(12)23788-9919
-688319,Timothy Tim,6º B,contatoaluno688319@hotmail.com,98371746083,pai.688319.34@gmail.com,(43)37756-0350,33137036977,contatomae688319@hotmail.com,(26)60226-8136
-686089,Edmond Eddie,4º B,aluno.686089.51@gmail.com,34409632460,686089_pai@email.com.br,(60)38190-3327,77964062295,686089_mae@email.com.br,(77)28911-6810
-684374,Mervyn Merv,8º A,contatoaluno684374@hotmail.com,56200906860,contatopai684374@hotmail.com,(85)82305-3778,61885104281,mae.684374.68@gmail.com,(80)38849-5629
-680401,Clare Clara,1º A,aluno.680401.51@gmail.com,74274848231,680401_pai@email.com.br,(39)06827-8461,73386432665,contatomae680401@hotmail.com,(36)85576-4716
-676222,Thomas Tommy,3º A,aluno.676222.66@gmail.com,71393749576,676222_pai@email.com.br,(21)77351-3091,13845988556,676222_mae@email.com.br,(60)50558-5677
-676000,Relief Leafa,6º C,contatoaluno676000@hotmail.com,89101083553,676000_pai@email.com.br,(33)14099-8314,53975587559,676000_mae@email.com.br,(40)33239-8038
-671970,Laurence Larry,5º B,aluno.671970.95@gmail.com,63219083845,pai.671970.36@gmail.com,(49)75472-4640,52259602330,671970_mae@email.com.br,(73)28468-2967
-671447,Rebecca Becca,6º C,aluno.671447.58@gmail.com,29149869523,pai.671447.81@gmail.com,(13)85738-4676,87206056217,mae.671447.78@gmail.com,(37)28390-5538
-671188,Margaret Margy,1º A,aluno.671188.16@gmail.com,32309684717,contatopai671188@hotmail.com,(93)39008-4761,47675064558,contatomae671188@hotmail.com,(62)55502-2254
-666382,Gabrielle Ella,9º C,aluno.666382.46@gmail.com,19481534565,pai.666382.51@gmail.com,(56)56556-4613,51005087398,666382_mae@email.com.br,(59)29973-7902
-664916,Mary Polly,2º B,aluno.664916.61@gmail.com,17375856081,contatopai664916@hotmail.com,(92)96844-1996,96964575902,664916_mae@email.com.br,(88)73205-6816
-657677,Cameron Cam,7º C,657677_aluno@email.com.br,75635794035,contatopai657677@hotmail.com,(15)27664-0740,87612301638,contatomae657677@hotmail.com,(93)33902-4839
-653119,Arlene Lena,5º C,aluno.653119.45@gmail.com,62970871766,653119_pai@email.com.br,(46)08346-9375,19368794876,contatomae653119@hotmail.com,(22)45281-1793
-651463,Katherine Lena,3º C,aluno.651463.59@gmail.com,12664293682,651463_pai@email.com.br,(72)75488-6712,70296477438,651463_mae@email.com.br,(19)14721-3776
-650836,Chauncey Chan,8º A,contatoaluno650836@hotmail.com,75962463778,pai.650836.16@gmail.com,(56)90576-0371,73561750265,mae.650836.44@gmail.com,(39)46452-2629
-641105,Catherine Katy,7º A,contatoaluno641105@hotmail.com,90650195686,pai.641105.98@gmail.com,(97)27705-1539,29718560821,mae.641105.98@gmail.com,(39)73369-6102
-640538,Samuel Sammy,6º A,640538_aluno@email.com.br,75407216512,contatopai640538@hotmail.com,(75)21241-2601,55461740669,contatomae640538@hotmail.com,(32)87388-6627
-638230,Courtney Curt,7º A,638230_aluno@email.com.br,86009864055,638230_pai@email.com.br,(52)94254-2180,44342436162,contatomae638230@hotmail.com,(50)01873-4483
-637897,Arabella Bella,7º C,637897_aluno@email.com.br,85779018853,pai.637897.14@gmail.com,(71)08679-0028,48653536163,637897_mae@email.com.br,(39)59793-8804
-636757,Isabella Belle,8º C,aluno.636757.27@gmail.com,94061979597,636757_pai@email.com.br,(23)18021-8238,96047252801,mae.636757.72@gmail.com,(36)84113-7168
-636254,Olivia Ollie,2º A,aluno.636254.63@gmail.com,97716733423,636254_pai@email.com.br,(43)36102-9545,41328490032,contatomae636254@hotmail.com,(62)70084-9022
-634536,Wilber Will,7º B,aluno.634536.48@gmail.com,95196431003,contatopai634536@hotmail.com,(65)43845-5827,25149566377,contatomae634536@hotmail.com,(71)94755-8008
-633876,James Jimmie,6º A,aluno.633876.54@gmail.com,76136503794,pai.633876.15@gmail.com,(28)39810-4346,13797250414,633876_mae@email.com.br,(13)99356-8043
-632625,Judson Jud,1º C,aluno.632625.86@gmail.com,59575005767,pai.632625.78@gmail.com,(53)52600-6180,65303466222,632625_mae@email.com.br,(46)90543-6388
-631856,Edwin Win,8º A,aluno.631856.17@gmail.com,72501210566,contatopai631856@hotmail.com,(12)67671-2539,27394075118,631856_mae@email.com.br,(45)27941-9140
-623877,William Bell,6º B,623877_aluno@email.com.br,11687430508,pai.623877.46@gmail.com,(42)83562-9369,60444717640,contatomae623877@hotmail.com,(32)17316-3690
-617524,Mehitabel Hitty,2º A,617524_aluno@email.com.br,59906160397,pai.617524.63@gmail.com,(21)12931-4447,71256926984,contatomae617524@hotmail.com,(12)65848-8151
-608865,Clement Clem,3º B,608865_aluno@email.com.br,29344292483,608865_pai@email.com.br,(70)46271-3196,18948449341,mae.608865.73@gmail.com,(55)29564-3817
-603688,Isabelle Tibbie,4º B,contatoaluno603688@hotmail.com,53561300917,pai.603688.89@gmail.com,(95)05455-5036,52666626343,mae.603688.97@gmail.com,(12)23726-1168
-601112,Stephen Steph,5º B,contatoaluno601112@hotmail.com,11836230377,601112_pai@email.com.br,(95)09961-6865,16498368639,601112_mae@email.com.br,(23)10903-0955
-600473,Pat Pat,5º B,contatoaluno600473@hotmail.com,32841323605,600473_pai@email.com.br,(83)69703-6736,12388702007,600473_mae@email.com.br,(24)75509-2246
-600423,Edgar Eddy,9º C,600423_aluno@email.com.br,76987021400,pai.600423.56@gmail.com,(59)04212-6706,28778553127,mae.600423.40@gmail.com,(53)66509-0301
-588208,Edward Eddie,3º A,contatoaluno588208@hotmail.com,32197312318,pai.588208.40@gmail.com,(59)23121-1375,58912024849,588208_mae@email.com.br,(23)35063-0287
-586902,Bill Billy,4º C,aluno.586902.30@gmail.com,68203789024,pai.586902.62@gmail.com,(90)18859-0320,31085121569,mae.586902.50@gmail.com,(55)68245-8321
-586295,Cyrenius Swene,8º C,aluno.586295.79@gmail.com,29042707298,pai.586295.19@gmail.com,(16)94032-3701,18041803979,mae.586295.15@gmail.com,(14)83174-4232
-584553,Alice Allie,3º B,aluno.584553.92@gmail.com,59912544464,584553_pai@email.com.br,(39)17938-2789,86493938896,584553_mae@email.com.br,(64)00787-1333
-582922,Evaline Eve,3º B,582922_aluno@email.com.br,96526369646,contatopai582922@hotmail.com,(77)28994-1500,58860825621,contatomae582922@hotmail.com,(49)93352-9304
-582576,Clement Clem,4º A,aluno.582576.83@gmail.com,83658913305,582576_pai@email.com.br,(76)59570-6066,21691665669,582576_mae@email.com.br,(51)61173-9464
-582088,Lucas Luke,7º B,aluno.582088.10@gmail.com,70090717580,contatopai582088@hotmail.com,(42)17567-3440,32448289287,mae.582088.37@gmail.com,(51)25386-7386
-581100,Adelphia Adele,1º B,aluno.581100.75@gmail.com,73981511553,581100_pai@email.com.br,(12)89498-4883,66131088956,mae.581100.69@gmail.com,(77)72197-7002
-576330,Olivia Livia,3º C,aluno.576330.42@gmail.com,76159860005,576330_pai@email.com.br,(60)86188-3765,57083710480,mae.576330.99@gmail.com,(31)02098-5513
-571236,Emanuel Manny,5º B,571236_aluno@email.com.br,16127164323,contatopai571236@hotmail.com,(61)25867-8949,43803540444,contatomae571236@hotmail.com,(10)80668-6631
-566197,John Jock,9º A,aluno.566197.86@gmail.com,75759638122,566197_pai@email.com.br,(19)58000-9578,54958462751,mae.566197.62@gmail.com,(95)88901-8134
-562640,Gus Gussie,2º B,aluno.562640.33@gmail.com,79382432213,562640_pai@email.com.br,(81)50564-6060,47649006929,mae.562640.41@gmail.com,(18)90815-2310
-562078,Arabella Belle,7º A,aluno.562078.85@gmail.com,57095530851,pai.562078.31@gmail.com,(53)69613-1695,33861113774,mae.562078.60@gmail.com,(76)24832-6680
-561453,Cathleen Trina,5º A,561453_aluno@email.com.br,12338450804,pai.561453.79@gmail.com,(24)72523-3012,25929050918,561453_mae@email.com.br,(47)12221-3732
-559761,Derrick Rick,4º A,aluno.559761.76@gmail.com,36029578572,559761_pai@email.com.br,(16)65724-4799,74222722269,contatomae559761@hotmail.com,(12)76152-3598
-552746,Eleanor Ellen,2º A,contatoaluno552746@hotmail.com,79739970944,contatopai552746@hotmail.com,(67)11501-8911,11312516201,mae.552746.67@gmail.com,(13)82067-8687
-552383,Jefferson Sonny,3º A,552383_aluno@email.com.br,23651806855,552383_pai@email.com.br,(74)17540-6293,63495110735,contatomae552383@hotmail.com,(61)10737-0645
-547405,Clair Clara,6º C,contatoaluno547405@hotmail.com,87267153576,547405_pai@email.com.br,(83)69183-2882,91579532931,547405_mae@email.com.br,(25)69766-9187
-547077,Francis Frankie,3º B,547077_aluno@email.com.br,49769817589,547077_pai@email.com.br,(44)19236-6927,24681288261,contatomae547077@hotmail.com,(90)82877-6499
-545845,Thomas Tom,5º B,545845_aluno@email.com.br,32736870426,contatopai545845@hotmail.com,(30)67156-7784,99479443343,545845_mae@email.com.br,(83)49964-7092
-533849,Susie Suzie,7º C,aluno.533849.78@gmail.com,81255891821,contatopai533849@hotmail.com,(21)12704-6261,51941232926,533849_mae@email.com.br,(63)18960-6238
-533408,Azariah Riah,4º C,aluno.533408.59@gmail.com,74990929895,contatopai533408@hotmail.com,(38)12185-8812,96486246975,contatomae533408@hotmail.com,(35)74815-4160
-532824,Ernest Ernie,9º C,aluno.532824.38@gmail.com,73807664969,pai.532824.87@gmail.com,(74)79397-7629,28832613883,532824_mae@email.com.br,(66)79949-6847
-531825,Augustus Gus,5º A,contatoaluno531825@hotmail.com,94909950523,pai.531825.58@gmail.com,(48)08898-3615,46079902719,mae.531825.11@gmail.com,(50)16001-7842
-527693,Ara Belle,4º B,aluno.527693.19@gmail.com,21928820648,527693_pai@email.com.br,(83)59813-0193,64292420496,contatomae527693@hotmail.com,(13)51775-4428
-526651,Gabby Gabe,7º B,526651_aluno@email.com.br,59372441061,pai.526651.77@gmail.com,(85)41019-7803,48756533076,526651_mae@email.com.br,(93)17945-0003
-523881,Virginia Jane,5º A,523881_aluno@email.com.br,17492060700,pai.523881.40@gmail.com,(17)50366-7223,88072226275,contatomae523881@hotmail.com,(65)05635-9571
-514429,Ricardo Rick,7º B,contatoaluno514429@hotmail.com,28694041234,514429_pai@email.com.br,(69)05983-6534,92696046506,mae.514429.93@gmail.com,(84)57425-2332
-513377,Lavinia Viney,2º C,aluno.513377.64@gmail.com,12715653271,513377_pai@email.com.br,(57)32015-2552,16064525279,mae.513377.14@gmail.com,(26)52423-9134
-512634,Nik Nick,8º A,512634_aluno@email.com.br,13550544900,pai.512634.33@gmail.com,(51)06564-0670,13689215651,contatomae512634@hotmail.com,(88)44612-9998
-506323,Timothy Tim,7º B,aluno.506323.23@gmail.com,37259241741,506323_pai@email.com.br,(95)41971-4713,12580193192,506323_mae@email.com.br,(99)13355-9286
-506115,Asenath Assene,5º B,contatoaluno506115@hotmail.com,64329260081,contatopai506115@hotmail.com,(84)63267-5458,38470739944,contatomae506115@hotmail.com,(23)30267-4305
-501468,Heloise Elouise,6º A,contatoaluno501468@hotmail.com,42497979846,contatopai501468@hotmail.com,(77)90422-3073,70662233225,501468_mae@email.com.br,(39)12276-3011
-501184,Robert Dobbin,3º A,501184_aluno@email.com.br,91414996373,501184_pai@email.com.br,(37)18387-4206,38900858952,mae.501184.43@gmail.com,(37)77909-9115
-495885,Nelle Nelly,6º B,aluno.495885.52@gmail.com,96571753349,495885_pai@email.com.br,(92)20093-4122,48601721860,contatomae495885@hotmail.com,(93)57484-1993
-495476,Samuel Sammy,8º B,aluno.495476.25@gmail.com,33510715652,pai.495476.26@gmail.com,(32)30511-6656,37675610640,495476_mae@email.com.br,(74)34180-2868
-488894,Martha Mat,1º A,aluno.488894.91@gmail.com,49123806452,488894_pai@email.com.br,(51)82675-6283,51048690300,mae.488894.39@gmail.com,(77)68674-8319
-488238,Maddy Madge,4º A,488238_aluno@email.com.br,89107193321,488238_pai@email.com.br,(61)55126-0766,90971655470,contatomae488238@hotmail.com,(32)65084-5965
-487133,Charlotte Sherry,3º A,contatoaluno487133@hotmail.com,21378080258,pai.487133.35@gmail.com,(41)73488-0172,42467491015,487133_mae@email.com.br,(56)75307-7229
-478695,Alan Al,5º B,aluno.478695.39@gmail.com,57902209058,contatopai478695@hotmail.com,(74)34102-2994,99243731547,contatomae478695@hotmail.com,(78)00365-9988
-477962,Louisa Eliza,2º C,477962_aluno@email.com.br,91496731746,contatopai477962@hotmail.com,(71)83641-9034,72571257043,477962_mae@email.com.br,(97)52288-9547
-476704,Solomon Saul,4º C,contatoaluno476704@hotmail.com,63679078512,476704_pai@email.com.br,(71)32283-0418,58273203438,contatomae476704@hotmail.com,(36)05200-1603
-476266,Curtis Curt,9º A,aluno.476266.50@gmail.com,34842448389,contatopai476266@hotmail.com,(90)77021-8499,15703877042,contatomae476266@hotmail.com,(43)91746-1905
-474620,Vanessa Vanna,6º C,contatoaluno474620@hotmail.com,34020819004,contatopai474620@hotmail.com,(63)16982-0908,40568365731,474620_mae@email.com.br,(60)74388-2177
-473984,Tobias Toby,6º C,aluno.473984.78@gmail.com,27463792408,contatopai473984@hotmail.com,(16)19170-1325,30697720100,contatomae473984@hotmail.com,(80)60286-1476
-473125,Margaretta Peggy,1º A,contatoaluno473125@hotmail.com,45833458314,473125_pai@email.com.br,(72)54481-5106,99180308656,473125_mae@email.com.br,(63)20692-2690
-467335,Ebenezer Eb,3º B,contatoaluno467335@hotmail.com,32191736414,pai.467335.29@gmail.com,(62)21050-4437,13337461992,mae.467335.36@gmail.com,(79)62242-6843
-464252,Priscilla Cissy,7º B,aluno.464252.57@gmail.com,91643694870,contatopai464252@hotmail.com,(32)08887-4841,93206514599,mae.464252.97@gmail.com,(91)37819-2866
-457597,Richard Dicky,2º C,457597_aluno@email.com.br,18034018221,contatopai457597@hotmail.com,(46)80922-1215,21186743439,mae.457597.19@gmail.com,(45)06354-9413
-456631,Jedidiah Jed,7º C,contatoaluno456631@hotmail.com,53228244915,contatopai456631@hotmail.com,(18)62627-9306,85063721335,mae.456631.86@gmail.com,(76)40110-2956
-453676,Theresa Tracy,7º C,contatoaluno453676@hotmail.com,61507082292,453676_pai@email.com.br,(19)80177-6550,59766401821,contatomae453676@hotmail.com,(24)22405-6344
-451332,Jennifer Jennie,2º A,aluno.451332.90@gmail.com,42335768034,pai.451332.64@gmail.com,(97)65135-4511,29416266176,mae.451332.57@gmail.com,(44)01639-0101
-450251,Veronica Ronna,3º C,450251_aluno@email.com.br,87615106193,450251_pai@email.com.br,(28)34130-5893,99086936512,mae.450251.80@gmail.com,(69)95189-7221
-449388,Isabelle Ib,1º A,aluno.449388.23@gmail.com,11140990826,449388_pai@email.com.br,(64)70182-3928,78781557413,contatomae449388@hotmail.com,(15)55597-8628
-447815,Lib Libby,7º A,contatoaluno447815@hotmail.com,37048763288,pai.447815.47@gmail.com,(68)58184-9342,35258722229,mae.447815.27@gmail.com,(67)05637-5425
-441408,Cyrenius Renius,5º C,aluno.441408.56@gmail.com,81354078359,pai.441408.66@gmail.com,(81)04713-6049,53090129062,441408_mae@email.com.br,(82)61202-8840
-439421,Almena Allie,6º C,439421_aluno@email.com.br,43531828203,pai.439421.74@gmail.com,(71)27902-8169,90318505736,439421_mae@email.com.br,(69)23913-6481
-430611,Alexander Alex,1º C,430611_aluno@email.com.br,67921830163,pai.430611.31@gmail.com,(54)41009-2155,98873821140,mae.430611.39@gmail.com,(44)28957-6589
-430025,Roger Hodge,3º A,430025_aluno@email.com.br,54937378938,430025_pai@email.com.br,(31)82572-6564,77962405078,mae.430025.46@gmail.com,(95)78084-8356
-429577,Epaphroditius Eppa,6º C,429577_aluno@email.com.br,71900590215,429577_pai@email.com.br,(23)21452-3554,71186671023,contatomae429577@hotmail.com,(73)43420-1415
-414904,Frederick Fred,7º A,414904_aluno@email.com.br,63832049463,pai.414904.89@gmail.com,(71)56884-3769,46051748729,contatomae414904@hotmail.com,(64)70486-3090
-414795,Sue Susie,2º B,aluno.414795.10@gmail.com,70655547188,pai.414795.45@gmail.com,(19)57828-6837,89241574304,414795_mae@email.com.br,(43)23298-0801
-410843,Dicey Dicie,7º B,410843_aluno@email.com.br,35339822994,410843_pai@email.com.br,(58)48458-7254,65076491916,mae.410843.15@gmail.com,(87)60526-6718
-410414,Natalie Nettie,4º B,aluno.410414.31@gmail.com,85881256176,410414_pai@email.com.br,(40)25062-2715,28066656104,410414_mae@email.com.br,(25)15331-7634
-407821,Elias Lias,8º B,407821_aluno@email.com.br,79914781585,contatopai407821@hotmail.com,(61)98204-0960,44368919488,407821_mae@email.com.br,(36)55016-4595
-403217,Christine Chrissy,4º C,contatoaluno403217@hotmail.com,26875067375,contatopai403217@hotmail.com,(32)15571-9444,59499046223,403217_mae@email.com.br,(73)82573-0265
-400268,Stuart Stu,8º C,contatoaluno400268@hotmail.com,97115102460,400268_pai@email.com.br,(28)68835-9243,58415118658,mae.400268.10@gmail.com,(35)99126-0686
-400242,Tryphena Phena,9º C,contatoaluno400242@hotmail.com,12531548586,400242_pai@email.com.br,(98)78673-5952,16349695767,contatomae400242@hotmail.com,(13)15976-4869
-393789,Thomas Thom,5º B,393789_aluno@email.com.br,67477204314,pai.393789.39@gmail.com,(73)86275-3977,71371528369,contatomae393789@hotmail.com,(15)86575-9158
-389896,Bert Bertie,1º A,contatoaluno389896@hotmail.com,79972191416,389896_pai@email.com.br,(51)56727-0499,94642257432,contatomae389896@hotmail.com,(90)32500-4095
-389220,Lawrence Lorry,7º C,aluno.389220.94@gmail.com,39539342783,contatopai389220@hotmail.com,(32)66787-9569,38329455371,contatomae389220@hotmail.com,(33)95400-4148
-388767,Emeline Milly,5º C,388767_aluno@email.com.br,56383223931,pai.388767.19@gmail.com,(43)36954-2953,27347829383,mae.388767.12@gmail.com,(16)12430-3960
-384189,Waldo Ossy,5º A,384189_aluno@email.com.br,89473745880,pai.384189.18@gmail.com,(67)79020-1303,35467723165,mae.384189.81@gmail.com,(39)61303-6322
-381177,Cornelius Con,1º C,381177_aluno@email.com.br,48916356336,381177_pai@email.com.br,(71)11146-2599,29638254007,contatomae381177@hotmail.com,(51)66939-5623
-378657,Barbara Bab,6º A,contatoaluno378657@hotmail.com,97850654558,378657_pai@email.com.br,(25)74957-7421,92715768918,mae.378657.24@gmail.com,(60)97423-9214
-373279,Nancy Nan,1º A,373279_aluno@email.com.br,23876938049,373279_pai@email.com.br,(11)83117-0874,83159818500,contatomae373279@hotmail.com,(83)85997-0633
-373161,Lois Lou,4º A,contatoaluno373161@hotmail.com,10762875170,373161_pai@email.com.br,(11)88655-4835,72693546261,contatomae373161@hotmail.com,(54)52246-7100
-372256,Wilfred Will,5º B,aluno.372256.64@gmail.com,92602036831,pai.372256.51@gmail.com,(48)07608-0914,42664177793,contatomae372256@hotmail.com,(22)44149-5535
-366447,Matilda Tilly,9º B,aluno.366447.98@gmail.com,91730394462,366447_pai@email.com.br,(38)43975-7599,78835879678,contatomae366447@hotmail.com,(58)39477-4482
-362949,Janice Jan,1º A,aluno.362949.37@gmail.com,54623710028,contatopai362949@hotmail.com,(63)55339-3605,58473324937,mae.362949.58@gmail.com,(47)78235-4648
-356521,Hannah Nanny,5º A,356521_aluno@email.com.br,90886546056,356521_pai@email.com.br,(60)74631-2711,85008058766,mae.356521.11@gmail.com,(28)56404-9472
-355758,Anthony Tony,1º B,aluno.355758.65@gmail.com,22198910513,pai.355758.77@gmail.com,(71)72072-2781,12135163685,mae.355758.60@gmail.com,(43)43396-7782
-355210,Joshua Jos,3º C,355210_aluno@email.com.br,30708171297,pai.355210.23@gmail.com,(87)28367-5093,94681148843,contatomae355210@hotmail.com,(62)29212-2942
-352489,Randolph Randy,6º B,352489_aluno@email.com.br,56567717196,pai.352489.46@gmail.com,(72)66877-8251,47557675987,352489_mae@email.com.br,(54)71724-8302
-350290,Cassandra Sandra,6º B,contatoaluno350290@hotmail.com,93902222939,pai.350290.68@gmail.com,(92)57569-1472,57354287571,350290_mae@email.com.br,(81)28669-5992
-346882,Richard Ricky,8º B,contatoaluno346882@hotmail.com,20364385767,pai.346882.78@gmail.com,(33)31621-2290,24219738840,346882_mae@email.com.br,(53)06586-3125
-346192,Jeanette Nettie,2º B,346192_aluno@email.com.br,60578067556,contatopai346192@hotmail.com,(44)44340-4253,35958339597,mae.346192.99@gmail.com,(66)64996-8182
-345516,Sheridan Dan,4º B,contatoaluno345516@hotmail.com,95676952488,345516_pai@email.com.br,(80)10942-1730,85310068089,mae.345516.56@gmail.com,(10)24469-0120
-342723,Lou Lu,9º B,contatoaluno342723@hotmail.com,17429164542,contatopai342723@hotmail.com,(30)74801-2091,50833595989,342723_mae@email.com.br,(38)48477-4313
-342151,Francine Frannie,1º A,342151_aluno@email.com.br,67436254937,contatopai342151@hotmail.com,(67)21105-2340,40054363354,mae.342151.22@gmail.com,(51)66595-1430
-341900,Richard Dick,4º C,341900_aluno@email.com.br,52627649777,contatopai341900@hotmail.com,(31)17873-6268,77830363103,mae.341900.40@gmail.com,(48)38424-9481
-341708,Cornelia Corny,6º B,contatoaluno341708@hotmail.com,52486502911,341708_pai@email.com.br,(64)68161-5369,89910104853,contatomae341708@hotmail.com,(58)18766-8834
-329523,Wilber Bert,7º A,aluno.329523.70@gmail.com,14883735894,329523_pai@email.com.br,(31)70222-2552,27369560524,329523_mae@email.com.br,(22)48382-1774
-323491,Edward Eddy,7º A,323491_aluno@email.com.br,10868395111,pai.323491.94@gmail.com,(50)36369-7848,17858398024,323491_mae@email.com.br,(16)94916-9107
-313341,Bartholomew Bat,9º B,contatoaluno313341@hotmail.com,81241867956,contatopai313341@hotmail.com,(91)37918-0882,40687739381,contatomae313341@hotmail.com,(19)29632-9016
-312827,Calvin Vinny,5º A,aluno.312827.80@gmail.com,32470339510,contatopai312827@hotmail.com,(34)91596-4307,83358343902,312827_mae@email.com.br,(97)86822-1620
-309587,Lafayette Laffie,2º A,aluno.309587.95@gmail.com,19855998130,contatopai309587@hotmail.com,(44)92287-1758,66751573213,contatomae309587@hotmail.com,(53)05730-5726
-306051,Darlene Darry,4º A,contatoaluno306051@hotmail.com,11595572103,pai.306051.22@gmail.com,(90)24602-1451,70062395246,contatomae306051@hotmail.com,(99)05056-9825
-301537,Nicholas Nick,9º B,301537_aluno@email.com.br,14060089362,301537_pai@email.com.br,(72)59225-6278,50831466959,contatomae301537@hotmail.com,(31)39944-7588
-299353,Elizabeth Bessie,9º B,aluno.299353.79@gmail.com,27757492296,pai.299353.42@gmail.com,(82)92453-6862,82218001846,299353_mae@email.com.br,(72)95933-7264
-296917,Julian Jule,5º A,296917_aluno@email.com.br,14318020411,296917_pai@email.com.br,(76)37444-2528,83312075363,mae.296917.49@gmail.com,(44)85147-7316
-289268,Keziah Kizza,8º B,aluno.289268.38@gmail.com,89568363945,pai.289268.19@gmail.com,(87)72361-7563,99783147898,contatomae289268@hotmail.com,(82)20180-1510
-286753,Rich Riche,8º C,contatoaluno286753@hotmail.com,14015407389,286753_pai@email.com.br,(84)12844-2859,23332079050,mae.286753.54@gmail.com,(86)68129-5502
-280598,Nancy Nan,1º B,280598_aluno@email.com.br,55643298516,pai.280598.33@gmail.com,(52)22365-2641,45909341878,280598_mae@email.com.br,(62)78146-7447
-278845,Feltie Felty,3º B,aluno.278845.20@gmail.com,37658200337,contatopai278845@hotmail.com,(67)37137-4241,87781797348,mae.278845.49@gmail.com,(50)79500-3282
-273152,Henry Harry,5º A,aluno.273152.79@gmail.com,84880732577,pai.273152.99@gmail.com,(83)11042-2107,57004105236,273152_mae@email.com.br,(88)72322-4876
-271038,Alicia Lisa,6º B,aluno.271038.21@gmail.com,60875861420,pai.271038.78@gmail.com,(26)32397-7131,89445153593,contatomae271038@hotmail.com,(28)98394-9451
-270037,Aileen Allie,8º B,270037_aluno@email.com.br,61727697180,contatopai270037@hotmail.com,(68)12363-1890,33902266531,mae.270037.93@gmail.com,(92)61856-8015
-266000,Margaret Peggy,5º A,266000_aluno@email.com.br,99449926413,pai.266000.60@gmail.com,(69)07770-4433,26348274374,mae.266000.47@gmail.com,(56)02512-3005
-264511,Virginia Ginger,7º A,264511_aluno@email.com.br,10544054425,contatopai264511@hotmail.com,(95)77109-8483,41626747251,mae.264511.77@gmail.com,(73)33952-6652
-261151,Agatha Aggy,3º A,261151_aluno@email.com.br,27015328087,contatopai261151@hotmail.com,(33)44324-4463,49686037893,261151_mae@email.com.br,(67)89827-6866
-259867,Derrick Ricky,2º B,aluno.259867.20@gmail.com,26817715638,pai.259867.16@gmail.com,(60)07884-6348,67411900576,contatomae259867@hotmail.com,(64)45276-0590
-259091,Gabriel Gabby,6º C,aluno.259091.98@gmail.com,79589251293,contatopai259091@hotmail.com,(62)53593-8416,93407000809,mae.259091.90@gmail.com,(28)75407-9546
-252124,Lorenzo Loren,1º C,aluno.252124.42@gmail.com,65464241649,252124_pai@email.com.br,(79)91433-9930,31121409894,mae.252124.75@gmail.com,(77)88925-6138
-250251,Carolyn Lynn,5º A,250251_aluno@email.com.br,50539317205,contatopai250251@hotmail.com,(89)09796-0669,13313747960,contatomae250251@hotmail.com,(81)47838-1361
-249762,Mahala Hallie,8º A,249762_aluno@email.com.br,87334912815,249762_pai@email.com.br,(69)76113-7556,15760798638,249762_mae@email.com.br,(52)41571-2742
-244008,Cameron Ron,3º C,aluno.244008.50@gmail.com,53680424853,pai.244008.73@gmail.com,(54)34789-6467,28198448164,244008_mae@email.com.br,(48)09487-7274
-242689,Rudolphus Rudy,6º C,242689_aluno@email.com.br,78288764476,242689_pai@email.com.br,(36)84908-2703,16322140132,242689_mae@email.com.br,(47)17052-5467
-238695,Edwin Ned,5º A,aluno.238695.71@gmail.com,45680234519,pai.238695.45@gmail.com,(51)58558-7011,24580499050,238695_mae@email.com.br,(59)06605-8383
-234688,Katherine Trina,7º A,aluno.234688.68@gmail.com,19578639089,contatopai234688@hotmail.com,(80)26752-3259,69893617970,mae.234688.93@gmail.com,(84)84954-5060
-230088,Russell Russ,3º B,230088_aluno@email.com.br,53895782411,230088_pai@email.com.br,(39)36268-3060,10474807320,contatomae230088@hotmail.com,(96)54366-9251
-229490,Robert Hob,9º B,aluno.229490.55@gmail.com,87010548773,contatopai229490@hotmail.com,(50)43320-6117,96922347425,mae.229490.15@gmail.com,(30)24585-4809
-225750,Thomas Tom,2º C,aluno.225750.80@gmail.com,61781160179,pai.225750.64@gmail.com,(26)09629-3585,13989000909,225750_mae@email.com.br,(24)83874-9362
-224222,Jeanette Jean,5º B,contatoaluno224222@hotmail.com,86079560626,pai.224222.63@gmail.com,(47)42463-6332,82199995685,mae.224222.23@gmail.com,(20)21371-9314
-221914,Philinda Linda,9º B,221914_aluno@email.com.br,66305204413,221914_pai@email.com.br,(20)76874-6618,90715786899,mae.221914.43@gmail.com,(55)82989-3124
-214606,Kimberly Kim,7º A,contatoaluno214606@hotmail.com,55397547045,pai.214606.61@gmail.com,(71)47862-0909,13364025880,214606_mae@email.com.br,(51)53463-3723
-213369,Vanessa Essa,6º A,aluno.213369.55@gmail.com,11541736398,213369_pai@email.com.br,(23)62197-8240,53183376415,213369_mae@email.com.br,(62)87243-8261
-212413,Julia Jill,1º B,aluno.212413.26@gmail.com,62368005282,212413_pai@email.com.br,(38)57487-1245,73998410443,mae.212413.73@gmail.com,(88)55699-7176
-211703,Rose Rosie,8º A,211703_aluno@email.com.br,79128258448,contatopai211703@hotmail.com,(67)59311-1528,44638682991,contatomae211703@hotmail.com,(14)26915-5230
-210457,Emeline Em,3º A,contatoaluno210457@hotmail.com,81022044800,contatopai210457@hotmail.com,(54)94035-9043,99297262091,mae.210457.65@gmail.com,(95)22701-4951
-206402,Marge Margery,9º B,aluno.206402.29@gmail.com,53148924755,contatopai206402@hotmail.com,(99)91858-3922,17565067242,mae.206402.85@gmail.com,(82)03703-9047
-205967,Roberta Bertie,4º A,aluno.205967.23@gmail.com,68551586332,contatopai205967@hotmail.com,(92)42349-7344,64587974498,205967_mae@email.com.br,(28)72619-2438
-205670,Vincent Vince,4º C,205670_aluno@email.com.br,76471948327,pai.205670.82@gmail.com,(99)22988-4415,95210174953,205670_mae@email.com.br,(13)24453-2105
-204855,Isabel Tibbie,8º B,contatoaluno204855@hotmail.com,61324444994,pai.204855.55@gmail.com,(88)12567-8595,15557092080,mae.204855.62@gmail.com,(70)38108-7249
-202722,Ezra Ez,1º C,aluno.202722.43@gmail.com,21148904300,pai.202722.40@gmail.com,(71)55925-2640,87075210463,mae.202722.44@gmail.com,(96)24157-4887
-202297,Helen Ellen,7º B,contatoaluno202297@hotmail.com,61564765531,202297_pai@email.com.br,(39)88788-5532,47515407608,mae.202297.32@gmail.com,(62)63118-8472
-199788,Camille Millie,8º C,aluno.199788.21@gmail.com,81241260027,pai.199788.37@gmail.com,(79)70510-0679,47251541173,mae.199788.15@gmail.com,(59)84509-2111
-197524,Veronica Vonnie,2º C,contatoaluno197524@hotmail.com,24126404524,contatopai197524@hotmail.com,(44)65572-1905,87071565846,mae.197524.38@gmail.com,(18)16375-9293
-196059,Bridget Biddie,8º C,aluno.196059.87@gmail.com,39256925770,contatopai196059@hotmail.com,(49)21107-8487,36482917569,mae.196059.19@gmail.com,(41)54993-1979
-194440,Paulina Lina,5º A,contatoaluno194440@hotmail.com,25759128665,contatopai194440@hotmail.com,(84)47274-9702,49962185641,194440_mae@email.com.br,(24)54648-3322
-192661,Rudolphus Rolf,3º C,192661_aluno@email.com.br,58246057900,pai.192661.56@gmail.com,(29)10666-5771,40400387291,mae.192661.82@gmail.com,(89)78956-6418
-188209,Lawrence Larry,3º A,contatoaluno188209@hotmail.com,22058586104,pai.188209.88@gmail.com,(87)15932-0090,84568089965,contatomae188209@hotmail.com,(99)45286-0960
-186246,John Jack,2º A,contatoaluno186246@hotmail.com,13983815339,pai.186246.57@gmail.com,(17)65147-0840,57087135707,186246_mae@email.com.br,(53)62442-4123
-186024,Johannah Hannah,6º B,contatoaluno186024@hotmail.com,46844923811,pai.186024.52@gmail.com,(42)37018-1562,49951536194,contatomae186024@hotmail.com,(34)92922-9626
-184079,Alfreda Frieda,5º B,contatoaluno184079@hotmail.com,81106606258,184079_pai@email.com.br,(90)82170-3431,42988504360,contatomae184079@hotmail.com,(61)12157-2176
-178041,Priscilla Cilla,2º A,contatoaluno178041@hotmail.com,66447368197,contatopai178041@hotmail.com,(90)08020-3814,68834951593,mae.178041.22@gmail.com,(59)61097-2274
-177007,Isabella Nib,5º C,177007_aluno@email.com.br,69025459287,177007_pai@email.com.br,(86)68126-2554,72940239145,177007_mae@email.com.br,(96)51220-7900
-172522,Ephraim Eph,7º A,aluno.172522.11@gmail.com,49137776178,pai.172522.59@gmail.com,(48)14845-1297,94330144437,172522_mae@email.com.br,(72)71424-3796
-169799,Benedict Bennie,1º A,169799_aluno@email.com.br,55358134167,169799_pai@email.com.br,(47)29263-8226,62638774888,mae.169799.38@gmail.com,(44)13060-7157
-166610,Ann Nanny,7º B,166610_aluno@email.com.br,65218770354,pai.166610.49@gmail.com,(58)46661-1068,42140291838,mae.166610.62@gmail.com,(56)69905-3886
-163455,Ronald Ron,4º A,163455_aluno@email.com.br,75195302648,contatopai163455@hotmail.com,(78)19818-5409,99896329574,mae.163455.77@gmail.com,(33)18945-3412
-163054,Parmelia Amelia,9º B,163054_aluno@email.com.br,33837416035,contatopai163054@hotmail.com,(93)64857-1013,61201439858,mae.163054.51@gmail.com,(70)28323-3854
-162320,Ed Eddie,1º A,162320_aluno@email.com.br,93602478802,pai.162320.53@gmail.com,(33)92817-6145,23819030107,mae.162320.34@gmail.com,(49)71756-9880
-156371,Judson Sonny,4º B,aluno.156371.77@gmail.com,95848105556,contatopai156371@hotmail.com,(33)40614-5713,48504297823,contatomae156371@hotmail.com,(15)46071-8126
-154367,Deborah Debby,8º B,aluno.154367.19@gmail.com,19240171823,pai.154367.72@gmail.com,(77)50959-4037,19234426226,mae.154367.88@gmail.com,(99)74479-6770
-154304,Prescott Scotty,7º B,aluno.154304.10@gmail.com,77711751982,contatopai154304@hotmail.com,(16)44429-7862,76035551402,mae.154304.34@gmail.com,(23)00198-8066
-142962,Bernard Barney,4º C,contatoaluno142962@hotmail.com,21639150249,contatopai142962@hotmail.com,(17)17885-0719,64586133050,142962_mae@email.com.br,(51)42207-6685
-140544,Terence Terry,4º A,140544_aluno@email.com.br,93413108155,pai.140544.66@gmail.com,(90)78566-4371,28767331240,140544_mae@email.com.br,(16)84751-0031
-137196,Penelope Penny,8º B,contatoaluno137196@hotmail.com,56166492351,contatopai137196@hotmail.com,(57)14344-0780,27327604412,mae.137196.59@gmail.com,(51)52570-7300
-135729,Rudolph Rudy,6º B,aluno.135729.27@gmail.com,84132498258,135729_pai@email.com.br,(96)56493-6545,44381676069,contatomae135729@hotmail.com,(87)23135-8388
-133884,Alfonse Al,2º C,aluno.133884.19@gmail.com,47345433498,133884_pai@email.com.br,(66)80244-7702,23687144974,133884_mae@email.com.br,(75)69518-5462
-123956,Lidia Lyddy,7º C,123956_aluno@email.com.br,97302231501,123956_pai@email.com.br,(57)37319-9591,58749268869,contatomae123956@hotmail.com,(76)38901-2031
-123352,Nathan Nat,6º C,123352_aluno@email.com.br,11756481935,123352_pai@email.com.br,(98)39134-1624,97650123489,mae.123352.33@gmail.com,(11)41383-1966
-121549,Oswald Ossy,9º A,contatoaluno121549@hotmail.com,19809605604,pai.121549.77@gmail.com,(87)85573-2879,37383991577,121549_mae@email.com.br,(85)44565-8395
-120471,Millicent Missy,1º A,contatoaluno120471@hotmail.com,13642110564,pai.120471.63@gmail.com,(93)19600-7864,48547378700,contatomae120471@hotmail.com,(52)45218-2898
-120277,Olive Nollie,1º C,120277_aluno@email.com.br,98615612397,contatopai120277@hotmail.com,(12)55292-5761,16441027540,mae.120277.91@gmail.com,(60)12321-1152
-119832,Ronald Ron,5º B,119832_aluno@email.com.br,14302327134,119832_pai@email.com.br,(21)88248-4408,41532236742,mae.119832.65@gmail.com,(44)22218-5184
-116515,Ezekiel Ez,6º A,116515_aluno@email.com.br,38812088802,116515_pai@email.com.br,(87)34366-7080,75352371920,116515_mae@email.com.br,(51)17248-3992
-111331,Frederick Fritz,8º A,aluno.111331.74@gmail.com,89168561299,pai.111331.51@gmail.com,(86)77592-4713,99508376045,contatomae111331@hotmail.com,(58)47716-9187
-103763,Christina Chris,1º C,103763_aluno@email.com.br,50966750135,pai.103763.75@gmail.com,(17)96579-3165,34860802457,mae.103763.24@gmail.com,(61)78871-1145
-102046,Rodger Roge,2º C,aluno.102046.37@gmail.com,97548450582,102046_pai@email.com.br,(90)04845-7595,80075067937,mae.102046.93@gmail.com,(68)95081-6890
+RM,Aluno,Turma,E-mail aluno,Pai,CPF pai,E-mail pai,Tel pai,Mae,CPF mae,E-mail mae,Tel mae
+991176,Augusta Gussie,9º C,991176_aluno@email.com.br,Elizabeth Eliza,32271063588,991176_pai@email.com.br,(35)55924-3892,Shirley Lee,44147854344,991176_mae@email.com.br,(88)72180-5495
+978782,Ferdinand Freddie,2º B,aluno.978782.84@gmail.com,Carrie Cassie,33199441654,pai.978782.83@gmail.com,(71)45135-7320,Ezekiel Zeke,17952407197,mae.978782.39@gmail.com,(82)72494-8453
+977244,Beatrice Trisha,3º B,977244_aluno@email.com.br,Winnifred Fred,99977227419,977244_pai@email.com.br,(64)16212-0149,Wilhelmina Willie,93783026658,mae.977244.85@gmail.com,(15)24966-4447
+974810,Richard Ricky,3º A,aluno.974810.47@gmail.com,Anne Nana,34302281156,pai.974810.64@gmail.com,(55)72033-1268,Virginia Ginger,86513912250,974810_mae@email.com.br,(13)06940-1811
+974211,Walter Walt,2º C,974211_aluno@email.com.br,Edmund Ed,38958214203,pai.974211.26@gmail.com,(71)26021-9228,Alexander Al,96246246617,974211_mae@email.com.br,(90)63577-6663
+967475,Roberta Bert,3º B,967475_aluno@email.com.br,Wilfred Fred,22049848697,pai.967475.53@gmail.com,(87)47235-9342,Vincenzo Vinnie,30516044781,967475_mae@email.com.br,(42)18038-4033
+962710,Lil Lily,7º A,aluno.962710.22@gmail.com,Leonard Lineau,44460409570,pai.962710.77@gmail.com,(70)12103-3233,Christine Crissy,68387788361,mae.962710.67@gmail.com,(81)08705-3661
+960137,Winifred Winnet,4º C,aluno.960137.39@gmail.com,Philetus Leet,30508805845,960137_pai@email.com.br,(58)57721-1847,Alicia Lisa,91845734095,mae.960137.86@gmail.com,(37)67263-7956
+956131,Matthew Matty,6º B,956131_aluno@email.com.br,Levi Lee,11882182589,pai.956131.82@gmail.com,(72)34940-7735,Frankie Frank,83688772076,956131_mae@email.com.br,(63)09500-9057
+954040,Winifred Winnie,5º C,954040_aluno@email.com.br,Geoff Jeff,74191653321,pai.954040.86@gmail.com,(61)00357-8177,Johannah Hannah,30675801203,mae.954040.79@gmail.com,(96)01266-0718
+943119,LeRoy L.R.,2º A,aluno.943119.99@gmail.com,Roxanna Ann,25090242609,943119_pai@email.com.br,(95)28563-2586,Nick Nik,69616892998,mae.943119.63@gmail.com,(55)54214-4149
+936229,Isabel Issy,6º B,936229_aluno@email.com.br,Julia Jill,45269437072,pai.936229.87@gmail.com,(83)97137-0518,Gertrude Trudy,70059762165,936229_mae@email.com.br,(71)18646-9607
+935127,Priscilla Prissy,3º B,935127_aluno@email.com.br,Theodore Ted,17518679568,pai.935127.46@gmail.com,(43)35841-9475,Frederick Fred,10944297905,mae.935127.83@gmail.com,(88)64331-5575
+919597,Mildred Milly,2º B,919597_aluno@email.com.br,Stephan Steve,86705866374,pai.919597.68@gmail.com,(10)20586-4472,Katelyn Kaye,91532479237,mae.919597.55@gmail.com,(97)81648-4943
+910030,Gabriella Ella,9º C,910030_aluno@email.com.br,Beatrice Bea,41251413447,910030_pai@email.com.br,(75)17032-6493,Willie Fred,33417972752,910030_mae@email.com.br,(75)40569-4619
+906994,Florence Flora,6º A,906994_aluno@email.com.br,Martina Tina,92046959564,906994_pai@email.com.br,(51)15783-7259,Lavina Viney,83646771948,mae.906994.27@gmail.com,(64)57794-1482
+902552,Augustus Gus,8º B,aluno.902552.33@gmail.com,Rosabella Rose,59142449091,902552_pai@email.com.br,(85)08658-3254,Teresa Terry,77780852502,mae.902552.84@gmail.com,(89)10741-4923
+899096,Heloise Lois,2º A,aluno.899096.99@gmail.com,Peg Peggy,60339755791,pai.899096.36@gmail.com,(88)69581-4864,Elwood Woody,70114255575,899096_mae@email.com.br,(84)95111-3567
+890369,Rick Ricky,1º C,aluno.890369.68@gmail.com,Isabel Ib,55471280214,pai.890369.63@gmail.com,(21)26626-9682,Paulina Polly,53842746165,mae.890369.92@gmail.com,(98)32956-4227
+879020,Gerald Gerry,7º A,879020_aluno@email.com.br,Seymour Morey,81678855033,879020_pai@email.com.br,(40)97583-7450,Ann Annie,19612849509,879020_mae@email.com.br,(27)85823-8369
+875097,Rebecca Becca,4º C,aluno.875097.58@gmail.com,Victoria Vicky,30034645477,pai.875097.92@gmail.com,(31)19740-7613,Kristine Chris,12578372074,875097_mae@email.com.br,(87)20623-7961
+870679,Sylvester Sly,1º C,870679_aluno@email.com.br,Cassandra Sandra,75683940454,pai.870679.34@gmail.com,(53)15679-6743,Heloise Elouise,16237600497,mae.870679.84@gmail.com,(85)88435-5954
+855015,Frances Frannie,2º C,855015_aluno@email.com.br,Hester Hetty,17888740016,pai.855015.69@gmail.com,(32)42586-3009,Phillip Phil,83404221225,855015_mae@email.com.br,(11)55508-8288
+842913,Epaphroditius Ditus,9º C,842913_aluno@email.com.br,Susan Susie,31894759820,842913_pai@email.com.br,(18)51731-1379,Oliver Ollie,51521563894,842913_mae@email.com.br,(24)71732-2073
+818309,Lavina Ina,5º C,aluno.818309.88@gmail.com,Bobby Rob,63372801026,818309_pai@email.com.br,(91)22060-9840,Nancy Nan,42460620970,mae.818309.67@gmail.com,(54)18328-2909
+812403,Elias Lee,4º C,aluno.812403.99@gmail.com,Timothy Timmy,54631712659,pai.812403.88@gmail.com,(52)21848-9722,Isabella Bella,24155355145,mae.812403.55@gmail.com,(57)67102-7753
+800316,Madeline Lena,2º C,aluno.800316.87@gmail.com,Sarah Sadie,82126931522,pai.800316.76@gmail.com,(48)72957-7549,Isabella Nib,34094704078,mae.800316.23@gmail.com,(18)68745-8878
+767895,Jeffrey Jeff,7º A,aluno.767895.11@gmail.com,Rodger Rod,85298127528,767895_pai@email.com.br,(35)30258-2874,Edmund Eddie,80971709574,mae.767895.50@gmail.com,(63)32914-1165
+750250,Joshua Jos,3º B,750250_aluno@email.com.br,Philinda Lindy,88968233326,750250_pai@email.com.br,(62)77346-0372,William Bill,71648825842,750250_mae@email.com.br,(46)97715-3351
+745132,Fredericka Ricka,4º A,745132_aluno@email.com.br,Regina Gina,84464743956,745132_pai@email.com.br,(57)10533-1202,Waldo Ossy,76874295614,mae.745132.41@gmail.com,(80)18618-7342
+739990,Katherine Kathy,8º C,739990_aluno@email.com.br,Katherine Lena,58582020637,739990_pai@email.com.br,(48)10847-6601,Silas Si,27948771944,mae.739990.32@gmail.com,(44)10541-0105
+738129,Theresa Tessa,2º C,aluno.738129.32@gmail.com,Abel Ab,42648014997,pai.738129.64@gmail.com,(24)91191-6312,Elisha Lish,20594520543,mae.738129.52@gmail.com,(31)49004-8126
+732296,Louisa Eliza,6º A,732296_aluno@email.com.br,Gabby Gabe,36555148261,732296_pai@email.com.br,(21)88035-9790,Calvin Cal,57365409405,mae.732296.36@gmail.com,(25)26074-4138
+704719,Lilly Lily,8º C,aluno.704719.83@gmail.com,Eva Eve,52231442224,704719_pai@email.com.br,(22)43018-8377,Joann Jo,45839383444,mae.704719.86@gmail.com,(41)37863-4478
+704217,Amelia Millie,8º B,aluno.704217.58@gmail.com,Mehitabel Mitty,62319401368,pai.704217.78@gmail.com,(98)23248-5442,Ronald Ronny,93997072050,704217_mae@email.com.br,(96)93887-9466
+701696,Isabel Belle,7º C,701696_aluno@email.com.br,Bert Bertie,22111384932,701696_pai@email.com.br,(87)49656-9532,Ernest Ernie,31126953169,mae.701696.45@gmail.com,(13)33074-1164
+690895,Roseann Roz,4º B,690895_aluno@email.com.br,James Jamie,71275874456,690895_pai@email.com.br,(11)80555-9063,Margaret Maggy,62874457301,690895_mae@email.com.br,(15)41513-7958
+682227,Wilbur Willy,9º C,aluno.682227.82@gmail.com,Clifton Cliff,91912838741,682227_pai@email.com.br,(49)86528-3784,Cynthia Cintha,31156726713,682227_mae@email.com.br,(91)43924-8868
+680561,Cornelius Conny,3º B,aluno.680561.23@gmail.com,Luella Lula,72916391514,pai.680561.22@gmail.com,(24)58598-3472,Steven Steph,70823093439,mae.680561.83@gmail.com,(62)59506-4567
+668707,Junior JR,1º B,aluno.668707.24@gmail.com,Keziah Kizzie,99772657781,pai.668707.20@gmail.com,(86)71562-8516,Christine Kristy,43026948007,mae.668707.28@gmail.com,(43)09462-5572
+659985,Theresa Tessie,8º A,659985_aluno@email.com.br,Eduardo Eddy,82549962019,pai.659985.89@gmail.com,(32)52498-3211,Rosalyn Rosa,49889101426,659985_mae@email.com.br,(70)47247-1484
+656331,Franklind Frank,2º B,656331_aluno@email.com.br,Winnifred Winnie,27544622135,pai.656331.25@gmail.com,(71)96869-9174,Smith Smitty,58010306794,mae.656331.24@gmail.com,(80)41407-0795
+641758,Sullivan Sully,4º A,aluno.641758.40@gmail.com,Vic Vicky,87125410266,641758_pai@email.com.br,(73)93545-2675,Elisha Eli,13356654637,mae.641758.18@gmail.com,(35)84712-4104
+640419,Richard Rick,4º B,640419_aluno@email.com.br,Gabrielle Ella,87598085905,640419_pai@email.com.br,(90)70636-8940,Sylvester Vester,31109337142,640419_mae@email.com.br,(68)03473-7903
+632589,Sandra Sandy,5º B,aluno.632589.71@gmail.com,Uriah Riah,22167109701,pai.632589.93@gmail.com,(30)52621-1058,Solomon Solly,95499449599,632589_mae@email.com.br,(11)42083-5590
+607545,Margaret Margery,1º C,607545_aluno@email.com.br,Genevieve Jean,53815983268,607545_pai@email.com.br,(91)94309-3443,Rich Riche,78058982094,mae.607545.79@gmail.com,(99)33004-1503
+597793,Kimberly Kim,9º C,597793_aluno@email.com.br,Charlotte Lottie,62602162416,597793_pai@email.com.br,(96)16337-1652,Gum Monty,58540166214,597793_mae@email.com.br,(16)66430-0690
+579138,Carol Lynn,5º C,aluno.579138.48@gmail.com,Margaretta Midge,53755493001,579138_pai@email.com.br,(27)07586-6159,Eduardo Eddie,23674896595,579138_mae@email.com.br,(58)99501-0368
+573434,Frieda Freddy,1º B,aluno.573434.47@gmail.com,Bridget Biddy,53901354990,pai.573434.44@gmail.com,(85)41931-6145,Roberta Robbie,95841079184,573434_mae@email.com.br,(36)03847-9550
+565496,Amanda Manda,9º A,aluno.565496.89@gmail.com,Josephine Fina,22507667533,pai.565496.38@gmail.com,(49)72493-3714,Isaac Ike,63734520834,565496_mae@email.com.br,(66)73150-3889
+558502,Priscilla Cilla,4º B,558502_aluno@email.com.br,Miranda Randy,95543285377,pai.558502.83@gmail.com,(51)30868-8960,Epaphroditius Dyche,19231689839,558502_mae@email.com.br,(15)66631-6524
+544160,Katherine Kaye,5º B,aluno.544160.96@gmail.com,Laurence Lorry,12173401403,544160_pai@email.com.br,(61)28998-8940,cheryl sheryl,11145000397,544160_mae@email.com.br,(36)02001-5050
+527463,Randolph Randy,3º C,527463_aluno@email.com.br,Leslie Les,62127633840,527463_pai@email.com.br,(41)62682-3852,Olivia Ollie,99592166710,mae.527463.66@gmail.com,(59)42387-2164
+513477,Benjamin Ben,2º A,aluno.513477.14@gmail.com,Lemuel Lem,53895865170,pai.513477.95@gmail.com,(96)03748-5723,Patricia Patty,98576086057,mae.513477.40@gmail.com,(19)67789-2502
+500727,Terence Terry,9º A,aluno.500727.94@gmail.com,Frieda Fred,28399469357,pai.500727.13@gmail.com,(64)10252-9898,Frances Cissy,92552719962,mae.500727.49@gmail.com,(17)99846-1356
+497720,Madeline Magda,2º C,497720_aluno@email.com.br,Roger Rupert,95491597668,497720_pai@email.com.br,(50)61086-2074,Edmond Eddie,37943873892,497720_mae@email.com.br,(39)43545-5241
+494871,Dorothy Dolly,8º A,494871_aluno@email.com.br,Loretta Etta,65589189115,pai.494871.83@gmail.com,(61)90360-9177,Conrad Con,69168317081,mae.494871.90@gmail.com,(87)54126-7279
+486624,Rudolph Rolf,9º A,aluno.486624.83@gmail.com,Evaline Eve,46536566339,pai.486624.31@gmail.com,(36)75626-7756,Beatrice Trixie,17697107916,mae.486624.51@gmail.com,(61)68929-0397
+478567,Isabella Ib,8º A,478567_aluno@email.com.br,Eleanor Elaine,28104351567,pai.478567.17@gmail.com,(98)69030-2015,Virginia Jennie,71806345422,mae.478567.81@gmail.com,(91)15345-8921
+478535,Roxanna Rose,5º B,aluno.478535.92@gmail.com,Helene Lena,58079184365,478535_pai@email.com.br,(64)36931-2391,Roseanne Ann,57212005380,478535_mae@email.com.br,(92)22644-1617
+472335,Roberta Bobbie,2º B,472335_aluno@email.com.br,Barbara Bab,64895936293,472335_pai@email.com.br,(47)82864-2134,Lillah Lolly,88248555176,472335_mae@email.com.br,(63)18457-5373
+455814,Epaphroditius Eppa,6º B,aluno.455814.47@gmail.com,Bartholomew Bat,88944680694,pai.455814.27@gmail.com,(26)01421-4077,Kristine Kristy,18775700026,455814_mae@email.com.br,(62)44146-9863
+432409,Nathaniel Nat,1º B,aluno.432409.97@gmail.com,Frederick Fritz,38160341345,432409_pai@email.com.br,(65)26779-8044,Josiah Jos,90118323872,mae.432409.31@gmail.com,(77)53592-7941
+412549,Kenneth Kenny,4º A,412549_aluno@email.com.br,Robert Bob,88907931058,pai.412549.27@gmail.com,(96)34916-9324,Bartholomew Mees,85566468606,412549_mae@email.com.br,(64)00090-9322
+411616,Eleanor Nora,3º A,aluno.411616.20@gmail.com,Ricardo Rick,12956831943,411616_pai@email.com.br,(94)24028-9478,Cassandra Sandy,25722447703,411616_mae@email.com.br,(72)20973-8123
+408301,Alonzo Lon,5º A,408301_aluno@email.com.br,Bert Bobby,43750996489,408301_pai@email.com.br,(61)65295-9366,Lenora Nora,62994170431,408301_mae@email.com.br,(16)98103-5283
+393396,Dorothy Dortha,6º B,393396_aluno@email.com.br,Kristine Tina,37277691626,pai.393396.63@gmail.com,(78)02891-8984,Zachariah Zeke,25556559823,393396_mae@email.com.br,(68)79087-1345
+379265,Edwin Ed,1º A,379265_aluno@email.com.br,Daniel Dan,14576120196,pai.379265.54@gmail.com,(44)51051-1582,Margaret Rita,40320877387,379265_mae@email.com.br,(26)68457-2099
+377369,Chester Chet,7º B,377369_aluno@email.com.br,Margaret Maggie,38270885454,377369_pai@email.com.br,(93)01294-9071,Obadiah Obie,35842498990,377369_mae@email.com.br,(40)61051-7180
+359059,Lavina Vina,6º B,aluno.359059.54@gmail.com,Rodger Bobby,66439798193,pai.359059.97@gmail.com,(16)83395-9184,Christine Chris,13983893142,359059_mae@email.com.br,(63)15207-5212
+358344,Elizabeth Lisa,9º C,aluno.358344.40@gmail.com,Edmund Ned,30321556332,358344_pai@email.com.br,(37)14408-5010,Kristine Christy,49671163021,358344_mae@email.com.br,(72)63864-1495
+357217,Valerie Val,6º A,357217_aluno@email.com.br,Simon Sion,62131123846,357217_pai@email.com.br,(53)66351-6552,Christian Chris,78994703720,357217_mae@email.com.br,(59)45627-5017
+346443,Frances Fran,2º C,aluno.346443.34@gmail.com,Casey K.C.,40912424101,346443_pai@email.com.br,(52)93079-6820,Epaphroditius Dite,70850506910,346443_mae@email.com.br,(32)63373-2150
+344163,Alonzo Lonzo,4º A,344163_aluno@email.com.br,Jean Jane,29334684031,pai.344163.28@gmail.com,(72)70687-3309,Zephaniah Zeph,16670151185,344163_mae@email.com.br,(41)03583-9440
+342047,Stephen Steph,2º C,aluno.342047.43@gmail.com,Jeffrey Jeff,36542579406,pai.342047.80@gmail.com,(96)51633-0071,Robert Dob,85936912916,342047_mae@email.com.br,(14)22541-8743
+341352,Sylvester Sy,7º C,aluno.341352.21@gmail.com,Vincenzo Vin,38046491473,341352_pai@email.com.br,(23)40734-1929,Christiana Crissy,10164834359,341352_mae@email.com.br,(40)13380-4525
+329793,Henrietta Nettie,7º A,aluno.329793.54@gmail.com,Jeanette Janet,55922211729,pai.329793.10@gmail.com,(75)49593-1362,Cecilia Celia,27790638941,329793_mae@email.com.br,(60)58298-4908
+319118,Timothy Timmy,9º C,319118_aluno@email.com.br,Ellswood Elsey,61247097982,pai.319118.50@gmail.com,(11)13605-0027,William Bela,52351509437,319118_mae@email.com.br,(73)30731-7499
+319097,Janet Jessie,8º B,aluno.319097.61@gmail.com,Kathleen Cassie,98375251687,319097_pai@email.com.br,(11)20032-9408,Adaline Delia,21731588268,319097_mae@email.com.br,(50)33810-9912
+313381,Dalton Dahl,1º C,aluno.313381.40@gmail.com,Matthew Mattie,88874320004,313381_pai@email.com.br,(86)44170-4091,Joanna Jody,46579116729,mae.313381.94@gmail.com,(71)13948-4583
+285793,Rachel Shelly,3º A,aluno.285793.43@gmail.com,Alfred Fred,86763390691,285793_pai@email.com.br,(33)47115-5131,Ricky Rich,69846515983,mae.285793.45@gmail.com,(73)62862-6673
+281581,Richard Rich,4º B,281581_aluno@email.com.br,Dennison Denny,57468391926,281581_pai@email.com.br,(82)98032-4701,Caroline Carrie,58259686266,281581_mae@email.com.br,(31)67308-2258
+278842,Ossy Ozzy,8º C,aluno.278842.26@gmail.com,Donald Dony,35385619930,278842_pai@email.com.br,(78)30825-7033,Debra Debbie,16207450913,mae.278842.31@gmail.com,(91)74761-0651
+276215,Isabelle Ib,2º A,aluno.276215.28@gmail.com,Matthias Matt,12669954561,pai.276215.50@gmail.com,(99)27291-1437,Carolyn Lynn,51108026206,276215_mae@email.com.br,(96)43213-2428
+264798,Brady Brody,3º B,264798_aluno@email.com.br,Jeanne Jane,39860924726,pai.264798.45@gmail.com,(98)05194-2265,Roseanna Roz,16164563881,264798_mae@email.com.br,(20)27297-4125
+260039,Carolyn Carrie,3º A,260039_aluno@email.com.br,Trix Trixie,79359864296,260039_pai@email.com.br,(36)86012-3345,Darlene Darry,32356671499,mae.260039.84@gmail.com,(84)20124-9259
+236710,Clarinda Clara,7º A,236710_aluno@email.com.br,Peter Pete,63801112389,236710_pai@email.com.br,(90)98073-1097,Helene Ellen,34104210272,mae.236710.80@gmail.com,(75)07277-7972
+229811,Geraldine Jerry,2º C,aluno.229811.49@gmail.com,Elizabeth Bess,40220745111,pai.229811.16@gmail.com,(36)28536-7979,Alfred Freddy,80586507416,mae.229811.46@gmail.com,(79)61578-1503
+215490,Cathleen Trina,4º B,aluno.215490.26@gmail.com,Patience Pat,82605568431,215490_pai@email.com.br,(97)09654-1031,Ricky Dick,58421707789,mae.215490.60@gmail.com,(44)23512-9941
+200558,Lydia Lyddy,6º C,200558_aluno@email.com.br,Alonzo Al,48643807424,pai.200558.73@gmail.com,(97)79296-9587,Joseph Joe,50489325482,mae.200558.11@gmail.com,(85)45660-4209
+199716,James Jim,8º A,199716_aluno@email.com.br,Will Bill,66367945603,199716_pai@email.com.br,(21)83401-5628,Nathaniel Nathan,97272015446,mae.199716.10@gmail.com,(16)96402-6697
+199425,Cameron Cam,8º B,199425_aluno@email.com.br,Manny Manuel,55563338071,pai.199425.92@gmail.com,(79)19695-5486,Rudolph Olph,32628810068,199425_mae@email.com.br,(93)67513-7197
+194436,Joseph Jos,5º C,194436_aluno@email.com.br,Aaron Ronnie,77244907714,pai.194436.97@gmail.com,(71)74578-9622,Rafaela Rafa,14585431382,mae.194436.70@gmail.com,(88)34047-4315
+160148,Yvonne Vonna,2º C,aluno.160148.88@gmail.com,Andy Drew,82760299007,pai.160148.30@gmail.com,(11)90720-4214,Lucias Luke,87600270886,160148_mae@email.com.br,(76)61929-4041
+149637,Bella Belle,5º B,149637_aluno@email.com.br,Elizabeth Lib,25527359978,pai.149637.78@gmail.com,(94)63026-3873,Stephen Steve,64708208059,149637_mae@email.com.br,(87)66829-0826
+148070,Laurence Lonny,6º B,148070_aluno@email.com.br,Jane Janie,63235145776,148070_pai@email.com.br,(51)03869-0403,Roger Hodge,68099986656,mae.148070.98@gmail.com,(99)99663-1254
+127951,Marjorie Margie,7º B,aluno.127951.38@gmail.com,Janet Jan,12827281531,pai.127951.68@gmail.com,(31)55958-2318,Margaret Gretta,60523276974,mae.127951.83@gmail.com,(58)51089-5206
+115595,Jon John,8º A,aluno.115595.67@gmail.com,Edmund Eddy,49529209677,pai.115595.15@gmail.com,(18)28513-7429,Amelia Amy,24487895210,mae.115595.59@gmail.com,(25)34378-9003
+111452,Pamela Pam,1º C,aluno.111452.50@gmail.com,Hubert Bert,28177434177,111452_pai@email.com.br,(29)76861-3193,Martha Patty,39922457793,111452_mae@email.com.br,(75)21801-1752
+103324,Jim Jimmie,8º A,103324_aluno@email.com.br,Wilson Willie,40389507669,pai.103324.43@gmail.com,(95)46921-8051,Berney Bernie,95100308644,103324_mae@email.com.br,(57)13049-4701

@@ -25,6 +25,12 @@ public class Atividade {
         this.concluida = concluida;
     }
 
+    /* Usado para cadastro */
+    public Atividade(String codigo, String nome) {
+        this.codigo = codigo;
+        this.nome = nome;
+    }        
+
     public String getCodigo() {
         return codigo;
     }

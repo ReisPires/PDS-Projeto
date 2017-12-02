@@ -1,0 +1,141 @@
+* {
+    box-sizing: border-box;
+    
+    font-family: "Segoe UI";
+}
+
+body {
+    margin: 0px;
+    
+    min-width: 1024px;
+    
+    background-color: rgb(204, 205, 206);
+}
+
+a {
+    text-decoration: none;
+}
+
+.cabecalho {
+    box-shadow: 0px 15px 15px #b0b0b0;
+
+    background-color: #ffffff;
+    
+    text-align: center;
+}
+
+.container {
+    display: inline-block;
+    
+    position: relative;
+
+    width: 1024px;
+    
+    text-align: center;
+    
+    vertical-align: top;
+}
+
+.logo {
+    float: left;
+}
+
+.pagina {
+    position: absolute;
+    
+    font-size: 50px;
+    font-family: "Segoe UI";
+    color: rgb(120, 185, 245);
+    line-height: 1.2;
+}
+
+.pagina-centro {
+    left: 50%;
+    bottom: 0px;
+    
+    transform: translate(-50%, 0px);
+}
+
+.pagina-direita {
+    right: 0px;
+    bottom: 0px;
+}
+
+.corpo {
+    padding: 50px 0px;
+    
+    text-align: center;
+}
+        
+.painel {
+    display: block;
+                
+    box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.23);
+    
+    padding: 28px;
+    padding-top: 24px;
+    
+    background-color: rgb(245, 243, 243);
+    
+    text-align: left;
+}
+  
+.painel:not(:last-child) {
+    margin-bottom: 15px;
+}
+            
+.label {
+    display: block;
+
+    font-size: 25px;
+    font-family: "Segoe UI";
+    color: rgb(71, 70, 70);
+    line-height: 1.2;
+}
+
+.campo {
+    display: block;
+    
+    resize: none;
+
+    border-width: 1px;
+    border-color: rgb(33, 33, 33);
+    border-style: solid;
+    
+    width: 100%;
+
+    font-size: 16.667px;
+    font-family: "Segoe UI";
+    color: rgb(85, 85, 85);
+    line-height: 1.2;
+}
+            
+.botoes {
+    margin-top: 15px;
+
+    text-align: right;
+}
+
+.botoes > .botao:not(:first-child) {
+    margin-left: 5px;
+}
+
+.botao {
+    box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.35);
+    
+    border: none;
+    
+    width: 126px;
+    height: 33px;
+    
+    background-color: rgb(163, 168, 166);
+    
+    font-size: 21px;
+    font-family: "Segoe UI";
+    color: rgb(255, 255, 255);
+    line-height: 1.2;
+}
+
+.submeter {
+    background-color: rgb(78, 171, 124) !important;
+}

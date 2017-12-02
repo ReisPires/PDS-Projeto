@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Pedro Pires
+ * @author Gustavo
  */
-@WebServlet(name = "Sair", urlPatterns = {"/sair"})
-public class Sair extends HttpServlet {
+@WebServlet(name = "EditarPost", urlPatterns = {"/editar-post"})
+public class EditarPost extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,9 +30,8 @@ public class Sair extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {        
-        request.getSession().invalidate();
-        request.getRequestDispatcher("index.jsp").forward(request, response);    
+            throws ServletException, IOException {
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -1,4 +1,4 @@
-/* 	Error guide 
+	/* 	Error guide 
 	-1 - Erro no banco
 
  	0 - Success!
@@ -9,7 +9,8 @@
  	14 - Duplicate: Username (Admin)
  	15 - Duplicate: Email
  	16 - Duplicate: Atividade
- 	
+ 	19 - Duplicate: Facebook
+
  	21 - Not found: Aluno 	
  	22 - Not found: Professor
  	23 - Not found: Responsavel
@@ -51,7 +52,7 @@ END $$ LANGUAGE 'plpgsql';
 
 CREATE OR REPLACE FUNCTION cadastraAluno(senha VARCHAR(50), matricula VARCHAR(10), turma VARCHAR(5), acpf VARCHAR(11), nome VARCHAR(100), email VARCHAR(80), 
 	telefone VARCHAR(14), sexo CHAR(1), pais VARCHAR(50), estado VARCHAR(50), cidade VARCHAR(60), cep VARCHAR(10), bairro VARCHAR(50), rua VARCHAR(100), 
-	numero INTEGER, complemento VARCHAR(80))
+	numero VARCHAR(6), complemento VARCHAR(80))
 RETURNS INTEGER AS $$
 DECLARE aux VARCHAR(80);
 DECLARE last_id BIGINT;
@@ -81,7 +82,7 @@ END $$ LANGUAGE 'plpgsql';
 /* ========================================================== */
 
 CREATE OR REPLACE FUNCTION cadastraResponsavel(senha VARCHAR(50), rcpf VARCHAR(11), nome VARCHAR(100), email VARCHAR(80), telefone VARCHAR(14),  sexo CHAR(1), 
-	pais VARCHAR(50), estado VARCHAR(50), cidade VARCHAR(60), cep VARCHAR(10), bairro VARCHAR(50), rua VARCHAR(100), numero INTEGER, complemento VARCHAR(80))
+	pais VARCHAR(50), estado VARCHAR(50), cidade VARCHAR(60), cep VARCHAR(10), bairro VARCHAR(50), rua VARCHAR(100), numero VARCHAR(6), complemento VARCHAR(80))
 RETURNS INTEGER AS $$
 DECLARE aux VARCHAR(80);
 DECLARE last_id BIGINT;
@@ -127,7 +128,7 @@ END $$ LANGUAGE 'plpgsql';
 /* ========================================================== */
 
 CREATE OR REPLACE FUNCTION cadastraProfessor(senha VARCHAR(50), codigo VARCHAR(10), pcpf VARCHAR(11), nome VARCHAR(100), email VARCHAR(80), telefone VARCHAR(14), 
-	sexo CHAR(1), pais VARCHAR(50), estado VARCHAR(50), cidade VARCHAR(60), cep VARCHAR(10), bairro VARCHAR(50), rua VARCHAR(100), numero INTEGER, complemento VARCHAR(80))
+	sexo CHAR(1), pais VARCHAR(50), estado VARCHAR(50), cidade VARCHAR(60), cep VARCHAR(10), bairro VARCHAR(50), rua VARCHAR(100), numero VARCHAR(6), complemento VARCHAR(80))
 RETURNS INTEGER AS $$
 DECLARE aux VARCHAR(80);
 DECLARE last_id BIGINT;
@@ -164,6 +165,22 @@ END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
 
+CREATE OR REPLACE FUNCTION realizaLoginFacebook(fbid VARCHAR(20))
+RETURNS TABLE(id BIGINT, tipo CHAR(1)) AS $$
+BEGIN
+	RETURN QUERY SELECT u.id, u.tipo FROM usuario u WHERE facebook = fbid;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION recuperaFacebook(uid BIGINT)
+RETURNS TABLE(facebook VARCHAR(20)) AS $$
+BEGIN
+	RETURN QUERY SELECT u.facebook FROM usuario u WHERE u.id = uid;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
 CREATE OR REPLACE FUNCTION realizaPrimeiroAcesso(uLogin1 VARCHAR(11), uLogin2 VARCHAR(80), uSenha VARCHAR(50))
 RETURNS TABLE(id BIGINT, tipo CHAR(1)) AS $$
 DECLARE aux BIGINT;
@@ -187,7 +204,7 @@ BEGIN
 	IF FOUND THEN
 		RETURN 16;
 	ELSE
-		INSERT INTO atividade (codigo, nome, ano, semestre, horario, concluida) VALUES (cod, nome, ano, semestre, horario, TRUE);
+		INSERT INTO atividade (codigo, nome, ano, semestre, horario, concluida) VALUES (cod, nome, ano, semestre, horario, FALSE);
 		RETURN 0;
 	END IF;
 END $$ LANGUAGE 'plpgsql';
@@ -276,13 +293,14 @@ END $$ LANGUAGE 'plpgsql';
 /* ========================================================== */
 
 CREATE OR REPLACE FUNCTION listaAlunosAtividadesResponsavel(uid BIGINT)
-RETURNS table (aluno VARCHAR(100), atividade VARCHAR(20)) AS $$
+RETURNS table (aluno VARCHAR(100), atividade TEXT) AS $$
 BEGIN
-	RETURN QUERY SELECT p.nome, t.codigo FROM atividade t
+	RETURN QUERY SELECT p.nome, string_agg(t.codigo, '/' ORDER BY t.codigo) FROM atividade t
 		JOIN aluno_atividade l ON l.atividade = t.codigo
 		JOIN responsavel_aluno r ON r.aluno = l.aluno
 		JOIN dados_pessoais p ON p.id = l.aluno		
-	WHERE r.responsavel = uid;
+	WHERE r.responsavel = uid
+	GROUP BY p.nome;
 END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
@@ -344,7 +362,7 @@ CREATE OR REPLACE FUNCTION realizaPostagem(atividade VARCHAR(20), professor BIGI
 RETURNS BIGINT AS $$
 DECLARE postagem_id BIGINT; 
 BEGIN
-	INSERT INTO postagem(atividade, professor, titulo, texto) VALUES (atividade, professor, titulo, texto) RETURNING codigo INTO postagem_id;
+	INSERT INTO postagem(atividade, professor, datahora, titulo, texto) VALUES (atividade, professor, now(), titulo, texto) RETURNING codigo INTO postagem_id;
 	RETURN postagem_id;
 END $$ LANGUAGE 'plpgsql';
 
@@ -371,9 +389,28 @@ END $$ LANGUAGE 'plpgsql';
 /* ========================================================== */
 
 CREATE OR REPLACE FUNCTION recuperaMidiasPostagem(id_postagem BIGINT)
-RETURNS table (endereco VARCHAR(1000)) AS $$
+RETURNS table (pendereco VARCHAR(1000)) AS $$
 BEGIN
 	RETURN QUERY SELECT endereco FROM midia WHERE postagem = id_postagem ORDER BY endereco;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION recuperaPostagem(cod_postagem BIGINT)
+RETURNS table (codigo BIGINT, professor VARCHAR(100), titulo VARCHAR(140), datahora TIMESTAMP, texto VARCHAR(1000)) AS $$
+BEGIN
+	RETURN QUERY SELECT p.codigo, d.nome, p.titulo, p.datahora, p.texto FROM postagem p
+		JOIN dados_pessoais d ON d.id = p.professor
+		JOIN atividade a ON p.atividade = a.codigo
+	WHERE p.codigo = cod_postagem;
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION atualizaPostagem(pid BIGINT, ptitulo VARCHAR(140), ptexto VARCHAR(1000))
+RETURNS VOID AS $$
+BEGIN
+	UPDATE postagem SET titulo = ptitulo, texto = ptexto WHERE id = pid;	
 END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
@@ -437,34 +474,52 @@ END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
 
-CREATE OR REPLACE FUNCTION atualizaDadosPessoais(uid BIGINT, ucpf VARCHAR(11), uemail VARCHAR(80), utelefone VARCHAR(14), usexo CHAR(1), upais VARCHAR(50), 
-	uestado VARCHAR(50), ucidade VARCHAR(60), ucep VARCHAR(10), ubairro VARCHAR(50), urua VARCHAR(100), unumero INTEGER, ucomplemento VARCHAR(80))
+CREATE OR REPLACE FUNCTION listaResponsaveisProfessor(uid BIGINT)
+RETURNS table (id BIGINT, nome VARCHAR(100)) AS $$
+BEGIN
+	RETURN QUERY SELECT d.id, d.nome FROM dados_pessoais d				
+		JOIN responsavel_aluno r on r.responsavel = d.id
+		JOIN aluno_atividade a ON a.aluno = r.aluno
+		JOIN professor_atividade p ON p.atividade = a.atividade
+	WHERE p.professor = uid
+	ORDER BY d.nome;	
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION listaResponsaveisAdministrador()
+RETURNS table (id BIGINT, nome VARCHAR(100)) AS $$
+BEGIN
+	RETURN QUERY SELECT d.id, d.nome FROM dados_pessoais d				
+		JOIN responsavel r on r.id = d.id
+	ORDER BY d.nome;	
+END $$ LANGUAGE 'plpgsql';
+
+/* ========================================================== */
+
+CREATE OR REPLACE FUNCTION atualizaDadosPessoais(uid BIGINT, uemail VARCHAR(80), utelefone VARCHAR(14), usexo CHAR(1), upais VARCHAR(50), 
+	uestado VARCHAR(50), ucidade VARCHAR(60), ucep VARCHAR(10), ubairro VARCHAR(50), urua VARCHAR(100), unumero VARCHAR(6), ucomplemento VARCHAR(80))
 RETURNS INTEGER AS $$
 DECLARE aux VARCHAR(80);
 DECLARE last_id BIGINT;
-BEGIN		
-	SELECT cpf INTO aux FROM dados_pessoais WHERE ucpf = cpf AND id != uid LIMIT 1;
+BEGIN			
+	SELECT login2 INTO aux FROM usuario WHERE uemail = login2 AND id != uid LIMIT 1;
 	IF FOUND THEN
-		RETURN 13;
+		RETURN 15;
 	ELSE
-		SELECT login2 INTO aux FROM usuario WHERE uemail = login2 AND id != uid LIMIT 1;
-		IF FOUND THEN
-			RETURN 15;
-		ELSE
-			UPDATE usuario SET login2 = uemail WHERE id = uid;			
-			UPDATE dados_pessoais SET cpf = ucpf, email = uemail, telefone = utelefone, sexo = usexo, pais = upais, estado = uestado, cidade = ucidade,
-				cep = ucep, bairro = ubairro, rua = urua, numero = unumero, complemento = ucomplemento
-			WHERE  id = uid;
-			RETURN 0;
-		END IF;	
-	END IF;		
+		UPDATE usuario SET login2 = uemail WHERE id = uid;			
+		UPDATE dados_pessoais SET email = uemail, telefone = utelefone, sexo = usexo, pais = upais, estado = uestado, cidade = ucidade,
+			cep = ucep, bairro = ubairro, rua = urua, numero = unumero, complemento = ucomplemento
+		WHERE  id = uid;
+		RETURN 0;
+	END IF;	
 END $$ LANGUAGE 'plpgsql';
 
 /* ========================================================== */
 
 CREATE OR REPLACE FUNCTION recuperaDadosPessoais(uid BIGINT)
 RETURNS table(email VARCHAR(80), telefone VARCHAR(14), sexo CHAR(1), pais VARCHAR(50), estado VARCHAR(50), cidade VARCHAR(60), cep VARCHAR(10), 
-	bairro VARCHAR(50), rua VARCHAR(100), numero INTEGER, complemento VARCHAR(80)) AS $$
+	bairro VARCHAR(50), rua VARCHAR(100), numero VARCHAR(6), complemento VARCHAR(80)) AS $$
 BEGIN			
 	RETURN QUERY SELECT d.email, d.telefone, d.sexo, d.pais, d.estado, d.cidade, d.cep, d.bairro, d.rua, d.numero, d.complemento FROM dados_pessoais d WHERE d.id = uid;
 END $$ LANGUAGE 'plpgsql';

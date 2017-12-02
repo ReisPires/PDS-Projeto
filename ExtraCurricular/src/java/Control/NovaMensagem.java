@@ -5,9 +5,12 @@
  */
 package Control;
 
-import DAO.*;
-import Model.*;
+import DAO.DAOMensagem;
+import Model.Mensagem;
+import Model.Usuario;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Gustavo
  */
-@WebServlet(name = "Cadastrar", urlPatterns = {"/cadastrar"})
-public class Cadastrar extends HttpServlet {
+@WebServlet(name = "NovaMensagem", urlPatterns = {"/nova-mensagem"})
+public class NovaMensagem extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,21 +35,43 @@ public class Cadastrar extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String login1 = (String)request.getParameter("identidade");
-        String login2 = (String)request.getParameter("email");
-        String senha = (String)request.getParameter("senha");
-        
-        DAOLogin daoLogin = new DAOLogin();
-        Usuario usuario = daoLogin.realizaPrimeiroAcesso(login1, login2);
-        
-        if (usuario == null || !daoLogin.atualizaSenha(usuario.getId(), usuario.getLogin(), senha)) {
-            request.setAttribute("incorrect", true);
-            request.getRequestDispatcher("cadastro.jsp").forward(request, response);            
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        if (usuario == null) {
+            request.getRequestDispatcher("index.jsp").forward(request, response);
             return;
-        }                
-                        
-        request.getSession().setAttribute("usuario", usuario);
-        request.getRequestDispatcher("atividades.jsp").forward(request, response);
+        }
+        
+        DAOMensagem daoMensagem = new DAOMensagem();
+        
+        String titulo = request.getParameter("titulo");
+        String destino = null;
+        String[] selecao;
+        selecao = request.getParameterValues("selecao");
+        String texto = request.getParameter("texto");
+        
+        ArrayList<Integer> destinatarios = new ArrayList<>();
+        
+        if (usuario.getTipo().equals("E") || usuario.getTipo().equals("P")) {
+            destino = request.getParameter("destino");
+            
+            if (destino.equals("todos")) {
+                // Adicionar todo mundo aos destinatários
+            } else if (destino.equals("atividades")) {
+                // Adicionar todo mundo das atividades aos destinatários
+            } else {
+                // Adicionar selecionados aos destinatários
+                for (int i = 0; i < selecao.length; ++i)
+                    destinatarios.add(Integer.parseInt(selecao[i]));
+            }
+        } else {
+            // Adicionar todos os professores selecionados aos destinatários
+            for (int i = 0; i < selecao.length; ++i)
+                destinatarios.add(Integer.parseInt(selecao[i]));
+        }
+        
+        Mensagem mensagem = new Mensagem(usuario.getId(), destinatarios, titulo, texto);
+        
+        daoMensagem.enviaMensagem(mensagem);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

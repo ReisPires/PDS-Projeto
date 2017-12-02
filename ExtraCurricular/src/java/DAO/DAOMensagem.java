@@ -156,6 +156,34 @@ public class DAOMensagem extends DAOConnection {
         }    
         return null;
     }
+    
+    public ArrayList<Responsavel> listaResponsaveis(Usuario usuario) {
+        try {
+            CallableStatement stmt;
+            switch (usuario.getTipo()) {
+                case "P":
+                    stmt = conn.prepareCall("{ call listaResponsaveisProfessor(?) }");                
+                    stmt.setInt(1, usuario.getId());
+                    break;
+                case "E":
+                    stmt = conn.prepareCall("{ call listaResponsaveisAdministrador() }");                
+                    break;
+                default:
+                    return null;
+            }
+            // Executa o comando
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();
+            
+            ArrayList<Responsavel> responsaveis = new ArrayList<>();            
+            while (rs.next())                 
+                responsaveis.add(new Responsavel(new Usuario(rs.getInt(1)), new DadosPessoais(rs.getString(2))));  
+            return responsaveis;          
+        } catch (SQLException e) {  
+            System.out.println(e);
+        }    
+        return null;
+    }
 }
 
 

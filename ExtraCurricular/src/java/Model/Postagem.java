@@ -47,7 +47,11 @@ public class Postagem {
     public ArrayList<String> getMidias() {
         return midias;
     }
-    
+
+    public Integer getId() {
+        return id;
+    }
+            
     
     
 }

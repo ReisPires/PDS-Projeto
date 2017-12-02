@@ -27,6 +27,23 @@ public class DAOLogin extends DAOConnection {
         return null;   
     }
     
+    public Usuario realizaLoginFacebook(String facebookId) {
+        try {
+            // Cria o comando
+            CallableStatement stmt = conn.prepareCall("{ call realizaLoginFacebook(?) }");
+            // Recupera os dados
+            stmt.setString(1, facebookId);            
+            // Executa o comando
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();
+            if (rs.next())
+                return new Usuario(rs.getInt(1), rs.getString(2));                                                            
+        } catch (SQLException e) {              
+            System.out.println(e);
+        }   
+        return null;
+    }
+    
     public Usuario realizaPrimeiroAcesso(String login1, String login2, String senha) {
         try {
             // Cria o comando
