@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Gustavo
+ * @author Pedro Pires
  */
 @WebServlet(name = "Sair", urlPatterns = {"/sair"})
 public class Sair extends HttpServlet {
@@ -30,9 +30,9 @@ public class Sair extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException {        
         request.getSession().invalidate();
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("index.jsp").forward(request, response);    
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

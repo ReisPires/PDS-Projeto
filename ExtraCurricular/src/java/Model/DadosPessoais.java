@@ -6,72 +6,76 @@ public class DadosPessoais {
     private String telefone;
     private String nome;
     private String sexo;
+    private Endereco endereco;
 
-    public DadosPessoais(String cpf, String email, String telefone, String nome, String sexo) {
+    public DadosPessoais(String cpf, String email, String telefone, String nome, String sexo, Endereco endereco) {
         this.cpf = cpf;
         this.email = email;
         this.telefone = telefone;
         this.nome = nome;
         this.sexo = sexo;
-    }
-    
-    // Cadastro de alunos por CSV
-    public DadosPessoais(String email, String nome) {
-        this.cpf = null;
+        this.endereco = endereco;
+    }   
+
+    /* Perfil */
+    public DadosPessoais(String email, String telefone, String sexo, Endereco endereco) {        
         this.email = email;
-        this.telefone = null;
+        this.telefone = telefone;
+        this.sexo = sexo;
+        this.endereco = endereco;
+    }       
+
+    /* Listagem nas mensagens */
+    public DadosPessoais(String nome) {
         this.nome = nome;
-        this.sexo = null;
-    }
+    }       
+
+    /* Cadastro por csv de professor */
+    public DadosPessoais(String cpf, String email, String nome) {
+        this.cpf = cpf;
+        this.email = email;
+        this.nome = nome;
+        this.endereco = new Endereco();
+    }        
+
+    /* Cadastro por csv de aluno */
+    public DadosPessoais(String email, String nome) {
+        this.email = email;
+        this.nome = nome;
+        this.endereco = new Endereco();
+    }        
     
-    // Cadastro de responsavel por CSV
-    public DadosPessoais(String cpf, String email, String telefone) {
+    /* Cadastro por csv de responsavel */
+    public DadosPessoais(String cpf, String email, String telefone, String nome) {
         this.cpf = cpf;
         this.email = email;
         this.telefone = telefone;
-        this.nome = null;
-        this.sexo = null;
+        this.nome = nome;
+        this.endereco = new Endereco();
     }
-        
+    
+
     public String getCpf() {
         return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getTelefone() {
         return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-    
-    
+    public Endereco getEndereco() {
+        return endereco;
+    }            
 }

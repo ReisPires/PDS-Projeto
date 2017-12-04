@@ -4,79 +4,220 @@ import Model.*;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DAOMensagem {
-     private static Connection conn = null;    
-    
-    public static void initConnection() {
-        if (conn != null)
-            return;
-        
-        try{
-            Class.forName("org.postgresql.Driver").newInstance();
-            
-            conn = DriverManager.getConnection("jdbc:postgresql:" +
-                        "//localhost/ExtraCurricular?user=postgres&password=123");                        
-        } catch (Exception e){
-        }                
-    }
+public class DAOMensagem extends DAOConnection {     
     
     public DAOMensagem() {
         initConnection();
     }
     
-    public Boolean enviaMensagem(Mensagem mensagem) {
+    public int exibeMensagensNaoLidas(Usuario usuario) {
         try {
             // Cria o comando
-            CallableStatement stmt = conn.prepareCall("{ call enviaMensagem(?, ?, ?) }");
+            CallableStatement stmt = conn.prepareCall("{ call exibeMensagensNaoLidas(?) }");
             // Recupera os dados
-            stmt.setInt(1, mensagem.getRemetente());
-            stmt.setInt(2, mensagem.getDestinatario());
-            stmt.setString(3, mensagem.getTexto());
+            stmt.setInt(1, usuario.getId());
             // Executa o comando
-            return (stmt.execute());
-        } catch (SQLException ex) {  
-            System.out.println(ex);
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();
+            if (rs.next())
+                return rs.getInt(1);
+        } catch (SQLException e) {  
+            System.out.println(e);
+        }
+        return -1;
+    }
+    
+    public boolean leMensagens(Usuario usuario) {
+        try {
+            // Cria o comando
+            CallableStatement stmt = conn.prepareCall("{ call leMensagens(?) }");
+            // Recupera os dados
+            stmt.setInt(1, usuario.getId());
+            // Executa o comando
+            return(stmt.execute());            
+        } catch (SQLException e) {
+            System.out.println(e);
         }
         return false;
     }
     
-    public ArrayList<Mensagem> exibeMensagens(Usuario usuario) {
+    public boolean enviaMensagem(Mensagem mensagem) {
+        try {
+            Integer codigo;            
+            // Cria o comando
+            CallableStatement stmt = conn.prepareCall("{ call criaMensagem(?, ?, ?) }");
+            // Recupera os dados
+            stmt.setInt(1, mensagem.getRemetente());
+            stmt.setString(2, mensagem.getTitulo());
+            stmt.setString(3, mensagem.getTexto());
+            // Executa o comando
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();
+            if (rs.next()) {
+                codigo = rs.getInt(1);
+            } else return false;
+            rs.close();
+            stmt.close();
+            
+            for (Integer destinatario : mensagem.getDestinatarios()) {
+                // Cria o comando
+                stmt = conn.prepareCall("{ call enviaMensagem(?, ?) }");
+                // Recupera os dados
+                stmt.setInt(1, codigo);
+                stmt.setInt(2, destinatario);                
+                // Executa o comando
+                stmt.execute();
+                stmt.close();
+            }
+            
+            return true;
+        } catch (SQLException ex) {  
+            System.out.println(ex);
+        }     
+        return false;
+    }
+    
+    public ArrayList<Mensagem> listaMensagens(Usuario usuario) {
          try {
             // Cria o comando
-            CallableStatement stmt = conn.prepareCall("{ call exibeMensagens(?) }");
+            CallableStatement stmt = conn.prepareCall("{ call listaMensagens(?) }");
             // Recupera os dados
             stmt.setInt(1, usuario.getId());            
             // Executa o comando
             stmt.execute();
             ResultSet rs = (ResultSet) stmt.getResultSet();
             
-            ArrayList<Mensagem> msgs = new ArrayList<>();            
+            ArrayList<Mensagem> mensagens = new ArrayList<>();            
             while (rs.next())                 
-                msgs.add(new Mensagem(rs.getInt(1), rs.getInt(2), rs.getTimestamp(3), rs.getString(4), rs.getBoolean(5)));
-            
-            return msgs;          
-        } catch (SQLException ex) {  
-            System.out.println(ex);
+                mensagens.add(new Mensagem(rs.getString(1), rs.getString(2), rs.getTimestamp(3), rs.getString(4)));            
+            return mensagens;          
+        } catch (SQLException e) {  
+            System.out.println(e);
         }    
         return null;
-    }
+    }        
     
-    public ArrayList<Mensagem> todasMensagens() {
-         try {
-            // Cria o comando
-            CallableStatement stmt = conn.prepareCall("{ call exibeTodasMensagens() }");            
+    public ArrayList<Aluno> listaAlunos(Usuario usuario) {
+        try {
+            CallableStatement stmt;
+            switch (usuario.getTipo()) {
+                case "P":
+                    stmt = conn.prepareCall("{ call listaAlunosProfessor(?) }");                
+                    stmt.setInt(1, usuario.getId());
+                    break;
+                case "E":
+                    stmt = conn.prepareCall("{ call listaAlunosAdministrador() }");                
+                    break;
+                default:
+                    return null;
+            }
             // Executa o comando
             stmt.execute();
             ResultSet rs = (ResultSet) stmt.getResultSet();
             
-            ArrayList<Mensagem> msgs = new ArrayList<>();            
+            ArrayList<Aluno> alunos = new ArrayList<>();            
             while (rs.next())                 
-                msgs.add(new Mensagem(rs.getInt(1), rs.getInt(2), rs.getTimestamp(3), rs.getString(4), rs.getBoolean(5)));
+                alunos.add(new Aluno(rs.getString(2), new Usuario(rs.getInt(1)), new DadosPessoais(rs.getString(3))));  
+            return alunos;          
+        } catch (SQLException e) {  
+            System.out.println(e);
+        }    
+        return null;
+    }
+    
+    public ArrayList<Professor> listaProfessor(Usuario usuario) {
+        try {
+            CallableStatement stmt;
+            switch (usuario.getTipo()) {
+                case "A":
+                    stmt = conn.prepareCall("{ call listaProfessoresAluno(?) }");                
+                    stmt.setInt(1, usuario.getId());
+                    break;
+                case "R":
+                    stmt = conn.prepareCall("{ call listaProfessoresResponsavel(?) }");                
+                    stmt.setInt(1, usuario.getId());
+                    break;
+                case "E":
+                    stmt = conn.prepareCall("{ call listaProfessoresAdministrador() }");                
+                    break;
+                default:
+                    return null;
+            }
+            // Executa o comando
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();
             
-            return msgs;          
-        } catch (SQLException ex) {  
-            System.out.println(ex);
+            ArrayList<Professor> professores = new ArrayList<>();            
+            while (rs.next())                 
+                professores.add(new Professor(new Usuario(rs.getInt(1)), rs.getString(2), rs.getString(4), new DadosPessoais(rs.getString(3)))); 
+            return professores;          
+        } catch (SQLException e) {  
+            System.out.println(e);
+        }    
+        return null;
+    }
+    
+    public ArrayList<Responsavel> listaResponsaveis(Usuario usuario) {
+        try {
+            CallableStatement stmt;
+            switch (usuario.getTipo()) {
+                case "P":
+                    stmt = conn.prepareCall("{ call listaResponsaveisProfessor(?) }");                
+                    stmt.setInt(1, usuario.getId());
+                    break;
+                case "E":
+                    stmt = conn.prepareCall("{ call listaResponsaveisAdministrador() }");                
+                    break;
+                default:
+                    return null;
+            }
+            // Executa o comando
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();
+            
+            ArrayList<Responsavel> responsaveis = new ArrayList<>();            
+            while (rs.next())                 
+                responsaveis.add(new Responsavel(new Usuario(rs.getInt(1)), new DadosPessoais(rs.getString(2))));  
+            return responsaveis;          
+        } catch (SQLException e) {  
+            System.out.println(e);
+        }    
+        return null;
+    }
+    
+    public ArrayList<Integer> listaAlunosAtividade(Atividade atividade) {
+        try {          
+            CallableStatement stmt = conn.prepareCall("{ call listaAlunosAtividade(?) }");                
+            stmt.setString(1, atividade.getCodigo());
+            // Executa o comando
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();
+            
+            ArrayList<Integer> alunos = new ArrayList<>();            
+            while (rs.next())                 
+                alunos.add(rs.getInt(1));  
+            return alunos;          
+        } catch (SQLException e) {  
+            System.out.println(e);
+        }    
+        return null;
+    }
+    
+    public ArrayList<Integer> listaTodosMensagem() {
+        try {          
+            CallableStatement stmt = conn.prepareCall("{ call listaTodosMensagem() }");                            
+            // Executa o comando
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();            
+            ArrayList<Integer> ids = new ArrayList<>();            
+            while (rs.next())                 
+                ids.add(rs.getInt(1));  
+            return ids;          
+        } catch (SQLException e) {  
+            System.out.println(e);
         }    
         return null;
     }
 }
+
+

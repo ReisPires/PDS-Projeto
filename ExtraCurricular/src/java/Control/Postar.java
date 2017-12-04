@@ -7,17 +7,17 @@ package Control;
 
 import DAO.*;
 import Model.*;
-import java.io.File;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,27 +42,42 @@ public class Postar extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String professor = request.getParameter("professor");
-        String atividade = request.getParameter("atividade");
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        if (usuario == null) {
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+            return;
+        }
+
+        String codigo = request.getParameter("atividade");
         String titulo = request.getParameter("titulo");
         String texto = request.getParameter("texto");
+        ArrayList<String> midias = new ArrayList<>();
         
-        Part parte = request.getPart("midia");
-        String midia = null;        
-        
-        if (!"".equals(parte.getSubmittedFileName())) {            
-            String arquivo = Paths.get(parte.getSubmittedFileName()).getFileName().toString();
-            String caminho = "C:/Users/Pedro Pires/Documents/GitHub/PDS-Projeto/ExtraCurricular/web/media";
-            midia = caminho + "/" + arquivo;
+        Collection<Part> parts = request.getParts();
+        for (Part part: parts) {
+            if (!part.getName().equals("midias"))
+                continue;
             
-            Files.copy(parte.getInputStream(), Paths.get(midia), REPLACE_EXISTING);
+            if (!"".equals(part.getSubmittedFileName())) {            
+                String arquivo = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+                String caminho = "C:/Users/Pedro Pires/Documents/GitHub/PDS-Projeto/ExtraCurricular/web/media";
+                //String caminho = "C:/Users/Gustavo/Arquivos/UFSCar/6º Semestre/Matérias/Projeto e Desenvolvimento de Sistemas/Projeto/PDS-Projeto/ExtraCurricular/web/media";
+                String midia = caminho + "/" + arquivo;
+                
+                midias.add(arquivo);
+
+                Files.copy(part.getInputStream(), Paths.get(midia), REPLACE_EXISTING);
+            }
         }
         
-        DAOUsuario daoUsuario = new DAOUsuario();               
-        new DAOAtividade().insereInformacao(new Informacao(daoUsuario.recuperaProfessor(new Professor(new Usuario(Integer.valueOf(professor)))).getCodigo(), atividade, titulo, texto, midia));
+        Atividade atividade = new Atividade(codigo, "");
+        Postagem postagem = new Postagem(titulo, texto, midias);
         
-        request.setAttribute("success", true);
-        request.getRequestDispatcher("postar.jsp?atividade=" + atividade).forward(request, response);
+        DAOAtividade daoAtividade = new DAOAtividade();               
+        daoAtividade.realizaPostagem(atividade, usuario, postagem);
+        
+        request.setAttribute("success", true);          
+        response.sendRedirect("atividade.jsp?codigo=" + codigo);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

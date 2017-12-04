@@ -32,3 +32,4 @@ ExtraCurricular/web/META-INF/context.xml
 *.py
 ExtraCurricular/web/media/passe-futebol.mp4
 ExtraCurricular/web/media/sonhar-com-robo.jpg
+/RMI/nbproject/private/

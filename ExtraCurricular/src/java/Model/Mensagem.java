@@ -1,82 +1,63 @@
 package Model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Mensagem {
+public class Mensagem {    
     private Integer remetente;
-    private Integer destinatario;
+    private String nomeRemetente;
+    private ArrayList<Integer> destinatarios;
+    private String titulo;
     private String dia;
     private String horario;
-    private String texto;
-    private Boolean lida;
 
-    public Mensagem(Integer remetente, Integer destinatario, String texto) {
+    public String getNomeRemetente() {
+        return nomeRemetente;
+    }
+    private String texto;    
+
+    /* Envio */
+    public Mensagem(Integer remetente, ArrayList<Integer> destinatarios, String titulo, String texto) {
         this.remetente = remetente;
-        this.destinatario = destinatario;
+        this.destinatarios = destinatarios;       
+        this.titulo = titulo;
         this.texto = texto;
     }
-
-    public Mensagem(Integer remetente, Integer destinatario, Timestamp datahora, String texto, Boolean lida) {
-        this.remetente = remetente;
-        this.destinatario = destinatario;        
-        this.texto = texto;
-        this.lida = lida;
         
+    /* Recebimento */
+    public Mensagem(String nomeRemetente, String titulo, Timestamp datahora, String texto) {
+        this.nomeRemetente = nomeRemetente;      
+        this.titulo = titulo;
         Calendar c = Calendar.getInstance();
-        c.setTimeInMillis(datahora.getTime());
-        this.horario = String.format("%02d", c.get(Calendar.HOUR)) + ":" + String.format("%02d", c.get(Calendar.MINUTE));
+        c.setTimeInMillis(datahora.getTime());           
         this.dia = String.format("%02d", c.get(Calendar.DATE)) + "/" + String.format("%02d", c.get(Calendar.MONTH) + 1) + "/" + String.format("%04d", c.get(Calendar.YEAR));        
+        this.horario = String.format("%02d", c.get(Calendar.HOUR)) + ":" + String.format("%02d", c.get(Calendar.MINUTE));
+        this.texto = texto;
     }
 
     public Integer getRemetente() {
         return remetente;
     }
 
-    public void setRemetente(Integer remetente) {
-        this.remetente = remetente;
-    }
-
-    public Integer getDestinatario() {
-        return destinatario;
-    }
-
-    public void setDestinatario(Integer destinatario) {
-        this.destinatario = destinatario;
-    }
-
     public String getDia() {
         return dia;
-    }
-
-    public void setDia(String dia) {
-        this.dia = dia;
     }
 
     public String getHorario() {
         return horario;
     }
 
-    public void setHorario(String horario) {
-        this.horario = horario;
+    public String getTitulo() {
+        return titulo;
     }
 
     public String getTexto() {
         return texto;
     }
 
-    public void setTexto(String texto) {
-        this.texto = texto;
-    }
-
-    public Boolean getLida() {
-        return lida;
-    }
-
-    public void setLida(Boolean lida) {
-        this.lida = lida;
-    }
-    
-    
+    public ArrayList<Integer> getDestinatarios() {
+        return destinatarios;
+    }        
     
 }
