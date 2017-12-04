@@ -1,3 +1,5 @@
+<%@page import="java.util.ListIterator"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="Model.*"%>
 <%@page import="DAO.*"%>
 
@@ -9,6 +11,9 @@ if (usuario == null) {
 }
 
 DAOMensagem daoMensagem = new DAOMensagem();
+daoMensagem.leMensagens(usuario);
+
+ArrayList<Mensagem> mensagens = daoMensagem.listaMensagens(usuario);
 %>
 
 <!DOCTYPE html>
@@ -92,11 +97,12 @@ DAOMensagem daoMensagem = new DAOMensagem();
         <div class="corpo">
             <div class="container">
                 <div class="frame">
-                    <% for (Mensagem mensagem: daoMensagem.listaMensagens(usuario)) { %>
+                    <% for (ListIterator i = mensagens.listIterator(mensagens.size()); i.hasPrevious();) { %>
+                        <% Mensagem mensagem = (Mensagem)i.previous(); %>
                     <div class="painel">
-                        <div class="autor">Enviado por <%= mensagem.getRemetente()%></div>
+                        <div class="autor">Enviado por <%= mensagem.getNomeRemetente() == null ? "Escola" : mensagem.getNomeRemetente() %></div>
                         <div class="titulo"><%= mensagem.getTitulo() %></div>
-                        <div class="data"><%--= mensagem.getData() --%> - <%--= mensagem.getHorario() --%></div>
+                        <div class="data"><%= mensagem.getDia() %> - <%= mensagem.getHorario() %></div>
                         <div class="texto"><%= mensagem.getTexto() %></div>
                     </div>
                     <% } %>

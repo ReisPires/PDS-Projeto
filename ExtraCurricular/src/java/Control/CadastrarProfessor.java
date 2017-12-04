@@ -24,6 +24,12 @@ public class CadastrarProfessor extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        if (usuario == null || !usuario.getTipo().equals("E")) {
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+            return;
+        }
+        
         DAOUsuario daoUsuario = new DAOUsuario();
         
         String codigo = request.getParameter("codigo");        

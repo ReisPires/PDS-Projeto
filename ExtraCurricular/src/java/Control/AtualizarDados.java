@@ -1,5 +1,9 @@
 package Control;
 
+import DAO.DAOUsuario;
+import Model.DadosPessoais;
+import Model.Endereco;
+import Model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -22,7 +26,32 @@ public class AtualizarDados extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String fbid = (String)request.getParameter("fbid");
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        if (usuario == null) {
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+            return;
+        }
+        
+        DAOUsuario daoUsuario = new DAOUsuario();
+        
+        String fbid = (request.getParameter("fbid").equals("") ? null : request.getParameter("fbid"));            
+        String email = request.getParameter("email");        
+        String telefone = request.getParameter("telefone");
+        String sexo = ("masc".equals(request.getParameter("sexo")) ? "M" : ("fem".equals(request.getParameter("sexo")) ? "F" : null));        
+        String pais = request.getParameter("pais");
+        String cep = request.getParameter("cep");
+        String estado = request.getParameter("estado");
+        String cidade = request.getParameter("cidade");
+        String bairro = request.getParameter("bairro");
+        String rua = request.getParameter("rua");
+        String numero = request.getParameter("numero");
+        String complemento = request.getParameter("complemento");
+        
+        request.getSession().setAttribute("resultadoAtualizacao", daoUsuario.atualizaDadosPessoais(usuario, fbid, new DadosPessoais(email, telefone, sexo, new Endereco(pais, cep, estado, cidade, bairro, rua, numero, complemento))));
+        request.getSession().setAttribute("dadosPessoais", daoUsuario.recuperaDadosPessoais(usuario));
+        request.getSession().setAttribute("facebookId", daoUsuario.recuperaFacebook(usuario));        
+        
+        request.getRequestDispatcher("perfil.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

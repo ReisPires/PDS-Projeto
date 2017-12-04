@@ -1,34 +1,51 @@
-const MAX_ALUNOS = 5;
-var proxAluno = 2;
-
-function adicionarAluno() {
-    if ($("[name=alunos]").length === MAX_ALUNOS)
-        return;
-    
-    if ($("[name=alunos]").length === 1) {
-        $("[name=alunos]").css("width", "calc(260px - 8px - 28px)");
-        $(".deletar").css("display", "");
-    }
-        
-    $("#alunos").append(
-        '<div id="aluno' + proxAluno + '">' +
-            '<input class="deletar" type="button" value="-" onclick="deletarAluno(' + proxAluno++ + ')"/>' +
-            '<input name="alunos" class="campo" type="text" placeholder="Aluno" spellcheck="false" style="width: calc(260px - 8px - 28px)"/>' +
-        '</div>'
-    );
-    
-    if ($("[name=alunos]").length === MAX_ALUNOS)
-        $(".adicionar").css("display", "none");
+function preencherAlunos() {        
+    $("#selecao-grupo").show();
+    $("#selecao").val("");
+    $("#selecoes").html("Nenhum aluno selecionado");
+    $("#selecao-label").html("Alunos");        
+    $("#selecao").autocomplete({lookup: listaAlunos, onSelect: selecionar});
 }
 
-function deletarAluno(id) {
-    if ($("[name=alunos]").length === MAX_ALUNOS)
-        $(".adicionar").css("display", "");
-        
-    $("#aluno" + id).remove();
-    
-    if ($("[name=alunos]").length === 1) {
-        $("[name=alunos]").css("width", "260px");
-        $(".deletar").css("display", "none");
-   }
+function selecionar() {
+    var value = selecao.value;
+    selecao.value = "";
+
+    $("#selecao").focus();
+
+    var found = null;
+    var array = listaAlunos;
+    for (var i in array)
+        if (value === array[i].value) {
+            found = array[i];
+            break;
+        }
+    if (!found)
+        return;
+
+    var selecionado = false;
+    $(".selecao").each(function () {
+        if (value === this.innerText) {
+            selecionado = true;
+            return false;
+        }
+    });
+    if (selecionado)
+        return;
+
+    if ($(".selecao").length === 0)
+        $("#selecoes").html("");
+
+    $("<div class='selecao' onclick='deselecionar(this)'>" +
+        found.value +
+        "<input type='hidden' name='selecao' value='" + found.data + "'/>" + 
+    "</div>").appendTo("#selecoes");
+}
+
+function deselecionar(elem) {
+    $(elem).remove();
+
+    if ($(".selecao").length === 0)
+        $("#selecoes").html("Nenhum aluno selecionado");
+
+    $("#selecao").focus();
 }

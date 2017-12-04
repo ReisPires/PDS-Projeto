@@ -1,6 +1,11 @@
 <%@page import="Model.*"%>
 
 <%
+    Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");    
+    if (usuario == null || !usuario.getTipo().equals("E")) {
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+        return;
+    } 
     Integer resultadoCadastro = (Integer)request.getSession().getAttribute("resultadoCadastro");
 %>
 
@@ -10,6 +15,70 @@
         <meta charset="utf-8">
         <title>Sistema London - Cadastro de Aluno</title>
         <link rel="stylesheet" type="text/css" href="styles/cinza.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>           
+        <script type="text/javascript" >
+
+            $(document).ready(function() {
+
+                function limpa_formulário_cep() {
+                    // Limpa valores do formulário de cep.
+                    $("#rua").val("");
+                    $("#bairro").val("");
+                    $("#cidade").val("");
+                    $("#estado").val("");                    
+                }
+
+                //Quando o campo cep perde o foco.
+                $("#cep").blur(function() {
+
+                    //Nova variável "cep" somente com dígitos.
+                    var cep = $(this).val().replace(/\D/g, '');
+
+                    //Verifica se campo cep possui valor informado.
+                    if (cep != "") {
+
+                        //Expressão regular para validar o CEP.
+                        var validacep = /^[0-9]{8}$/;
+
+                        //Valida o formato do CEP.
+                        if(validacep.test(cep)) {
+
+                            //Preenche os campos com "..." enquanto consulta webservice.
+                            $("#rua").val("...");
+                            $("#bairro").val("...");
+                            $("#cidade").val("...");
+                            $("#estado").val("...");                            
+
+                            //Consulta o webservice viacep.com.br/
+                            $.getJSON("//viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                                if (!("erro" in dados)) {
+                                    //Atualiza os campos com os valores da consulta.
+                                    $("#rua").val(dados.logradouro);
+                                    $("#bairro").val(dados.bairro);
+                                    $("#cidade").val(dados.localidade);
+                                    $("#estado").val(dados.uf);                                    
+                                } //end if.
+                                else {
+                                    //CEP pesquisado não foi encontrado.
+                                    limpa_formulário_cep();
+                                    alert("CEP não encontrado.");
+                                }
+                            });
+                        } //end if.
+                        else {
+                            //cep é inválido.
+                            limpa_formulário_cep();
+                            alert("Formato de CEP inválido.");
+                        }
+                    } //end if.
+                    else {
+                        //cep sem valor, limpa formulário.
+                        limpa_formulário_cep();
+                    }
+                });
+            });
+        </script>
         <style>
             .titulo {
                 font-size: 29px;
@@ -99,7 +168,7 @@
                             
                             <br style="clear:both" />
                                                         
-                            <label class="label" for="gender" style="width: 244px">Sexo</label>
+                            <label class="label" for="sexo" style="width: 244px">Sexo</label>
                             <label class="label" for="pais" style="width: 280px">País</label>
                             <label class="label" for="cep" style="width: 120px">CEP</label>                            
                             <label class="label" for="estado">Estado</label>
@@ -109,7 +178,7 @@
                             <label class="radiolabel"><input type="radio" id="masc" name="sexo" value="masc">   Masculino</label>
                             <label class="radiolabel"><input type="radio" id="fem" name="sexo" value="fem">   Feminino</label>                            
                             <input class="campo" id="pais" name="pais" maxlength="50" style="width: 280px" type="text" spellcheck="false">                                                        
-                            <input class="campo" id="cep" name="cep" maxlength="10" style="width: 120px" type="text" spellcheck="false">                         
+                            <input class="campo" id="cep" name="cep" maxlength="8" style="width: 120px" type="text" spellcheck="false">                         
                             <input class="campo" id="estado" name="estado" maxlength="50" style="width: 277px" type="text" spellcheck="false"> 
                             
                             <br style="clear:both" />                                                                                                                                                                                                    

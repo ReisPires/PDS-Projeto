@@ -15,9 +15,16 @@ public class Professor {
     }             
 
     /* Para a listagem nas mensagens */
-    public Professor(Usuario dadosUsuario, String atividades, DadosPessoais dadosPessoais) {        
+    public Professor(Usuario dadosUsuario, String codigo, String atividades, DadosPessoais dadosPessoais) {        
         this.dadosUsuario = dadosUsuario;
+        this.codigo = codigo;
         this.atividades = atividades;
+        this.dadosPessoais = dadosPessoais;
+    }  
+
+    /* Professores nas atividades */
+    public Professor(Usuario dadosUsuario, DadosPessoais dadosPessoais) {
+        this.dadosUsuario = dadosUsuario;
         this.dadosPessoais = dadosPessoais;
     }        
 
@@ -32,5 +39,11 @@ public class Professor {
     public DadosPessoais getDadosPessoais() {
         return dadosPessoais;
     }
+
+    public String getAtividades() {
+        return atividades;
+    }
+    
+    
   
 }

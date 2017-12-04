@@ -149,7 +149,7 @@ public class DAOMensagem extends DAOConnection {
             
             ArrayList<Professor> professores = new ArrayList<>();            
             while (rs.next())                 
-                professores.add(new Professor(new Usuario(rs.getInt(1)), rs.getString(3), new DadosPessoais(rs.getString(2)))); 
+                professores.add(new Professor(new Usuario(rs.getInt(1)), rs.getString(2), rs.getString(4), new DadosPessoais(rs.getString(3)))); 
             return professores;          
         } catch (SQLException e) {  
             System.out.println(e);
@@ -179,6 +179,40 @@ public class DAOMensagem extends DAOConnection {
             while (rs.next())                 
                 responsaveis.add(new Responsavel(new Usuario(rs.getInt(1)), new DadosPessoais(rs.getString(2))));  
             return responsaveis;          
+        } catch (SQLException e) {  
+            System.out.println(e);
+        }    
+        return null;
+    }
+    
+    public ArrayList<Integer> listaAlunosAtividade(Atividade atividade) {
+        try {          
+            CallableStatement stmt = conn.prepareCall("{ call listaAlunosAtividade(?) }");                
+            stmt.setString(1, atividade.getCodigo());
+            // Executa o comando
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();
+            
+            ArrayList<Integer> alunos = new ArrayList<>();            
+            while (rs.next())                 
+                alunos.add(rs.getInt(1));  
+            return alunos;          
+        } catch (SQLException e) {  
+            System.out.println(e);
+        }    
+        return null;
+    }
+    
+    public ArrayList<Integer> listaTodosMensagem() {
+        try {          
+            CallableStatement stmt = conn.prepareCall("{ call listaTodosMensagem() }");                            
+            // Executa o comando
+            stmt.execute();
+            ResultSet rs = (ResultSet) stmt.getResultSet();            
+            ArrayList<Integer> ids = new ArrayList<>();            
+            while (rs.next())                 
+                ids.add(rs.getInt(1));  
+            return ids;          
         } catch (SQLException e) {  
             System.out.println(e);
         }    

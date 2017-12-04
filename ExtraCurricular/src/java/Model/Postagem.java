@@ -30,7 +30,16 @@ public class Postagem {
         this.titulo = titulo;
         this.texto = texto;
         this.midias = midias;
-    }        
+    }
+    
+    /* Atualizacao */
+    public Postagem(Integer id, String titulo, String texto, ArrayList<String> midias) {
+        this.id = id;
+        this.titulo = titulo;
+        this.texto = texto;
+        this.midias = midias;
+    }
+    
 
     public void setMidias(ArrayList<String> midias) {
         this.midias = midias;
@@ -50,6 +59,18 @@ public class Postagem {
 
     public Integer getId() {
         return id;
+    }
+
+    public String getProfessor() {
+        return professor;
+    }
+
+    public String getDia() {
+        return dia;
+    }
+
+    public String getHorario() {
+        return horario;
     }
             
     

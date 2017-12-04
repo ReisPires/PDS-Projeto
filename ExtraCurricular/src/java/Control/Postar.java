@@ -60,11 +60,11 @@ public class Postar extends HttpServlet {
             
             if (!"".equals(part.getSubmittedFileName())) {            
                 String arquivo = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-                //String caminho = "C:/Users/Pedro Pires/Documents/GitHub/PDS-Projeto/ExtraCurricular/web/media";
-                String caminho = "C:/Users/Gustavo/Arquivos/UFSCar/6º Semestre/Matérias/Projeto e Desenvolvimento de Sistemas/Projeto/PDS-Projeto/ExtraCurricular/web/media";
+                String caminho = "C:/Users/Pedro Pires/Documents/GitHub/PDS-Projeto/ExtraCurricular/web/media";
+                //String caminho = "C:/Users/Gustavo/Arquivos/UFSCar/6º Semestre/Matérias/Projeto e Desenvolvimento de Sistemas/Projeto/PDS-Projeto/ExtraCurricular/web/media";
                 String midia = caminho + "/" + arquivo;
                 
-                midias.add("media/" + arquivo);
+                midias.add(arquivo);
 
                 Files.copy(part.getInputStream(), Paths.get(midia), REPLACE_EXISTING);
             }
@@ -76,8 +76,8 @@ public class Postar extends HttpServlet {
         DAOAtividade daoAtividade = new DAOAtividade();               
         daoAtividade.realizaPostagem(atividade, usuario, postagem);
         
-        request.setAttribute("success", true);
-        request.getRequestDispatcher("atividade.jsp?codigo=" + codigo).forward(request, response);
+        request.setAttribute("success", true);          
+        response.sendRedirect("atividade.jsp?codigo=" + codigo);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

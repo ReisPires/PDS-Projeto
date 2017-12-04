@@ -20,7 +20,18 @@ public class Aluno {
         this.matricula = matricula;
         this.dadosUsuario = dadosUsuario;
         this.dadosPessoais = dadosPessoais;
+    }       
+            
+    public Aluno(String matricula) {
+        this.matricula = matricula;
     }        
+    
+    /* Dados pessoais */
+    public Aluno(String matricula, String turma) {
+        this.matricula = matricula;
+        this.turma = turma;
+    }
+    
 
     public String getMatricula() {
         return matricula;
@@ -36,6 +47,5 @@ public class Aluno {
 
     public DadosPessoais getDadosPessoais() {
         return dadosPessoais;
-    }
-      
+    }          
 }

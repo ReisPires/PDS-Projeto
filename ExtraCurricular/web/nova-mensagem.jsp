@@ -15,6 +15,7 @@ ListaAtividades atividades = daoAtividade.listaAtividades(usuario);
 DAOMensagem daoMensagem = new DAOMensagem();
 ArrayList<Professor> professores = daoMensagem.listaProfessor(usuario);
 ArrayList<Aluno> alunos = daoMensagem.listaAlunos(usuario);
+ArrayList<Responsavel> responsaveis = daoMensagem.listaResponsaveis(usuario);
 %>
 
 <!DOCTYPE html>
@@ -99,7 +100,7 @@ ArrayList<Aluno> alunos = daoMensagem.listaAlunos(usuario);
                                 <label id="selecao-label" class="label" for="selecao"></label>
                                 <input id="selecao" class="campo" type="text" onkeydown="if (event.keyCode == 13) return false;"/>
                                 <div id="selecoes">
-                                    Nenhum destinatário selecionado
+                                    Nenhum destinatario selecionado
                                 </div>
                             </div>
                             <div class="grupo">
@@ -123,27 +124,25 @@ ArrayList<Aluno> alunos = daoMensagem.listaAlunos(usuario);
         
             <% if (usuario.getTipo().equals("E") || usuario.getTipo().equals("P")) { %>
             var listaAtividades = [
-                <% for (Atividade atividade: atividades.atividades) { %>
+                <% for (Atividade atividade: atividades.getAtividades()) { %>
                 {value: "<%= atividade.getCodigo() %> - <%= atividade.getNome() %>", data: "<%= atividade.getCodigo() %>"},
                 <% } %>
             ];
             var listaResponsaveis = [
-                {value: "Erlang", data: "Erlang"},
-                {value: "Fortran", data: "Fortran"},
-                {value: "Groovy", data: "Groovy"},
-                {value: "Haskell", data: "Haskell"},
-                {value: "Java", data: "Java"}
+                <% for (Responsavel responsavel : responsaveis) { %>
+                {value: "<%= responsavel.getDadosPessoais().getNome() %>", data: "<%= responsavel.getDadosUsuario().getId() %>"},
+                <% } %>
             ];
             var listaAlunos = [
                 <% for (Aluno aluno: alunos) { %>
-                {value: "<%= aluno.getDadosUsuario().getId() %> - <%= aluno.getDadosPessoais().getNome() %>", data: "<%= aluno.getDadosUsuario().getId() %>"},
+                {value: "<%= aluno.getMatricula() %> - <%= aluno.getDadosPessoais().getNome() %>", data: "<%= aluno.getDadosUsuario().getId() %>"},
                 <% } %>
             ];
             <% } %>
             <% if (!usuario.getTipo().equals("P")) { %>
             var listaProfessores = [
                 <% for (Professor professor: professores) { %>
-                {value: "<%= professor.getCodigo() %> - <%= professor.getDadosPessoais().getNome() %>", data: "<%= professor.getCodigo() %>"},
+                {value: "<%= professor.getDadosPessoais().getNome() %> (<%= professor.getAtividades() %>)", data: "<%= professor.getDadosUsuario().getId() %>"},
                 <% } %>
             ];
             <% } %>

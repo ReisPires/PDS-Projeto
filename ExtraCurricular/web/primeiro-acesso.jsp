@@ -22,7 +22,7 @@
     <body>
         <div class="frame">
             <img src="img/SistemaLogoGrande.png"/>
-            <div class="pagina">Primeiro acesso</div>
+            <div class="pagina"></div>
             <form class="formulario" action="entrarPrimeiroAcesso" method="post">
                     <% if (errmsg != null) { %>                        
                         <% if (errmsg == 0) { %>                        

@@ -1,4 +1,7 @@
-<% request.getSession().setAttribute("resultadoCadastro", null); %>
+<% 
+    request.getSession().setAttribute("resultadoCadastro", null); 
+    request.getSession().setAttribute("relatorioCadastroCSV", null);
+%>
 
 <!DOCTYPE html>
 <html>
@@ -15,10 +18,22 @@
                 
                 text-decoration: none;
                 
-                font-size: 41.667px;
+                font-size: 35px;
                 font-family: "Segoe UI";
                 color: rgb(71, 70, 70);
                 line-height: 1.2;
+                
+                height: 62px;
+                width: 420px;
+                float: left;
+                margin-right: 15px;
+            }
+            
+            .icone {
+                float: left; 
+                height: 62px; 
+                width: 62px; 
+                margin-right: 10px;
             }
         </style>
     </head>
@@ -32,10 +47,24 @@
         <div class="corpo">
             <div class="container">
                 <div class="atividades">
-                    <a class="painel" href="cadastro-professor.jsp">Cadastro de professor</a>
-                    <a class="painel" href="cadastro-responsavel.jsp">Cadastro de responsável</a>
-                    <a class="painel" href="cadastro-aluno.jsp">Cadastro de aluno</a>
-                    <a class="painel" href="cadastro-csv.jsp">Cadastro por csv</a>
+                    <img class="icone" src="img/IconAdmin.png" />
+                    <a class="painel" href="cadastro-administrador.jsp">Administrador</a>                    
+                    <a class="painel" href="cadastro-aluno.jsp">Aluno</a>
+                    <img class="icone" src="img/IconUsuarioBranco.png" />
+                    
+                    <br style="clear:both" />
+                    
+                    <img class="icone" src="img/Professor.png" />                    
+                    <a class="painel" href="cadastro-professor.jsp">Professor</a>                                       
+                    <a class="painel" href="cadastro-responsavel.jsp">Responsável</a>                
+                    <img class="icone" src="img/Responsavel.png" />
+                    
+                    <br style="clear:both" />
+                    
+                    <img class="icone" src="img/Atividades.png" />
+                    <a class="painel" href="cadastro-atividade.jsp">Atividade</a>                    
+                    <a class="painel" href="cadastro-csv.jsp">CSV</a>            
+                    <img class="icone" src="img/CSV.png" />
                 </div>
             </div>
         </div>

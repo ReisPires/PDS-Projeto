@@ -54,7 +54,7 @@ if (usuario == null) {
             }
             
             .titulo {
-                font-size: 41.667px;
+                font-size: 35px;
                 font-family: "Segoe UI";
                 color: rgb(71, 70, 70);
                 line-height: 1.2;
@@ -114,8 +114,15 @@ if (usuario == null) {
                     </a>
                     <% } %>
                     <a class="opcao" href="mensagens.jsp">
-                        <img src="img/MensagensIcone.png"/>
-                        <div>Mensagens</div>
+                        <% DAOMensagem daoMensagem = new DAOMensagem();
+                        int msgsNaoLidas = daoMensagem.exibeMensagensNaoLidas(usuario);
+                        if (msgsNaoLidas > 0) { %>
+                            <img src="img/MensagensIconeOn.png"/>
+                            <div>Mensagens(<%= Integer.toString(msgsNaoLidas) %>)</div>
+                        <% } else { %>
+                            <img src="img/MensagensIconeOff.png"/>
+                            <div>Mensagens</div>
+                        <% } %>                        
                     </a>
                     <% if (!usuario.getTipo().equals("E")) { %>
                     <a class="opcao" href="recuperarPerfil">

@@ -19,9 +19,10 @@ a {
 .cabecalho {
     box-shadow: 0px 15px 15px #b0b0b0;
 
-    background-color: #ffffff;
+    background-color: #ffffff;       
     
     text-align: center;
+        
 }
 
 .container {
@@ -43,22 +44,22 @@ a {
 .pagina {
     position: absolute;
     
-    font-size: 50px;
+    font-size: 40px !important;
     font-family: "Segoe UI";
     color: rgb(120, 185, 245);
-    line-height: 1.2;
+    line-height: 1.2;   
 }
 
 .pagina-centro {
     left: 50%;
-    bottom: 0px;
+    bottom: 8px;
     
     transform: translate(-50%, 0px);
 }
 
 .pagina-direita {
     right: 0px;
-    bottom: 0px;
+    bottom: 8px;
 }
 
 .corpo {

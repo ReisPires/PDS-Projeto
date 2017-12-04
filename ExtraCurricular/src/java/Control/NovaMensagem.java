@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Control;
 
 import DAO.DAOMensagem;
-import Model.Mensagem;
-import Model.Usuario;
+import Model.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -17,10 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Gustavo
- */
 @WebServlet(name = "NovaMensagem", urlPatterns = {"/nova-mensagem"})
 public class NovaMensagem extends HttpServlet {
 
@@ -45,8 +35,9 @@ public class NovaMensagem extends HttpServlet {
         
         String titulo = request.getParameter("titulo");
         String destino = null;
-        String[] selecao;
-        selecao = request.getParameterValues("selecao");
+        String[] selecao = request.getParameterValues("selecao");
+        if (selecao == null)
+            selecao = new String[0];
         String texto = request.getParameter("texto");
         
         ArrayList<Integer> destinatarios = new ArrayList<>();
@@ -56,8 +47,13 @@ public class NovaMensagem extends HttpServlet {
             
             if (destino.equals("todos")) {
                 // Adicionar todo mundo aos destinatários
+                for (Integer id : daoMensagem.listaTodosMensagem())
+                    destinatarios.add(id);
             } else if (destino.equals("atividades")) {
                 // Adicionar todo mundo das atividades aos destinatários
+                for (int i = 0; i < selecao.length; ++i)
+                    for (Integer alunoid : daoMensagem.listaAlunosAtividade(new Atividade(selecao[i], "")))
+                        destinatarios.add(alunoid);                
             } else {
                 // Adicionar selecionados aos destinatários
                 for (int i = 0; i < selecao.length; ++i)
@@ -72,6 +68,8 @@ public class NovaMensagem extends HttpServlet {
         Mensagem mensagem = new Mensagem(usuario.getId(), destinatarios, titulo, texto);
         
         daoMensagem.enviaMensagem(mensagem);
+        
+        request.getRequestDispatcher("mensagens.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

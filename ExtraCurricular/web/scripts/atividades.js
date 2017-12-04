@@ -31,6 +31,9 @@ function adicionarAtividade(id, nome, concluida) {
         atividades.set(id, atividade);
     }
     
+    if ("elem" in atividade)
+        return;
+    
     var nomes = [];
     for (var i in atividade.alunos)
         nomes.push(alunos.get(atividade.alunos[i]).nome);
@@ -49,16 +52,26 @@ function atualizarAtividades() {
     
     for (var aluno of alunos)
         if ($("#aluno" + aluno[0]).prop("checked"))
-            for (var atividade of aluno[1].atividades)
-                visiveis.add(atividade);
+            for (var i of aluno[1].atividades) {
+                var atividade = atividades.get(i);
+                
+                if (!atividade.concluida && !$("#em-andamento").prop("checked"))
+                    continue;
+                if (atividade.concluida && !$("#concluidas").prop("checked"))
+                    continue;
+                
+                visiveis.add(i);
+            }
             
-    for (var atividade of atividades) {
-        if (!atividade[1].concluida && !$("#em-andamento").prop("checked"))
-            continue;
-        if (atividade[1].concluida && !$("#concluidas").prop("checked"))
-            continue;
-        
-        visiveis.add(atividade[0]);
+    if (alunos.size === 0) {
+        for (var atividade of atividades) {
+            if (!atividade[1].concluida && !$("#em-andamento").prop("checked"))
+                continue;
+            if (atividade[1].concluida && !$("#concluidas").prop("checked"))
+                continue;
+
+            visiveis.add(atividade[0]);
+        }
     }
             
     var invisiveis = new Set();

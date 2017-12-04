@@ -39,6 +39,8 @@ if (usuario == null) {
     return;
 }
 
+request.getSession().setAttribute("resultadoAltera", null);
+
 String codigo = request.getParameter("codigo");
 if (codigo == null) {
     request.getRequestDispatcher("atividades.jsp").forward(request, response);
@@ -47,9 +49,12 @@ if (codigo == null) {
 
 DAOAtividade daoAtividade = new DAOAtividade();
 Atividade atividade = new Atividade(codigo, "");
-daoAtividade.recuperaAtividade(atividade);
-
+atividade = daoAtividade.recuperaAtividade(atividade);
 ArrayList<Postagem> postagens = daoAtividade.listaPostagens(atividade);
+ArrayList<Professor> professores = daoAtividade.listaProfessoresAtividade(atividade);
+
+DAOUsuario daoUsuario = new DAOUsuario();
+String facebookId = daoUsuario.recuperaFacebook(usuario);
 %>
 
 <!DOCTYPE html>
@@ -169,6 +174,8 @@ ArrayList<Postagem> postagens = daoAtividade.listaPostagens(atividade);
                 
                 object-fit: cover;
                 object-position: center;
+                
+                cursor: pointer;
             }
             
             #fundo {
@@ -181,23 +188,66 @@ ArrayList<Postagem> postagens = daoAtividade.listaPostagens(atividade);
                 
                 background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
             }
+            
+            .info {                
+                box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.23);                
+                margin: 0 auto;                
+                margin-top: -20px;
+                margin-bottom: 20px;
+                padding: 10px;
+                background-color: rgb(245, 243, 243);                
+                width: 50%;                
+            }
         </style>
     </head>
     <body>
+        <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=690889244441145';
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+        
         <div class="cabecalho">
             <div class="container">
                 <a href="atividades.jsp"><img class="logo" src="img/SistemaLogo.png"/></a>
                 <span class="pagina pagina-centro"><%= atividade.getNome() %></span>
                 <div class="menu">
-                    <a class="opcao" href="postar.jsp?atividade=<%= codigo %>">
-                        <img src="img/CadastrosIcone.png"/>
-                        <div>Realizar Postagem</div>
-                    </a>
+                    <% if (usuario.getTipo().equals("P")) { %>
+                        <a class="opcao" href="postar.jsp?atividade=<%= codigo %>">
+                            <img src="img/CadastrosIcone.png"/>
+                            <div>Realizar Postagem</div>
+                        </a>
+                    <% } %>
                 </div>
             </div>
         </div>
         <div class="corpo">
-            <div class="container">
+            <div class="container">                
+                    <div class="info">
+                        <% if (atividade.getAno() > 0 && atividade.getSemestre() != null) { %>
+                            <div class="label" style="font-size: 16px"><%= atividade.getAno() == 0 ? "" : Integer.toString(atividade.getAno()) %><%= atividade.getAno() > 0 && atividade.getSemestre() != null ? "/" : "" %><%= atividade.getSemestre() == null ? "" : atividade.getSemestre() %></div>
+                        <% } %>
+                        <div class="label" style="font-size: 16px">                            
+                            <% if (professores != null) {
+                                for (int i = 0; i < professores.size(); ++i) { %>
+                                    <a style="color:rgb(111, 110, 110); font-size: 16px; text-decoration: none" href="usuario.jsp?id=<%= professores.get(i).getDadosUsuario().getId() %>">Prof. <%= professores.get(i).getDadosPessoais().getNome() %></a> 
+                                    <% if (i < professores.size() - 1) { %>
+                                        -
+                                    <% } %>
+                                <% } %>
+                            <% } %>
+                        </div>
+                        <% if (atividade.getHorario() != null) { %>
+                            <div class="label" style="font-size: 16px"><%= atividade.getHorario() %></div>  
+                        <% } %>
+                        <% if (usuario.getTipo().equals("P") || usuario.getTipo().equals("E")) { %>
+                            <input class="botao submeter" type="button" style="margin-top: 10px; width: 220px; height: 25px; font-size: 16px; margin-right: 10px; margin-bottom: 5px" value="Alterar dados da atividade" onclick="location.href = 'altera-atividade.jsp?codigo=<%= codigo %>'"/>
+                        <% } %>
+                        <input class="botao submeter" type="button" style="margin-top: 10px; width: 220px; height: 25px; font-size: 16px" value="Ver inscritos" onclick="location.href = 'inscritos.jsp?codigo=<%= codigo %>'"/>
+                    </div>                
                 <div class="frame">
                     <div><input id="busca" class="busca" type="text" placeholder="Busca"/></div>
                     <div class="postagens">
@@ -207,21 +257,26 @@ ArrayList<Postagem> postagens = daoAtividade.listaPostagens(atividade);
                             <% if (usuario.getTipo().equals("P")) { %>
                             <a href="editar-post.jsp?atividade=<%= codigo %>&codigo=<%= postagem.getId() %>"><img class="editar" src="img/EditarPostagemIcone.png"/></a>
                             <% } %>
-                            <div class="autor">Postado por <%--= postagem.getAutor() --%></div>
+                            <div class="autor">Postado por <%= postagem.getProfessor() %></div>
                             <div class="titulo"><%= postagem.getTitulo() %></div>
                             <div class="data"><%= postagem.getDia() %> - <%= postagem.getHorario() %></div>
                             <div class="texto"><%= postagem.getTexto() %></div>
                             <div class="midias">
                                 <% for (String midia: postagem.getMidias()) { %>
                                     <% if (isImage(midia)) { %>
-                                    <div class="midia"><img src="<%= midia %>"/></div>
+                                    <div class="midia"><img src="<%= "media/" + midia %>"/></div>
                                     <% } else if (isVideo(midia)) { %>
-                                <div class="midia"><video src="<%= midia %>" controls></video></div>
+                                <div class="midia"><video src="<%= "media/" + midia %>" controls></video></div>
                                     <% } else if (isAudio(midia)) { %>
-                                <div class="midia"><audio src="<%= midia %>" controls></audio></div>
+                                <div class="midia"><audio src="<%= "media/" + midia %>" controls></audio></div>
                                     <% } %>
                                 <% } %>
+                            </div>    
+                            <% if (facebookId != null) { %>
+                            <div style="text-align: right">
+                                <div style="margin-top: 15px" class="fb-like" data-href="http://c5993641.ngrok.io/PDS-Projeto/postagem.jsp?id=<%= Integer.toString(postagem.getId()) %>" data-layout="button_count" data-action="like" data-size="large" data-show-faces="false" data-share="true"></div>
                             </div>
+                            <% } %>
                         </div>
                         <% } %>
                         <div class="nenhum" style="display: none">Nenhum resultado encontrado.</div>

@@ -29,7 +29,7 @@ function mudarDestino() {
 
     $("#selecao-grupo").show();
     $("#selecao").val("");
-    $("#selecoes").html("Nenhum destinatário selecionado");
+    $("#selecoes").html("Nenhum destinatario selecionado");
 
     switch (destino) {
     case "atividades":
@@ -39,7 +39,7 @@ function mudarDestino() {
         $("#selecao-label").html("Professores:");
         break;
     case "responsaveis":
-        $("#selecao-label").html("Responsáveis:");
+        $("#selecao-label").html("Responsaveis:");
         break;
     case "alunos":
         $("#selecao-label").html("Alunos:");
@@ -80,7 +80,7 @@ function selecionar() {
 
     $("<div class='selecao' onclick='deselecionar(this)'>" +
         found.value +
-        "<input type='hidden' name='selecao' value='" + found.data + "/>" + 
+        "<input type='hidden' name='selecao' value='" + found.data + "'/>" + 
     "</div>").appendTo("#selecoes");
 }
 
@@ -88,7 +88,7 @@ function deselecionar(elem) {
     $(elem).remove();
 
     if ($(".selecao").length === 0)
-        $("#selecoes").html("Nenhum destinatário selecionado");
+        $("#selecoes").html("Nenhum destinatario selecionado");
 
     $("#selecao").focus();
 }

@@ -284,4 +284,64 @@ public class DAOAtividade extends DAOConnection {
         }    
         return false;
     } 
+    
+    public ArrayList<Professor> listaProfessoresAtividade(Atividade atividade) {
+         try {
+            // Cria o comando
+            CallableStatement stmt = conn.prepareCall("{ call listaProfessoresAtividade(?) }");
+            // Recupera os dados
+            stmt.setString(1, atividade.getCodigo());                        
+            // Executa o comando
+            stmt.execute();                                    
+            ResultSet rs = (ResultSet) stmt.getResultSet();
+            ArrayList<Professor> professores = new ArrayList<>();
+            while (rs.next())
+                professores.add(new Professor(new Usuario(rs.getInt(1)), new DadosPessoais(rs.getString(2))));            
+            return professores;
+        } catch (SQLException ex) {  
+            System.out.println(ex);
+        }    
+        return null;
+    }
+    
+    public ArrayList<Aluno> listaDadosAlunosAtividade(Atividade atividade) {
+         try {
+            // Cria o comando
+            CallableStatement stmt = conn.prepareCall("{ call listaDadosAlunosAtividade(?) }");
+            // Recupera os dados
+            stmt.setString(1, atividade.getCodigo());                        
+            // Executa o comando
+            stmt.execute();                                    
+            ResultSet rs = (ResultSet) stmt.getResultSet();
+            ArrayList<Aluno> alunos = new ArrayList<>();
+            while (rs.next())
+                alunos.add(new Aluno(rs.getString(2), rs.getString(4), new Usuario(rs.getInt(1)), new DadosPessoais(rs.getString(5), rs.getString(3))));            
+            return alunos;
+        } catch (SQLException ex) {  
+            System.out.println(ex);
+        }    
+        return null;
+    }
+    
+    public int atualizaAtividade(Atividade atividade) {
+         try {
+            // Cria o comando
+            CallableStatement stmt = conn.prepareCall("{ call atualizaAtividade(?, ?, ?, ?, ?) }");
+            // Recupera os dados
+            stmt.setString(1, atividade.getCodigo());                        
+            stmt.setInt(2, atividade.getAno());
+            stmt.setString(3, atividade.getSemestre());
+            stmt.setString(4, atividade.getHorario());
+            stmt.setBoolean(5, atividade.isConcluida());
+            // Executa o comando
+            stmt.execute();                                    
+            ResultSet rs = (ResultSet) stmt.getResultSet();            
+            if (rs.next())
+                return rs.getInt(1);
+            return -1;
+        } catch (SQLException ex) {  
+            System.out.println(ex);
+        }    
+        return -1;
+    }
 }

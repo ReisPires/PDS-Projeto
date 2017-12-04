@@ -11,6 +11,10 @@ public class Mensagem {
     private String titulo;
     private String dia;
     private String horario;
+
+    public String getNomeRemetente() {
+        return nomeRemetente;
+    }
     private String texto;    
 
     /* Envio */
@@ -34,6 +38,14 @@ public class Mensagem {
 
     public Integer getRemetente() {
         return remetente;
+    }
+
+    public String getDia() {
+        return dia;
+    }
+
+    public String getHorario() {
+        return horario;
     }
 
     public String getTitulo() {

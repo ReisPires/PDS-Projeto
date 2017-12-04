@@ -1,6 +1,5 @@
 package Control;
 
-import DAO.DAOAtividade;
 import DAO.DAOLogin;
 import Model.*;
 import java.io.IOException;
@@ -52,8 +51,8 @@ public class Entrar extends HttpServlet {
             request.setAttribute("incorrect", true);
             request.getRequestDispatcher("index.jsp").forward(request, response);
             return;
-        }              
-        
+        }         
+                        
         request.getSession().setAttribute("usuario", usuario);
         request.getRequestDispatcher("atividades.jsp").forward(request, response);
     }

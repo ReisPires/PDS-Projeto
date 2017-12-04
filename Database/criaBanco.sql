@@ -18,6 +18,7 @@ CREATE TABLE usuario(
 	login2 VARCHAR(80), /* Email */
 	senha VARCHAR(50) NOT NULL,
 	tipo CHAR(1) NOT NULL,
+	valido BOOLEAN,
 	facebook VARCHAR(20),
 	PRIMARY KEY(id)
 );
@@ -53,7 +54,7 @@ CREATE TABLE dados_pessoais(
 	cep VARCHAR(10),
 	bairro VARCHAR(50),
 	rua VARCHAR(100),
-	numero INTEGER,
+	numero VARCHAR(6),
 	complemento VARCHAR(80),
 	PRIMARY KEY(id)
 );

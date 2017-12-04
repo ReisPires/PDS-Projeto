@@ -3,6 +3,7 @@
 <%    
     DadosPessoais dadosPessoais = (DadosPessoais)request.getSession().getAttribute("dadosPessoais");
     String facebookId = (String)request.getSession().getAttribute("facebookId");
+    Integer resultadoAtualizacao = (Integer)request.getSession().getAttribute("resultadoAtualizacao");
 %>
 
 <!DOCTYPE html>
@@ -48,19 +49,27 @@
             }   
             
             .error-msg {
-                font-size: 22px;
+                font-size: 18px;
                 font-family: "Segoe UI";
                 text-align: left; 
                 color: red;                             
-                margin-right: 30px;                
+                margin-right: 15px;                
             }
 
             .success-msg {
-                font-size: 22px;
+                font-size: 18px;
                 font-family: "Segoe UI";
                 text-align: left; 
                 color: green;   
-                margin-right: 30px;                
+                margin-right: 15px;                
+            }
+            
+            .mude-senha {        
+                float: left;                
+                text-decoration: none;
+                font-size: 18px;
+                font-family: "Segoe UI";
+                color: rgb(71, 70, 70);  
             }
         </style>
     </head>
@@ -76,7 +85,7 @@
         
             function onLogin() {
                 FB.getLoginStatus(function(response) {
-                    if (response.status === 'connected')
+                    if (response.status === 'connected') 
                         document.getElementById('fbid').value = FB.getUserID();
                     else
                         document.getElementById('fbid').value = "";
@@ -112,10 +121,10 @@
                             
                             <br style="clear:both" />
                                    
-                            <% if (dadosPessoais.getSexo().equals("M")) { %>
+                            <% if (dadosPessoais.getSexo() != null && dadosPessoais.getSexo().equals("M")) { %>
                                 <label class="radiolabel"><input type="radio" id="masc" name="sexo" value="masc" checked>   Masculino</label>
                                 <label class="radiolabel"><input type="radio" id="fem" name="sexo" value="fem">   Feminino</label>                            
-                            <% } else if (dadosPessoais.getSexo().equals("F")) { %>
+                            <% } else if (dadosPessoais.getSexo() != null &&  dadosPessoais.getSexo().equals("F")) { %>
                                 <label class="radiolabel"><input type="radio" id="masc" name="sexo" value="masc">   Masculino</label>
                                 <label class="radiolabel"><input type="radio" id="fem" name="sexo" value="fem" checked>   Feminino</label>                            
                             <% } else { %>
@@ -158,9 +167,19 @@
                             <% } else { %>                                   
                                 <div class="fb-login-button" data-width="220" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false" onlogin="onLogin()"></div>                                
                             <% } %>              
-                            <input id="fbid" name="fbid" type="hidden" value="<%= facebookId %>"/>
+                            <input id="fbid" name="fbid" type="hidden" value="<%= (facebookId == null ? "" : facebookId) %>"/>
                             <div class="botoes" style="clean: both">                                    
-                                <input class="botao" type="button" value="Retornar" onclick="location.href = 'cadastros.jsp'"/>
+                                <a class="mude-senha" href='mude-senha.jsp'>Deseja mudar sua senha? Clique aqui</a>
+                                <% if (resultadoAtualizacao != null) { %>
+                                    <% if (resultadoAtualizacao == 0) { %>                                        
+                                        <label class="success-msg">Dados atualizados com sucesso</label>                                        
+                                    <% } else if (resultadoAtualizacao == 15) { %>
+                                        <label class="error-msg">Erro: e-mail já cadastrado</label>                                                                        
+                                    <% } else if (resultadoAtualizacao == 19) { %>
+                                        <label class="error-msg">Erro: Facebook já associado à outra conta</label>                                                                        
+                                    <% } %>
+                                <% } %>
+                                <input class="botao" type="button" value="Retornar" onclick="location.href = 'atividades.jsp'"/>
                                 <input class="botao submeter" type="submit" value="Salvar"/>
                             </div>
                         </form>
